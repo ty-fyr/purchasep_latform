@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.purchase.mapper.RepertoryMapper">
+  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.Repertory">
+    <id column="repertory_id" jdbcType="INTEGER" property="repertoryId" />
+    <result column="receipt" jdbcType="VARCHAR" property="receipt" />
+    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="invoice_number" jdbcType="INTEGER" property="invoiceNumber" />
+    <result column="Start_time" jdbcType="DATE" property="startTime" />
+    <result column="endoplasmic_reticulum" jdbcType="DATE" property="endoplasmicReticulum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    repertory_id, receipt, drug_id, invoice_number, Start_time, endoplasmic_reticulum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from repertory
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from repertory
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.Repertory">
+    insert into repertory (repertory_id, receipt, drug_id, 
+      invoice_number, Start_time, endoplasmic_reticulum
+      )
+    values (#{repertoryId,jdbcType=INTEGER}, #{receipt,jdbcType=VARCHAR}, #{drugId,jdbcType=INTEGER}, 
+      #{invoiceNumber,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endoplasmicReticulum,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.Repertory">
+    insert into repertory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="repertoryId != null">
+        repertory_id,
+      </if>
+      <if test="receipt != null">
+        receipt,
+      </if>
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="invoiceNumber != null">
+        invoice_number,
+      </if>
+      <if test="startTime != null">
+        Start_time,
+      </if>
+      <if test="endoplasmicReticulum != null">
+        endoplasmic_reticulum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="repertoryId != null">
+        #{repertoryId,jdbcType=INTEGER},
+      </if>
+      <if test="receipt != null">
+        #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNumber != null">
+        #{invoiceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endoplasmicReticulum != null">
+        #{endoplasmicReticulum,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.Repertory">
+    update repertory
+    <set>
+      <if test="receipt != null">
+        receipt = #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="drugId != null">
+        drug_id = #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNumber != null">
+        invoice_number = #{invoiceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        Start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endoplasmicReticulum != null">
+        endoplasmic_reticulum = #{endoplasmicReticulum,jdbcType=DATE},
+      </if>
+    </set>
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.Repertory">
+    update repertory
+    set receipt = #{receipt,jdbcType=VARCHAR},
+      drug_id = #{drugId,jdbcType=INTEGER},
+      invoice_number = #{invoiceNumber,jdbcType=INTEGER},
+      Start_time = #{startTime,jdbcType=DATE},
+      endoplasmic_reticulum = #{endoplasmicReticulum,jdbcType=DATE}
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

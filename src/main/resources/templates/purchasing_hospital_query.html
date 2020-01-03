@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>按采购医院查询</title>
+    <style>
+        .button {
+            background-color: #1aa5fb;
+
+        }
+
+        .table {
+            width: 800px;
+
+        }
+    </style>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<div class="biankuang">
+
+    <table class="table" border="1" cellspacing="0" style="table-layout:fixed">
+        <tr>
+            <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">按采购医院查询</th>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de" color="red">采购医院名称:</td>
+            <td><input></td>
+            <td bgcolor="#b0c4de">统计时间:</td>
+            <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购状态:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+
+        </tr>
+
+    </table>
+    <div align="center">
+    <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>序号</td>
+            <td>采购医院</td>
+            <td>采购状态</td>
+            <td>采购量</td>
+            <td>采购金额</td>
+            <td>入库量</td>
+            <td>入库金额</td>
+            <td>退货量</td>
+            <td>退货金额</td>
+            <td>结算量</td>
+            <td>结算金额</td>
+            <td>交易药品信息</td>
+        </tr>
+
+        <tr >
+            <td class="xuhao">1</td>
+            <td class="supplier">崔苗镇崔苗村卫生室</td>
+            <td class="cg-status">已入库</td>
+            <td class="dh-amount">70</td>
+            <td class="dh-money">41.9</td>
+            <td class="sh-amount">70</td>
+            <td class="sh-money"></td>
+            <td ></td>
+            <td ></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button type="button" class="btn btn-warning"><a href="#">查询</a></button>
+            </td>
+        </tr>
+
+        <td>合计:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </table>
+</div>
+</body>
+</html>

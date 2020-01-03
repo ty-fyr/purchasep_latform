@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按采购单查询</title>
+    <style>
+        .button{
+            background-color: #1aa5fb;
+
+        }
+        .table{
+            width: 90%;
+
+        }
+    </style>
+</head>
+<body>
+<div class="biankuang" align="center">
+
+        <table class="table" border="1" cellspacing="0"  style="table-layout:fixed" >
+            <tr>
+                <th align="left"  colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">|按采购单查询</th>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px; color: #6495ed; ">采购单编号:</span>
+                </td>
+                <td><input></td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">采购单名称:</span>
+                </td>
+                <td><input></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">采购单状态:</span>
+                </td>
+                <td>
+                    <select>
+                        <option value="-1">请选择</option>
+                    </select>
+                </td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">采购医院:</span>
+                </td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">供货商:</span>
+                </td>
+                <td>
+                    <select>
+                        <option value="-1">请选择</option>
+                    </select>
+                </td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">统计时间:</span>
+                </td>
+                <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">药品流水号:</span>
+                </td>
+                <td><input/></td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">通用名:</span>
+                </td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">剂型:</span>
+                </td>
+                <td><input style=""/></td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">规格:</span>
+                </td>
+                <td><input style=""/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">单位:</span>
+                </td>
+                <td><input/></td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">转换系数:</span>
+                </td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">生产企业:</span>
+                </td>
+                <td><input/></td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">商品名:</span>
+                </td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">质量层次:</span>
+                </td>
+                <td>
+                    <select>
+                        <option value="-1">请选择</option>
+                    </select>
+                </td>
+                <td >
+                    <span style="font-size: 16px; color: #6495ed; ">药品类别:</span>
+                </td>
+                <td>
+                    <select>
+                        <option value="-1">请选择</option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        &nbsp;
+        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+
+    <!--<form type="">
+
+       <p> 采购单编号:<input type="text">   采购单名称:<input type="text"></p>
+       <p> 采购单状态:<select></select>     采购医院:<input type="text"></p>
+        <p> 供货商:<select></select>         统计时间:<input type="text"></p>
+        <p> 药品流水号:<input type="text">   通用名:<input type="text"></p>
+        <p> 剂型:<input type="text">         规格:<input type="text"></p>
+        <p> 单位:<input type="text">         转换系数:<input type="text"></p>
+        <p> 生产企业:<input type="text">     商品名:<input type="text"></p>
+        <p> 质量层次:<select>请选择</select>       药品类别:<select>请选择</select></p>
+    </form>-->
+</div>
+
+<div class="po-table">
+    <table border="1" cellspacing="0">
+        <thead>
+
+        <tr>
+            <th class="w1">序号</th>
+            <th class="w2">采购医院</th>
+            <th class="w3">采购单编号</th>
+            <th class="w4">采购单名称</th>
+            <th class="w5">采购状态</th>
+            <th class="w6">采购时间</th>
+            <th class="w7">开始采购时间</th>
+            <th class="w8">结束采购时间</th>
+            <th class="w9">建单时间</th>
+            <th class="w10">提交时间</th>
+            <th class="w11">采购量</th>
+            <th class="w12">采购金额</th>
+            <th class="w13">入库量</th>
+            <th class="w14">入库金额</th>
+            <th class="w15">退货量</th>
+            <th class="w16">退货金额</th>
+            <th class="w17">结算量</th>
+            <th class="w18">结算金额</th>
+        </tr>
+
+        </thead>
+        <tr>
+            <td class="xuhao">1</td>
+            <td class="cg-hospital">崔苗镇无涯村卫生室</td>
+            <td class="cgd-number">1</td>
+            <td class="cgd-name">崔苗镇无涯村卫生室采购单</td>
+            <td class="cg-status">已入库</td>
+            <td class="kscg-time">2019-12-31</td>
+            <td class="jscag-time">2020-1-3</td>
+            <td class="creat-time">2020-1-2</td>
+            <td class="sub-time">2020-1-2</td>
+            <td class="sh-time">2020-1-3</td>
+            <td class="cg-amount">60</td>
+            <td class="cg-money">120</td>
+            <td class="rk-amount">60</td>
+            <td class="rk-money">120</td>
+            <td class="th-amount">0</td>
+            <td class="th-money">0</td>
+            <td class="js-amount">60</td>
+            <td class="js-money">120</td>
+        </tr>
+        <tr>
+            <th class="w19">合计:</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

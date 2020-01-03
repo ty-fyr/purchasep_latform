@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.purchase.mapper.ProxyMonitorMapper">
+  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.ProxyMonitor">
+    <id column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+    <result column="proxy_name" jdbcType="VARCHAR" property="proxyName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    proxy_id, proxy_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from proxy_monitor
+    where proxy_id = #{proxyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from proxy_monitor
+    where proxy_id = #{proxyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.ProxyMonitor">
+    insert into proxy_monitor (proxy_id, proxy_name)
+    values (#{proxyId,jdbcType=INTEGER}, #{proxyName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.ProxyMonitor">
+    insert into proxy_monitor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="proxyId != null">
+        proxy_id,
+      </if>
+      <if test="proxyName != null">
+        proxy_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="proxyId != null">
+        #{proxyId,jdbcType=INTEGER},
+      </if>
+      <if test="proxyName != null">
+        #{proxyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.ProxyMonitor">
+    update proxy_monitor
+    <set>
+      <if test="proxyName != null">
+        proxy_name = #{proxyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where proxy_id = #{proxyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.ProxyMonitor">
+    update proxy_monitor
+    set proxy_name = #{proxyName,jdbcType=VARCHAR}
+    where proxy_id = #{proxyId,jdbcType=INTEGER}
+  </update>
+</mapper>

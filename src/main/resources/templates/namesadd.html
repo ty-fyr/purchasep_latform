@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $.ajax({
+                url:"seldrugc",
+                type:"post",
+                datatype:"json",
+                success:function (result) {
+                    console.log(result);
+                   var  v="<option>请选择</option>"
+                    for (var i = 0; i <result.length ; i++) {
+                        v+="<option value='"+result[i].dcId+"'>"+result[i].drugType+"</option>";
+                    }
+                    $("#seldrugid").append(v);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <h2 align="center">药品目录添加</h2>
+<form>
+<table align="center">
+    <tr>
+        <td>
+            <input/>通用名</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>剂型</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>规格</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>单位</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>转换系数</td>
+    </tr>
+    <tr>
+        <td>
+            <select name="seldrug" id="seldrugid"></select>药品类别
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input/>交易状态
+        </td>
+    </tr>
+    <tr>
+        <td><button class="btn btn-success">添加</button>
+        <input type="reset"></td>
+    </tr>
+</table>
+</body>
+
+</form>
+</html>

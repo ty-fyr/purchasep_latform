@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>按交易药品查询</title>
+    <style>
+        .button {
+            background-color: #1aa5fb;
+
+        }
+
+        .table {
+            width: 800px;
+
+        }
+    </style>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<div class="biankuang">
+    <table class="table" border="1" cellspacing="0" style="table-layout:fixed">
+        <div>
+            <tr>
+                <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">按交易药品查询</th>
+            </tr>
+        </div>
+        <tr>
+            <td bgcolor="#b0c4de" color="red">采购单编号:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">采购单名称:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">采购状态:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购医院:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">供货商:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+            <td bgcolor="#b0c4de">统计时间:</td>
+            <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">药品流水号:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">通用名:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">剂型:</td>
+            <td><input/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">规格:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">单位:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">转换系数:</td>
+            <td><input/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">生产企业:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">商品名:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">药品类别:</td>
+            <td>
+                <select>
+                    <option>全部</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div align="center">
+        <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <td>序号</td>
+            <td>流水号</td>
+            <td>通用名</td>
+            <td>商品名</td>
+            <td>剂型</td>
+            <td>规格</td>
+            <td>单位</td>
+            <td>转换系数</td>
+            <td>生产企业</td>
+            <td>采购量</td>
+            <td>采购金额</td>
+            <td>采购状态</td>
+            <td>入库量</td>
+            <td>入库金额</td>
+            <td>退货量</td>
+            <td>退货金额</td>
+            <td>结算量</td>
+            <td>结算金额</td>
+        </tr>
+        <tr>
+            <td class="xuhao">1</td>
+            <td class="ls-hao">48190</td>
+            <td class="ty-name">0.9%氯化钠</td>
+            <td class="itme-name">0.9%氯化钠</td>
+            <td class="dosage-form">大输液</td>
+            <td class="Specifications">250ml</td>
+            <td class="Company">瓶</td>
+            <td class="zh-coefficient">1</td>
+            <td class="sc-enterprise">河南太龙药业股份有限公司</td>
+            <td class="cg-amount">20</td>
+            <td class="cg-money">17.2</td>
+            <td class="rk-status">已入库</td>
+            <td class="rk-amount">20</td>
+            <td class="rk-money">17.2</td>
+            <td class="th-amount">0</td>
+            <td class="th-money">0</td>
+            <td class="js-amount">20</td>
+            <td class="js-money">17.2</td>
+        </tr>
+        <td>合计:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </table>
+</div>
+</body>
+</html>

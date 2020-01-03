@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<<<<<<< HEAD
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>药品采购后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/plugins/adminLTE/js/app.min.js"></script>
+
+    <script type="text/javascript">
+        function SetIFrameHeight(){
+            var iframeid=document.getElementById("iframe"); //iframe id
+            if (document.getElementById){
+                iframeid.height =document.documentElement.clientHeight;
+            }
+        }
+    </script>
+=======
+	<!-- 页面meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>药品采购后台管理系统</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+
+	<link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/plugins/adminLTE/css/AdminLTE.css">
+	<link rel="stylesheet" href="../static/plugins/adminLTE/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+	<script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="../static/plugins/jQueryUI/jquery-ui.min.js"></script>
+	<script src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../static/plugins/adminLTE/js/app.min.js"></script>
+
+	<script type="text/javascript">
+		function SetIFrameHeight(){
+			var iframeid=document.getElementById("iframe"); //iframe id
+			if (document.getElementById){
+				iframeid.height =document.documentElement.clientHeight;
+			}
+		}
+
+	</script>
+>>>>>>> 0aee4c6cabc07e81fbcf15afd46e4dca2f113663
+
+</head>
+
+<body class="hold-transition skin-green sidebar-mini" >
+
+<div class="wrapper">
+
+<<<<<<< HEAD
+    <!-- 页面头部 -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="login.html" class="logo">
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>药品采购</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        </nav>
+    </header>
+    <!-- 页面头部 /-->
+
+    <!-- 导航侧栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../static/img/jiantou.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p> 采购医院</p>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu"  >
+                <li class="header">菜单</li>
+                <!-- 菜单 -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i>
+                        <span>监督管理</span>
+                        <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="drug_catalogue">
+                            <a href="drug_catalogue.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>药品目录管理
+                            </a>
+                            <ul class="treeview-menu" >
+                                <li id="names">
+                                    <a th:href="@{'names'}" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品品目维护
+                                    </a>
+
+                                </li>
+                                <li id="message">
+                                    <a th:href="@{'con'}" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品信息维护
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="purchase_order">
+                            <a href="purchase_order.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>采购单审核
+                            </a>
+                        </li>
+                        <li id="management">
+                            <a href="management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>供货管理
+                            </a>
+                        </li>
+                        <li id="query_statistics">
+                            <a href="query_statistics.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>交易查询统计
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i>
+                        <span>采购管理</span>
+                        <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                        <li id="drug_catalog_query1">
+                            <a href="drug_catalog_query1.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>药品目录查询
+                            </a>
+                            <ul class="treeview-menu" >
+                                <li id="names2">
+                                    <a href="names2.html" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品品目查询
+                                    </a>
+
+                                </li>
+                                <li id="message2">
+                                    <a href="message2.html" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品信息查询
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="procurement_catalog_management">
+                            <a href="procurement_catalog_management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>采购目录管理
+                            </a>
+                        </li>
+                        <li id="purchasing_management">
+                            <a href="purchasing_management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>采购管理
+                            </a>
+                        </li>
+                        <li id="return_management1">
+                            <a href="return_management1.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>退货管理
+                            </a>
+                        </li>
+                        <li id="settlement_management1">
+                            <a href="settlement_management1.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>结算管理
+                            </a>
+                        </li>
+                        <li id="transaction_query_statistics">
+                            <a href="transaction_query_statistics.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>交易查询统计
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i>
+                        <span>供货管理</span>
+                        <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                        <li id="drug_catalog_query">
+                            <a href="drug_catalog_query.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>药品目录查询
+                            </a>
+                            <ul class="treeview-menu" >
+                                <li id="names3">
+                                    <a href="names3.html" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品品目查询
+                                    </a>
+
+                                </li>
+                                <li id="message3">
+                                    <a href="message3.html" target="iframe">
+                                        <i class="fa fa-circle-o"></i>药品信息查询
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="commodity_management">
+                            <a href="commodity_management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>商品管理
+                            </a>
+                        </li>
+                        <li id="shipping_management">
+                            <a href="shipping_management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>发货管理
+                            </a>
+                        </li>
+                        <li id="return_management">
+                            <a href="return_management.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>退货单管理
+                            </a>
+                        </li>
+                        <li id="settlement_management">
+                            <a href="settlement_management.html"  target="iframe">
+                                <!--th:href="@{}"-->
+                                <i class="fa fa-circle-o"></i>结算管理
+                            </a>
+                        </li>
+                        <li id="transaction_statistics_query">
+                            <a href="transaction_statistics_query.html" target="iframe">
+                                <i class="fa fa-circle-o"></i>交易统计查询
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+        <iframe width="100%" id="iframe" name="iframe"	onload="SetIFrameHeight()"
+                frameborder="0" src="home.html"></iframe>
+    </div>
+    <footer class="main-footer">
+    </footer>
+=======
+	<!-- 页面头部 -->
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="index.html" class="logo">
+			<!-- logo for regular state and mobile devices -->
+			<span class="logo-lg"><b>药品采购</b></span>
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<!-- Sidebar toggle button-->
+			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+				<span class="sr-only">Toggle navigation</span>
+			</a>
+		</nav>
+	</header>
+	<!-- 页面头部 /-->
+
+	<!-- 导航侧栏 -->
+	<aside class="main-sidebar">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- Sidebar user panel -->
+			<div class="user-panel">
+				<div class="pull-left image">
+					<img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
+				</div>
+				<div class="pull-left info">
+					<p> 采购医院</p>
+				</div>
+			</div>
+
+			<!-- /.search form -->
+			<!-- sidebar menu: : style can be found in sidebar.less -->
+			<ul class="sidebar-menu"  >
+				<li class="header">菜单</li>
+				<!-- 菜单 -->
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-folder"></i>
+						<span>监督管理</span>
+						<span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+					</a>
+					<ul class="treeview-menu">
+
+						<li id="drug_catalogue">
+							<a href="drug_catalogue.html" target="iframe">
+								<i class="fa fa-circle-o"></i>药品目录管理
+							</a>
+						</li>
+						<li id="purchase_order">
+							<a href="purchase_order.html" target="iframe">
+								<i class="fa fa-circle-o"></i>采购单审核
+							</a>
+						</li>
+						<li id="management">
+							<a href="management.html" target="iframe">
+								<i class="fa fa-circle-o"></i>供货管理
+							</a>
+						</li>
+						<li id="query_statistics">
+							<a href="query_statistics.html" target="iframe">
+								<i class="fa fa-circle-o"></i>交易查询统计
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-folder"></i>
+						<span>采购管理</span>
+						<span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+					</a>
+					<ul class="treeview-menu">
+
+						<li id="drug_catalog_query1">
+							<a href="brand.html" target="iframe">
+								<i class="fa fa-circle-o"></i>药品目录查询
+							</a>
+						</li>
+						<li id="procurement_catalog_management">
+							<a href="specification.html" target="iframe">
+								<i class="fa fa-circle-o"></i>采购目录管理
+							</a>
+						</li>
+						<li id="purchasing_management">
+							<a href="type_template.html" target="iframe">
+								<i class="fa fa-circle-o"></i>采购管理
+							</a>
+						</li>
+						<li id="return_management1">
+							<a th:href="@{'select'}" target="iframe">
+								<i class="fa fa-circle-o"></i>退货管理
+							</a>
+						</li>
+						<li id="settlement_management1">
+							<a href="goods.html" target="iframe">
+								<i class="fa fa-circle-o"></i>结算管理
+							</a>
+						</li>
+						<li id="transaction_query_statistics">
+							<a href="goods.html" target="iframe">
+								<i class="fa fa-circle-o"></i>交易查询统计
+							</a>
+							<ul class="treeview-menu">
+								<li id="purchase_order2">
+									<a th:href="@{'purchaseQuery'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按采购单查询
+									</a>
+								</li>
+							</ul>
+							<ul class="treeview-menu">
+								<li id="supplier">
+									<a th:href="@{'supplierQuery'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按供货商查询
+									</a>
+								</li>
+							</ul>
+							<ul class="treeview-menu">
+								<li id="purchasing_hospital">
+									<a th:href="@{'buyHospitalQuery'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按采购医院查询
+									</a>
+								</li>
+							</ul>
+							<ul class="treeview-menu">
+								<li id="trading_drugs">
+									<a th:href="@{'buyDrugsQuery'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按交易药品查询
+									</a>
+								</li>
+							</ul>
+							<ul class="treeview-menu">
+								<li id="etailed">
+									<a th:href="@{'buyDrugsInfo'}" target="iframe">
+										<i class="fa fa-circle-o"></i>查询交易药品明细
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-folder"></i>
+						<span>供货管理</span>
+						<span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+					</a>
+					<ul class="treeview-menu">
+
+						<li id="drug_catalog_query">
+							<a href="drug_catalog_query" target="iframe">
+								<i class="fa fa-circle-o"></i>药品目录查询
+							</a>
+						</li>
+						<li id="commodity_management">
+							<a href="content.html" target="iframe">
+								<i class="fa fa-circle-o"></i>商品管理
+							</a>
+						</li>
+						<li id="shipping_management">
+							<a href="content.html" target="iframe">
+								<i class="fa fa-circle-o"></i>发货管理
+							</a>
+						</li>
+						<li id="return_management">
+							<a href="content.html" target="iframe">
+								<i class="fa fa-circle-o"></i>退货单管理
+							</a>
+						</li>
+						<li id="settlement_management">
+							<a href="content.html" target="iframe">
+								<i class="fa fa-circle-o"></i>结算管理
+							</a>
+						</li>
+						<li id="transaction_statistics_query">
+							<a href="content.html" target="iframe">
+								<i class="fa fa-circle-o"></i>交易统计查询
+							</a>
+						</li>
+					</ul>
+				</li>
+				<!-- 菜单 /-->
+
+			</ul>
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+
+	<!-- 内容区域 -->
+	<div class="content-wrapper">
+		<iframe width="100%" id="iframe" name="iframe"	onload="SetIFrameHeight()"
+				frameborder="0" src="home.html"></iframe>
+	</div>
+	<footer class="main-footer">
+
+	</footer>
+>>>>>>> 0aee4c6cabc07e81fbcf15afd46e4dca2f113663
+</div>
+</body>
+</html>

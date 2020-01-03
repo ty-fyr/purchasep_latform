@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.purchase.mapper.DrugCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.DrugCategory">
+    <id column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dc_id, drug_type, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drug_category
+    where dc_id = #{dcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_category
+    where dc_id = #{dcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.DrugCategory">
+    insert into drug_category (dc_id, drug_type, state
+      )
+    values (#{dcId,jdbcType=INTEGER}, #{drugType,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.DrugCategory">
+    insert into drug_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dcId != null">
+        dc_id,
+      </if>
+      <if test="drugType != null">
+        drug_type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dcId != null">
+        #{dcId,jdbcType=INTEGER},
+      </if>
+      <if test="drugType != null">
+        #{drugType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.DrugCategory">
+    update drug_category
+    <set>
+      <if test="drugType != null">
+        drug_type = #{drugType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dc_id = #{dcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.DrugCategory">
+    update drug_category
+    set drug_type = #{drugType,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where dc_id = #{dcId,jdbcType=INTEGER}
+  </update>
+</mapper>

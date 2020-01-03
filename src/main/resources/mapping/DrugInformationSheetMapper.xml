@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.purchase.mapper.DrugInformationSheetMapper">
+  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.DrugInformationSheet">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
+    <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
+    <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
+    <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="units" jdbcType="VARCHAR" property="units" />
+    <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
+    <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+    <result column="the_price" jdbcType="REAL" property="thePrice" />
+    <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
+    <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
+    <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
+    <result column="packaging" jdbcType="VARCHAR" property="packaging" />
+    <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
+    <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
+    <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
+    <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
+    <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
+    <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
+    <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+      <association property="unit" javaType="com.hospital.purchase.domain.Units">
+          <id column="units_id" jdbcType="INTEGER" property="unitsId" />
+          <result column="units" jdbcType="VARCHAR" property="units" />
+          <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
+      </association>
+      <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
+      <id column="dc_id" jdbcType="INTEGER" property="dcId" />
+      <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+      <result column="state" jdbcType="VARCHAR" property="state" />
+      </association>
+  </resultMap>
+  <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
+    <id column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <select id="findall" resultMap="BaseResultMap">
+    SELECT
+        dsi.drug_item_no,
+        dsi.generic_drug,
+        dsi.dosage_form,
+        dsi.specification,
+        ui.units,
+        dsi.conversion_factor,
+        dc.drug_type,
+        dsi.descrip_id
+    FROM
+        drug_information_sheet dsi
+    LEFT JOIN units ui ON dsi.units = ui.units_id
+    LEFT JOIN drug_category dc on dsi.dc_id=dc.dc_id;
+  </select>
+  <select id="seldrugc" resultMap="Category">
+    SELECT * from drug_category;
+</select>
+</mapper>

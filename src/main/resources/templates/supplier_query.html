@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>按供货商查询</title>
+    <style>
+        .button {
+            background-color: #1aa5fb;
+
+        }
+
+        .table {
+            width: 800px;
+
+        }
+    </style>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<div class="biankuang">
+
+    <table class="table" border="1" cellspacing="0" style="table-layout:fixed">
+        <tr>
+            <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">按供货商查询</th>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de" color="red">供货商:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+            <td bgcolor="#b0c4de">统计时间:</td>
+            <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购状态:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+
+        </tr>
+
+    </table>
+    <div align="center">
+    <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>序号</td>
+            <td>供应商</td>
+            <td>采购状态</td>
+            <td>订货量</td>
+            <td>订货金额</td>
+            <td>送货量</td>
+            <td>送货金额</td>
+            <td>退货量</td>
+            <td>退货金额</td>
+            <td>结算量</td>
+            <td>结算金额</td>
+            <td>交易药品信息</td>
+        </tr>
+
+        <tr >
+            <td class="xuhao">1</td>
+            <td class="supplier">河南九州通医药有限公司</td>
+            <td class="cg-status">已入库</td>
+            <td class="dh-amount">70</td>
+            <td class="dh-money">41.9</td>
+            <td class="sh-amount">70</td>
+            <td class="sh-money"></td>
+            <td ></td>
+            <td ></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button type="button" class="btn btn-warning"><a href="#">查询</a></button>
+            </td>
+        </tr>
+
+        <td>合计:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </table>
+</div>
+</body>
+</html>

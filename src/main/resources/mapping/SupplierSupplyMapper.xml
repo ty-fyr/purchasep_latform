@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.purchase.mapper.SupplierSupplyMapper">
+  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.SupplierSupply">
+    <id column="Supplier_supply_id" jdbcType="INTEGER" property="supplierSupplyId" />
+    <result column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Supplier_supply_id, supply_id, supplier_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier_supply
+    where Supplier_supply_id = #{supplierSupplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier_supply
+    where Supplier_supply_id = #{supplierSupplyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.SupplierSupply">
+    insert into supplier_supply (Supplier_supply_id, supply_id, supplier_id
+      )
+    values (#{supplierSupplyId,jdbcType=INTEGER}, #{supplyId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.SupplierSupply">
+    insert into supplier_supply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierSupplyId != null">
+        Supplier_supply_id,
+      </if>
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierSupplyId != null">
+        #{supplierSupplyId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.SupplierSupply">
+    update supplier_supply
+    <set>
+      <if test="supplyId != null">
+        supply_id = #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Supplier_supply_id = #{supplierSupplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.SupplierSupply">
+    update supplier_supply
+    set supply_id = #{supplyId,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER}
+    where Supplier_supply_id = #{supplierSupplyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>药品品目查询</title>
+    <style>
+        .button{
+            background-color: #1aa5fb;
+
+        }
+        .table{
+            width: 800px;
+
+        }
+    </style>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<div class="biankuang">
+    <center>
+        <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
+            <tr>
+                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">药品品目查询</th>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de" color="red">药品品目号:</td>
+                <td><input/></td>
+                <td bgcolor="#b0c4de">通用名:</td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">剂型:</td>
+                <td><input/></td>
+                <td bgcolor="#b0c4de">规格:</td>
+                <td><input/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">单位:</td>
+                <td><input/></td>
+                <td bgcolor="#b0c4de">转换系数:</td>
+                <td><input/></td>
+            </tr>
+        </table>
+        &nbsp;
+        <button class="btn btn-link">查询</button>&nbsp;<button class="btn btn-link">导出</button>
+    </center>
+    <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;<button class="btn btn-link">导出</button>
+    <table class="table table-bordered" >
+    <tr>
+        <td>药品品目号</td>
+        <td>通用名</td>
+        <td>剂型</td>
+        <td>规格</td>
+        <td>单位</td>
+        <td>转换系数</td>
+        <td>药品类别</td>
+        <td>交易状态</td>
+        <td>详细</td>
+        <td>修改</td>
+        <td>删除</td>
+    </tr><!--th:text="${find.descripId}"-->
+       <tr th:each="find : ${findall}">
+           <td th:text="${find.drugItemNo}"></td>
+           <td th:text="${find.genericDrug}"></td>
+           <td th:text="${find.dosageForm}"></td>
+           <td th:text="${find.specification}"></td>
+           <td th:text="${find.unit.units}"></td>
+           <td th:text="${find.conversionFactor}"></td>
+           <td th:text="${find.drugCategory.drugType}"></td>
+           <td>
+               <select th:switch="${find.descripId}">
+               <option th:case="1">正常</option>
+               <option th:case="0">非正常</option>
+               <option th:case="*">其他</option>
+               </select>
+           </td>
+           <td><button type="button" class="btn btn-default">查看</button></td>
+           <td><button type="button" class="btn btn-success">修改</button></td>
+           <td><button type="button" class="btn btn-danger">删除</button></td>
+       </tr>
+    </table>
+</div>
+</body>
+</html>
