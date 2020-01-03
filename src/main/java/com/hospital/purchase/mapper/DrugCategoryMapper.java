@@ -2,19 +2,10 @@ package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.DrugCategory;
 
-import org.apache.ibatis.annotations.Mapper;
-
+import java.util.List;
 
 public interface DrugCategoryMapper {
-    int deleteByPrimaryKey(Integer dcId);
 
-    int insert(DrugCategory record);
-
-    int insertSelective(DrugCategory record);
-
-    DrugCategory selectByPrimaryKey(Integer dcId);
-
-    int updateByPrimaryKeySelective(DrugCategory record);
-
-    int updateByPrimaryKey(DrugCategory record);
+    //查询全部药品类别
+    List<DrugCategory> findDrugCategory();
 }

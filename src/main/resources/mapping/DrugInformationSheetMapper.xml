@@ -30,23 +30,142 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="isdel" jdbcType="INTEGER" property="isdel" />
     <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
-      <association property="unit" javaType="com.hospital.purchase.domain.Units">
-          <id column="units_id" jdbcType="INTEGER" property="unitsId" />
-          <result column="units" jdbcType="VARCHAR" property="units" />
-          <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
-      </association>
-      <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
+    <association property="units1" javaType="com.hospital.purchase.domain.Units">
+      <id column="unitsId" property="unitsId"/>
+      <result column="uunits" property="units"/>
+      <result column="unitsFid" property="unitsFid"/>
+    </association>
+    <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
+      <id column="eenterpriseId" property="enterpriseId"/>
+      <result column="enterprise_name" property="enterpriseName"/>
+      <result column="business_license" property="businessLicense"/>
+      <result column="registration_time" property="registrationTime"/>
+    </association>
+    <association property="qualityLevel" javaType="com.hospital.purchase.domain.QualityLevel">
+      <id column="qlevelId" property="levelId"/>
+      <result column="level_type" property="levelType"/>
+    </association>
+    <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
+      <id column="drdcId" property="dcId"/>
+      <result column="drug_type" property="drugType"/>
+      <result column="state" property="state"/>
+    </association>
+  </resultMap>
+  <resultMap id="DrugInformationSheet" type="com.hospital.purchase.domain.DrugInformationSheet">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
+    <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
+    <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
+    <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="units" jdbcType="VARCHAR" property="units" />
+    <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
+    <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+    <result column="the_price" jdbcType="REAL" property="thePrice" />
+    <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
+    <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
+    <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
+    <result column="packaging" jdbcType="VARCHAR" property="packaging" />
+    <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
+    <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
+    <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
+    <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
+    <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
+    <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
+    <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+
+    <association property="units1" javaType="com.hospital.purchase.domain.Units">
+      <id column="units_id" jdbcType="INTEGER" property="unitsId" />
+      <result column="units" jdbcType="VARCHAR" property="units" />
+      <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
+    </association>
+    <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
       <id column="dc_id" jdbcType="INTEGER" property="dcId" />
       <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
       <result column="state" jdbcType="VARCHAR" property="state" />
-      </association>
+    </association>
   </resultMap>
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
     <id column="dc_id" jdbcType="INTEGER" property="dcId" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
-  <select id="findall" resultMap="BaseResultMap">
+
+
+  <sql id="Base_Column_List">
+    drug_id, drug_serial_number, drug_item_no, generic_drug, dosage_form, specification,
+    units, conversion_factor, enterprise_id, trade_name, the_price, approval_number,
+    approval_number_date, whether_import, packaging, packing_unit, latest_retail_price,
+    Source_price, level_id, quality_hierarchy, inspection_report, drug_inspection, drug_inspection_report,
+    dc_id, descrip_id, description, isdel, proxy_id
+  </sql>
+  <select id="selecetDrugInformationSheet" resultMap="BaseResultMap">
+    SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
+      e.enterprise_name,e.business_license,e.registration_time,
+      q.level_id as qlevelId,q.level_type,
+      dr.dc_id as drdcId,dr.drug_type,dr.state
+      FROM drug_information_sheet d
+      LEFT JOIN units u ON d.units= u.units_id
+      LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
+      LEFT JOIN quality_level q ON d.level_id=q.level_id
+      LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
+  </select>
+  <select id="findSerchBean" parameterType="com.hospital.purchase.domain.dto.SelectDto" resultMap="BaseResultMap">
+    SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
+    e.enterprise_name,e.business_license,e.registration_time,
+    q.level_id as qlevelId,q.level_type,
+    dr.dc_id as drdcId,dr.drug_type,dr.state
+    FROM drug_information_sheet d
+    LEFT JOIN units u ON d.units= u.units_id
+    LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
+    LEFT JOIN quality_level q ON d.level_id=q.level_id
+    LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
+    WHERE 1=1
+    <if test="drugSerialNumber!=null">
+      and d.drug_serial_number=#{drugSerialNumber}
+    </if>
+    <if test="genericDrug!=null">
+      and d.drug_serial_number=#{genericDrug}
+    </if>
+    <if test="dosageForm!=null">
+      and d.dosage_form=#{dosageForm}
+    </if>
+    <if test="specification!=null">
+      and d.specification=#{specification}
+    </if>
+    <if test="units!=null">
+      and d.units=#{units}
+    </if>
+    <if test="conversionFactor!=null">
+      and d.conversion_factor=#{conversionFactor}
+    </if>
+    <if test="enterpriseId!=null">
+      and d.enterprise_id=#{enterpriseId}
+    </if>
+    <if test="tradeName!=null">
+      and d.trade_name=#{tradeName}
+    </if>
+    <if test="minMoney!=null and maxMoney!=null">
+      and d.the_price BETWEEN #{minMoney} AND #{maxMoney}
+    </if>
+    <if test="leveId!=null and leveId!=-1">
+      and d.level_id=#{leveId}
+    </if>
+    <if test="dcId!=null and dcId!=-1">
+      and d.dc_id=#{dcId}
+    </if>
+    <if test="descripId!=null and descripId!=-1">
+      and d.descrip_id=#{descripId}
+    </if>
+  </select>
+  <select id="findall" resultMap="DrugInformationSheet">
     SELECT
         dsi.drug_item_no,
         dsi.generic_drug,

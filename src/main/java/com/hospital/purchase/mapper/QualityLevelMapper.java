@@ -2,16 +2,10 @@ package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.QualityLevel;
 
+import java.util.List;
+
 public interface QualityLevelMapper {
-    int deleteByPrimaryKey(Integer levelId);
 
-    int insert(QualityLevel record);
-
-    int insertSelective(QualityLevel record);
-
-    QualityLevel selectByPrimaryKey(Integer levelId);
-
-    int updateByPrimaryKeySelective(QualityLevel record);
-
-    int updateByPrimaryKey(QualityLevel record);
+    //查询全部质量层次
+    List<QualityLevel> findQualityLevel();
 }

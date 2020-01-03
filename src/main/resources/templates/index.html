@@ -6,43 +6,47 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>采购药品后台管理系统登录</title>
-	 <link rel="icon" href="../static/assets/img/favicon.ico">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-    <title>采购药品后台管理系统</title>
-    <link rel="icon" href="../static/assets/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../static/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/pages-login-manage.css" />
+	<script type="text/javascript" src="../static/js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/plugins/sui/sui.min.js"></script>
+	<script type="text/javascript" src="../static/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+	<script src="../static/js/pages/jquery.slideunlock.js"></script>
+	<script src="../static/js/jquery1.11.3-jquery.min.js"></script>
+	<link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}">
+
 </head>
 <body>
 	<div class="loginmanage">
 		<div class="py-container">
 			<h4 class="manage-title">采购药品后台管理系统登录</h4>
-			<div class="loginform" >
-				<form role="form">
+			<div class="loginform">
+				<form id="form1" action="/findAll" method="post">
 					<div class="form-group">
-						<label for="exampleInputEmail1">账号</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+						<label for="username1">用户名</label>
+						<input type="text" class="form-control" id="username1" placeholder="请输入用户名" name="username">
 					</div>
+					<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 					<div class="form-group">
-						<label for="exampleInputPassword1">密码</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<label for="password1">密码</label>
+						<input type="password" class="form-control" id="password1" placeholder="请输入密码" name="password">
 					</div>
-					<button type="submit" class="btn btn-default"><a th:href="@{'login'}">登录</a></button>
+					<input type="submit" width="100" value="登录" id="loginBtn" border="0" style="background-color:#CD062D;height:35px;width:100px;color:white;">
 				</form>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript" src="../static/js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="../static/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
-<script src="../static/js/pages/jquery.slideunlock.js"></script>
-<link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+
+	<script type="text/javascript">
+        $("#loginBtn").click(function () {
+            if(confirm('确定要登录吗?')){
+                $("#form1").submit();
+            }
+        })
+
+	</script>
 </body>
 
 </html>

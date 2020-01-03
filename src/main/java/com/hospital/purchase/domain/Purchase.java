@@ -3,42 +3,43 @@ package com.hospital.purchase.domain;
 import java.util.Date;
 
 public class Purchase {
+    //采购单Id
     private Integer piId;
-
+    // 药品id
     private Integer drugId;
-
+    //审核结果
     private Integer result;
-
+    //审核意见
     private String opinion;
-
+    //医院id
     private Integer hospitalId;
-
+    //采购单编号
     private Integer purchaseNumber;
-
+    //采购单名称
     private String purchaseName;
-
+    //开始时间
     private Date startTime;
-
+    //结束时间
     private Date overTime;
-
+    //建单时间
     private Date activateTime;
-
+    //提交时间
     private Date submitTime;
-
+    //审核时间
     private Date assessorTime;
-
+    //采购单状态
     private Integer descripId;
-
+    //isdel
     private Integer isdel;
-
+    //审核人
     private String auditor;
-
+    //联系人
     private String contacts;
-
+    //联系人电话
     private String contactsph;
-
+    //供货商id
     private Integer supplierId;
-
+    //交易id
     private Integer tiId;
 
     public Integer getPiId() {

@@ -59,11 +59,14 @@ public class DrugInformationSheet {
 
     private Integer proxyId;
 
+    private Units units1;
 
-    private  Units unit;
+    private Enterprise enterprise;
 
-    private  DrugCategory drugCategory;
+    private QualityLevel qualityLevel;
 
+    private DrugCategory drugCategory;
+	
     public DrugCategory getDrugCategory() {
         return drugCategory;
     }
@@ -72,12 +75,28 @@ public class DrugInformationSheet {
         this.drugCategory = drugCategory;
     }
 
-    public Units getUnit() {
-        return unit;
+    public QualityLevel getQualityLevel() {
+        return qualityLevel;
     }
 
-    public void setUnit(Units unit) {
-        this.unit = unit;
+    public void setQualityLevel(QualityLevel qualityLevel) {
+        this.qualityLevel = qualityLevel;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public Units getUnits1() {
+        return units1;
+    }
+
+    public void setUnits1(Units units1) {
+        this.units1 = units1;
     }
 
     public Integer getDrugId() {

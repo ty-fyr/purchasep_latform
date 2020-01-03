@@ -1,17 +1,13 @@
 package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@Mapper
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer userId);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer userId);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+    //登录
+    User seleAll(@Param("username") String username, @Param("password") String password);
 }

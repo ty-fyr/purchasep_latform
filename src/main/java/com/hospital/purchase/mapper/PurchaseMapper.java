@@ -14,4 +14,10 @@ public interface PurchaseMapper {
     int updateByPrimaryKeySelective(Purchase record);
 
     int updateByPrimaryKey(Purchase record);
+
+    /*
+     * 按采购单查询
+     */
+    Purchase selectByPrimaryKey(String purchaseName);
+
 }

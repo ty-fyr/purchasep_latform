@@ -110,6 +110,34 @@
 							<a href="query_statistics.html" target="iframe">
 								<i class="fa fa-circle-o"></i>交易查询统计
 							</a>
+							<ul class="treeview-menu">
+
+								<li id="query">
+									<a th:href="@{'query1'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按采购单查询
+									</a>
+								</li>
+								<li id="supplier1">
+									<a th:href="@{'supplier'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按供货商查询
+									</a>
+								</li>
+								<li id="purchasing">
+									<a th:href="@{'purchasing'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按采购医院查询
+									</a>
+								</li>
+								<li id="transaction">
+									<a th:href="@{'transaction'}" target="iframe">
+										<i class="fa fa-circle-o"></i>按交易药品查询
+									</a>
+								</li>
+								<li id="drug">
+									<a th:href="@{'drug'}" target="iframe">
+										<i class="fa fa-circle-o"></i>查询药品交易明细
+									</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</li>
@@ -208,9 +236,26 @@
 							</a>
 						</li>
 						<li id="commodity_management">
-							<a href="goods_return_service.html" target="iframe">
+							<a href="commodity_management.html" target="iframe">
 								<i class="fa fa-circle-o"></i>商品管理
 							</a>
+							<ul class="treeview-menu">
+								<li id="select_suppliers">
+									<a th:href="@{'selectSuppliers'}" target="iframe">
+										<i class="fa fa-circle-o"></i>选择供货
+									</a>
+								</li>
+								<li id="cancel_the_supply">
+									<a th:href="@{'cancelTheSupply'}" target="iframe">
+										<i class="fa fa-circle-o"></i>取消供货
+									</a>
+								</li>
+								<li id="commodity_information_maintenance">
+									<a th:href="@{'commodityInformationMaintenance'}" target="iframe">
+										<i class="fa fa-circle-o"></i>商品信息维护
+									</a>
+								</li>
+							</ul>
 						</li>
 						<li id="shipping_management">
 							<a href="goods_return_service.html" target="iframe">

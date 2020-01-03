@@ -3,6 +3,7 @@ package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
+import com.hospital.purchase.domain.dto.SelectDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
 
@@ -20,4 +21,14 @@ public interface DrugInformationSheetMapper {
      * 查询药品类别
      * @return
      */
-    List<DrugCategory> seldrugc();}
+    List<DrugCategory> seldrugc();
+
+
+    //查询全部
+    List<DrugInformationSheet> selecetDrugInformationSheet();
+
+    //条件查询
+    List<DrugInformationSheet> findSerchBean(SelectDto selectDto);
+}
+
+
