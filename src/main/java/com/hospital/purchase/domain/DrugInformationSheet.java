@@ -66,7 +66,27 @@ public class DrugInformationSheet {
     private QualityLevel qualityLevel;
 
     private DrugCategory drugCategory;
-	
+
+    private  Enterprise enterpris;
+
+    private  QualityLevel qualityLeve;
+
+    public QualityLevel getQualityLeve() {
+        return qualityLeve;
+    }
+
+    public void setQualityLeve(QualityLevel qualityLeve) {
+        this.qualityLeve = qualityLeve;
+    }
+
+    public Enterprise getEnterpris() {
+        return enterpris;
+    }
+
+    public void setEnterpris(Enterprise enterpris) {
+        this.enterpris = enterpris;
+    }
+
     public DrugCategory getDrugCategory() {
         return drugCategory;
     }

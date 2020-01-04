@@ -3,11 +3,11 @@ package com.hospital.purchase.controller;
 import com.alibaba.fastjson.JSON;
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.service.CategoryService;
+import com.hospital.purchase.domain.DrugInformationSheet;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,16 +23,20 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/login")
-    public String ind(){
-        return "login";
-    }
-
     @RequestMapping("/namesadd")
     public String add(){
         return "namesadd";
     }
 
+    @RequestMapping("/up")
+    public String up(){
+        return "drugadd";
+    }
+
+    /**
+     * 查询药品类别
+     * @return
+     */
     @RequestMapping(value = "seldrugc", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String seldrugc(){
@@ -49,5 +53,29 @@ public class CategoryController {
         List<DummyPositionSensitiveRecordWithChildren> findal = categoryService.findall();
         model.addAttribute("findall",findal);
         return "names";
+    }
+
+    /**
+     * 药品信息查询
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findxx")
+    public String findxx(Model model){
+        List<DummyPositionSensitiveRecordWithChildren> finxx = categoryService.finxx();
+        model.addAttribute("finxx",finxx);
+        return "drugna";
+    }
+    /**
+     *添加药品品目
+     * @return
+     */
+    @RequestMapping("/findadd")
+    @ResponseBody
+    public String findadd(DrugInformationSheet children){
+        int finda = categoryService.findadd(children);
+        System.out.println(finda);
+        String json = JSON.toJSONString(finda);
+        return json;
     }
 }

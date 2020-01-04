@@ -23,6 +23,23 @@ public interface DrugInformationSheetMapper {
      */
     List<DrugCategory> seldrugc();
 
+    /**
+     *添加药品品目
+     * @return
+     */
+    int findadd(DrugInformationSheet children);
+
+    /**
+     *添加药品品目
+     * @return
+     */
+    int xxadd(DrugInformationSheet children);
+
+    /**
+     * 查询药品信息
+     * @return
+     */
+    List<DummyPositionSensitiveRecordWithChildren> finxx();
 
     //查询全部
     List<DrugInformationSheet> selecetDrugInformationSheet();
