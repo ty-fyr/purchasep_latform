@@ -28,10 +28,10 @@
         })
     </script>
     <script type="text/javascript">
-        function finadd() {
+        function drugadd() {
             $.ajax({
-                url: "findadd",
-                data: $("#findadd-form").serialize(),
+                url: "",
+                data: $("#drugadd-form").serialize(),
                 type:"post",
                 dataType:"json",
                 success : function(result) {
@@ -47,40 +47,99 @@
     </script>
 </head>
 <body>
-    <h2 align="center">药品品目添加</h2>
-<form id="findadd-form">
-<table align="center">
+    <h2 align="center">药品信息添加</h2>
+<form id="drugadd-form">
+<table class="table table-bordered">
     <tr>
         <td>
-            <input name="drugItemNo"/>药品品目号
+            <input name="drugSerialNumber"/>药品流水号
         </td>
-    </tr>
-    <tr>
         <td>
             <input name="genericDrug"/>通用名
         </td>
     </tr>
+
     <tr>
         <td>
             <input name="dosageForm"/>剂型</td>
-    </tr>
-    <tr>
+
         <td>
             <input name="specification"/>规格</td>
     </tr>
+
     <tr>
         <td>
             <input name="units"/>单位</td>
-    </tr>
-    <tr>
+
         <td>
             <input name="conversionFactor"/>转换系数</td>
     </tr>
+
     <tr>
+        <td>
+            <input name="enterpriseId"/>生产企业</td>
+
+        <td>
+            <input name="tradeName"/>商品名称</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="thePrice"/>中标价</td>
+        <td>
+            <input name="approvalNumber"/>批准文号</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="thePrice" type="Date"/>批准文号有效期</td>
+        <td>
+            <select name="whetherImport">
+                <option value="0">是</option>
+                <option value="1">否</option>
+            </select>是否进口
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="packaging"/>包装层次</td>
+        <td>
+            <input name="packingUnit"/>包装单位</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="latestRetailPrice"/>最新零售价</td>
+        <td>
+            <input name="sourcePrice"/>零售价出处</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="levelId"/>质量层次</td>
+        <td>
+            <input name="qualityHierarchy"/>质量层次说明</td>
+    </tr>
+
+    <tr>
+        <td>
+            <select name="inspectionReport">
+                <option value="0">有</option>
+                <option value="1">无</option>
+            </select>有无药品检验报</td>
+        <td>
+            <input name="drugInspection"/>药品检验报告编号</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input name="drugInspectionReport"/>药品检验报告有效期</td>
         <td>
             <select name="dcId" id="seldrugid"></select>药品类别
         </td>
     </tr>
+
     <tr>
         <td>
             <select name="descripId">
@@ -88,9 +147,18 @@
                 <option value="1">非正常</option>
             </select>交易状态
         </td>
+        <td>
+            <input name="description"/>产品说明</td>
+        </td>
+    </tr>
+   <!-- <tr>
+
     </tr>
     <tr>
-        <td><button class="btn btn-success" onclick="finadd()">添加</button>
+
+    </tr>-->
+    <tr>
+        <td><button class="btn btn-success" onclick="drugadd()">添加</button>
         <input type="reset" class="btn btn-danger"></td>
     </tr>
 </table>

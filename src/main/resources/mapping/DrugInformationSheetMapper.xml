@@ -41,7 +41,7 @@
       <result column="business_license" property="businessLicense"/>
       <result column="registration_time" property="registrationTime"/>
     </association>
-    <association property="qualityLevel" javaType="com.hospital.purchase.domain.QualityLevel">
+    <association property="qualityLeve" javaType="com.hospital.purchase.domain.QualityLevel">
       <id column="qlevelId" property="levelId"/>
       <result column="level_type" property="levelType"/>
     </association>
@@ -91,14 +91,23 @@
       <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
       <result column="state" jdbcType="VARCHAR" property="state" />
     </association>
+    <association property="enterpris" javaType="com.hospital.purchase.domain.Enterprise">
+    <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+      <result column="registration_time" jdbcType="DATE" property="registrationTime" />
+    </association>
+    <association property="qualityLeve" javaType="com.hospital.purchase.domain.QualityLevel">
+      <id column="level_id" jdbcType="INTEGER" property="levelId" />
+      <result column="level_type" jdbcType="VARCHAR" property="levelType" />
+
+    </association>
   </resultMap>
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
     <id column="dc_id" jdbcType="INTEGER" property="dcId" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
-
-
   <sql id="Base_Column_List">
     drug_id, drug_serial_number, drug_item_no, generic_drug, dosage_form, specification,
     units, conversion_factor, enterprise_id, trade_name, the_price, approval_number,
@@ -178,9 +187,92 @@
     FROM
         drug_information_sheet dsi
     LEFT JOIN units ui ON dsi.units = ui.units_id
-    LEFT JOIN drug_category dc on dsi.dc_id=dc.dc_id;
+    LEFT JOIN drug_category dc on dsi.dc_id=dc.dc_id
+		WHERE proxy_id=0;
+  </select>
+  <select id="finxx" resultMap="DrugInformationSheet">
+    SELECT
+	dsi.drug_serial_number,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	ui.units,
+	dsi.conversion_factor,
+	ep.enterprise_name,
+	dsi.trade_name,
+	dsi.the_price,
+	ql.level_type,
+	dc.drug_type,
+	dsi.descrip_id
+    FROM
+        drug_information_sheet dsi
+    LEFT JOIN units ui ON dsi.units = ui.units_id
+    LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+    LEFT JOIN	enterprise ep ON dsi.enterprise_id=ep.enterprise_id
+    LEFT JOIN quality_level ql ON dsi.level_id = ql.level_id
+    WHERE dsi.proxy_id=1
+
   </select>
   <select id="seldrugc" resultMap="Category">
     SELECT * from drug_category;
 </select>
+  <insert id="findadd">
+    INSERT INTO `drug_purchase`.`drug_information_sheet` (
+		`drug_id`,
+		`drug_item_no`,
+		`generic_drug`,
+		`dosage_form`,
+		`specification`,
+		`units`,
+		`conversion_factor`,
+		`dc_id`,
+		`descrip_id`,
+		`isdel`,
+		`proxy_id`
+	)
+VALUES
+	(
+    null,#{drugItemNo},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{dcId},#{descripId},1,0
+	);
+  </insert>
+
+  <insert id="xxadd">
+    INSERT INTO `drug_purchase`.`drug_information_sheet` (
+	`drug_id`,
+	`drug_serial_number`,
+	`generic_drug`,
+	`dosage_form`,
+	`specification`,
+	`units`,
+	`conversion_factor`,
+	`enterprise_id`,
+	`trade_name`,
+	`the_price`,
+	`approval_number`,
+	`approval_number_date`,
+	`whether_import`,
+	`packaging`,
+	`packing_unit`,
+	`latest_retail_price`,
+	`Source_price`,
+	`level_id`,
+	`quality_hierarchy`,
+	`inspection_report`,
+	`drug_inspection`,
+	`drug_inspection_report`,
+	`dc_id`,
+	`descrip_id`,
+	`description`,
+	`isdel`,
+	`proxy_id`
+)
+VALUES
+	(
+    null,#{drugSerialNumber},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{enterpriseId},#{tradeName},
+    #{thePrice},#{approvalNumber},#{thePrice},#{whetherImport},#{packaging},#{packingUnit},#{latestRetailPrice},#{sourcePrice},#{levelId},
+    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1
+	);
+  </insert>
+
+
 </mapper>

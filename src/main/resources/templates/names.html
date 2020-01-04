@@ -5,12 +5,10 @@
     <title>药品品目查询</title>
     <style>
         .button{
-            background-color: #1aa5fb;
-
+            background-color: dodgerblue;
         }
         .table{
             width: 800px;
-
         }
     </style>
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
@@ -20,7 +18,7 @@
     <center>
         <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
             <tr>
-                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">药品品目查询</th>
+                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">药品品目查询</th>
             </tr>
             <tr>
                 <td bgcolor="#b0c4de" color="red">药品品目号:</td>
@@ -73,7 +71,7 @@
                <option th:case="0">非正常</option>
                <option th:case="*">其他</option>
                </select>
-           </td>
+           </td >
            <td><button type="button" class="btn btn-default">查看</button></td>
            <td><button type="button" class="btn btn-success">修改</button></td>
            <td><button type="button" class="btn btn-danger">删除</button></td>
