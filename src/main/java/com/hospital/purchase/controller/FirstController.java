@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class FirstController {
-    @RequestMapping("/query")
-    public String query(){
-        return "login";
-    }
+
     @RequestMapping("/find")
     public String find(){
         return "index";
@@ -31,7 +28,6 @@ public class FirstController {
 
         return "content";
     }
-
     //跳转到采购单查询
     @RequestMapping("/purchaseQuery")
     public String purchaseQuery(){
