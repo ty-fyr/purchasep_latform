@@ -3,6 +3,8 @@ package com.hospital.purchase.domain;
 import java.util.Date;
 
 public class Purchase {
+    //主键id
+    private Integer purId;
     //采购单Id
     private Integer piId;
     // 药品id
@@ -42,6 +44,24 @@ public class Purchase {
     //交易id
     private Integer tiId;
 
+    private TransactionInfo transaction;
+
+    public TransactionInfo getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(TransactionInfo transaction) {
+        this.transaction = transaction;
+    }
+
+    public Integer getPurId() {
+        return purId;
+    }
+
+    public void setPurId(Integer purId) {
+        this.purId = purId;
+    }
+
     public Integer getPiId() {
         return piId;
     }
@@ -71,7 +91,7 @@ public class Purchase {
     }
 
     public void setOpinion(String opinion) {
-        this.opinion = opinion == null ? null : opinion.trim();
+        this.opinion = opinion;
     }
 
     public Integer getHospitalId() {
@@ -95,7 +115,7 @@ public class Purchase {
     }
 
     public void setPurchaseName(String purchaseName) {
-        this.purchaseName = purchaseName == null ? null : purchaseName.trim();
+        this.purchaseName = purchaseName;
     }
 
     public Date getStartTime() {
@@ -159,7 +179,7 @@ public class Purchase {
     }
 
     public void setAuditor(String auditor) {
-        this.auditor = auditor == null ? null : auditor.trim();
+        this.auditor = auditor;
     }
 
     public String getContacts() {
@@ -167,7 +187,7 @@ public class Purchase {
     }
 
     public void setContacts(String contacts) {
-        this.contacts = contacts == null ? null : contacts.trim();
+        this.contacts = contacts;
     }
 
     public String getContactsph() {
@@ -175,7 +195,7 @@ public class Purchase {
     }
 
     public void setContactsph(String contactsph) {
-        this.contactsph = contactsph == null ? null : contactsph.trim();
+        this.contactsph = contactsph;
     }
 
     public Integer getSupplierId() {

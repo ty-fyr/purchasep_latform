@@ -3,16 +3,17 @@ package com.hospital.purchase.domain;
 import java.util.Date;
 
 public class Repertory {
+    //库存id
     private Integer repertoryId;
-
+    //入库量
     private String receipt;
-
+    //药品id
     private Integer drugId;
-
+    //发票号或入库单号
     private Integer invoiceNumber;
-
+    //入库开始时间
     private Date startTime;
-
+    //入库结束时间
     private Date endoplasmicReticulum;
 
     public Integer getRepertoryId() {
