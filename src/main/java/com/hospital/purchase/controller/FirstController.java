@@ -1,8 +1,15 @@
 package com.hospital.purchase.controller;
 
+import com.hospital.purchase.domain.Purchase;
+import com.hospital.purchase.domain.dto.SearchDto;
+import com.hospital.purchase.service.PurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 
 
 /**
@@ -16,23 +23,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class FirstController {
-
-    @RequestMapping("/find")
-    public String find(){
-        return "index";
+    @Autowired
+    private PurchaseService purchaseService;
+    @RequestMapping("/query")
+    public String query(){
+        return "login";
     }
-
     //跳转到退货页面
     @RequestMapping("/select")
     public String select(){
 
-        return "content";
+        return "return_goods_info";
     }
+
     //跳转到采购单查询
+
     @RequestMapping("/purchaseQuery")
-    public String purchaseQuery(){
-        return "transaction_statistics_query";
+    public ModelAndView purchaseQueryAll(ModelAndView modelAndView){
+        List<Purchase> purchases = purchaseService.selectAll();
+        modelAndView.addObject("purchases",purchases);
+        modelAndView.setViewName("transaction_statistics_query");
+        return modelAndView;
     }
+/*    //跳转到采购单查询
+    @RequestMapping("/purchaseQuery")
+    public ModelAndView purchaseQuery(SearchDto searchDto, ModelAndView modelAndView){
+        List<Purchase> purchases = purchaseService.selectBySearchBean(searchDto);
+
+        modelAndView.addObject("purchases",purchases);
+        modelAndView.setViewName("transaction_statistics_query");
+        return modelAndView;
+    }*/
     //跳转到供货商查询
     @RequestMapping("/supplierQuery")
     public String supplierQuery(){

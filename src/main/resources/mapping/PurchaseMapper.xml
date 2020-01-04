@@ -36,7 +36,7 @@
       <result column="isdel" jdbcType="INTEGER" property="isdel" />
     </association>
   </resultMap>
-  
+
     <!--按照采购单查询-->
   <select id="selectByPrimaryName" resultMap="BaseResultMap" >
 SELECT
@@ -77,15 +77,15 @@ SELECT
       AND hospital_id LIKE concat('%',#{hospitalId},'%')
     </if>
   </select>
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   <sql id="Base_Column_List">
-    pur_id, pi_id, drug_id, result, opinion, hospital_id, Purchase_number, Purchase_name, 
-    start_time, over_time, activate_time, submit_time, assessor_time, descrip_id, isdel, 
+    pur_id, pi_id, drug_id, result, opinion, hospital_id, Purchase_number, Purchase_name,
+    start_time, over_time, activate_time, submit_time, assessor_time, descrip_id, isdel,
     auditor, contacts, contactsph, supplier_id, ti_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -99,19 +99,19 @@ SELECT
     where pur_id = #{purId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hospital.purchase.domain.Purchase">
-    insert into purchase (pur_id, pi_id, drug_id, 
-      result, opinion, hospital_id, 
-      Purchase_number, Purchase_name, start_time, 
-      over_time, activate_time, submit_time, 
-      assessor_time, descrip_id, isdel, 
-      auditor, contacts, contactsph, 
+    insert into purchase (pur_id, pi_id, drug_id,
+      result, opinion, hospital_id,
+      Purchase_number, Purchase_name, start_time,
+      over_time, activate_time, submit_time,
+      assessor_time, descrip_id, isdel,
+      auditor, contacts, contactsph,
       supplier_id, ti_id)
-    values (#{purId,jdbcType=INTEGER}, #{piId,jdbcType=VARCHAR}, #{drugId,jdbcType=INTEGER}, 
-      #{result,jdbcType=INTEGER}, #{opinion,jdbcType=VARCHAR}, #{hospitalId,jdbcType=INTEGER}, 
-      #{purchaseNumber,jdbcType=INTEGER}, #{purchaseName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, 
-      #{overTime,jdbcType=DATE}, #{activateTime,jdbcType=DATE}, #{submitTime,jdbcType=DATE}, 
-      #{assessorTime,jdbcType=DATE}, #{descripId,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}, 
-      #{auditor,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{contactsph,jdbcType=VARCHAR}, 
+    values (#{purId,jdbcType=INTEGER}, #{piId,jdbcType=VARCHAR}, #{drugId,jdbcType=INTEGER},
+      #{result,jdbcType=INTEGER}, #{opinion,jdbcType=VARCHAR}, #{hospitalId,jdbcType=INTEGER},
+      #{purchaseNumber,jdbcType=INTEGER}, #{purchaseName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE},
+      #{overTime,jdbcType=DATE}, #{activateTime,jdbcType=DATE}, #{submitTime,jdbcType=DATE},
+      #{assessorTime,jdbcType=DATE}, #{descripId,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER},
+      #{auditor,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{contactsph,jdbcType=VARCHAR},
       #{supplierId,jdbcType=INTEGER}, #{tiId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hospital.purchase.domain.Purchase">
@@ -327,4 +327,53 @@ SELECT
       ti_id = #{tiId,jdbcType=INTEGER}
     where pur_id = #{purId,jdbcType=INTEGER}
   </update>
+    <!--查询全部采购单信息-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        p.`pi_id`,
+        p.`Purchase_number`,
+        p.`Purchase_name`,
+        h.`hospital_name`,
+        p.`descrip_id`,
+        p.`start_time`,
+        p.`over_time`,
+        p.`activate_time`,
+        p.`submit_time`,
+        p.`assessor_time`,
+        ti.`order_amount`,
+        ti.`order_quantity`
+    FROM purchase p
+    LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
+    LEFT JOIN transaction_info ti ON p.`pi_id`= ti.`pi_id`
+    </select>
+ <!--动态查询-->
+    <select id="selectBySearchBean" resultMap="BaseResultMap">
+        SELECT
+        p.`pi_id`,
+        p.`Purchase_number`,
+        p.`Purchase_name`,
+        h.`hospital_name`,
+        p.`descrip_id`,
+        p.`start_time`,
+        p.`over_time`,
+        p.`activate_time`,
+        p.`submit_time`,
+        p.`assessor_time`,
+        ti.`order_amount`,
+        ti.`order_quantity`
+        FROM purchase p
+        LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
+        LEFT JOIN transaction_info ti ON p.`pi_id`= ti.`pi_id`
+        WHERE
+        <if test="purchaseNumber != null and purchaseNumber !=''">
+            and p.Purchase_number like ('%',#{purchaseNumber},'%')
+        </if>
+        <if test="purchaseName != null and purchaseName!=''">
+            and p.Purchase_name like ('%',#{purchaseName},'%')
+        </if>
+        <if test="hospitalName !=null and hospitalName!=''">
+            and h.hospital_name like ('%',#{hospitalName},'%')
+        </if>
+
+    </select>
 </mapper>
