@@ -3,10 +3,12 @@ package com.hospital.purchase.service.impl;
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
 import com.hospital.purchase.domain.QualityLevel;
+import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SelectDto;
 import com.hospital.purchase.mapper.DrugCategoryMapper;
 import com.hospital.purchase.mapper.DrugInformationSheetMapper;
 import com.hospital.purchase.mapper.QualityLevelMapper;
+import com.hospital.purchase.mapper.SupplierMapper;
 import com.hospital.purchase.service.JizedongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,9 @@ public class JizedongServiceImpl implements JizedongService {
     @Autowired
     private DrugCategoryMapper drugCategoryMapper;
 
+    @Autowired
+    private SupplierMapper supplierMapper;
+
     //查询全部
     @Override
     public List<DrugInformationSheet> selecetDrugInformationSheet() {
@@ -56,5 +61,16 @@ public class JizedongServiceImpl implements JizedongService {
     @Override
     public List<DrugCategory> findDrugCategory() {
         return drugCategoryMapper.findDrugCategory();
+    }
+
+    //查询全部供货商
+    @Override
+    public List<Supplier> findSupplier() {
+        return supplierMapper.findSupplier();
+    }
+
+    @Override
+    public DrugInformationSheet selecetDrugInformationSheetById(Integer drugId) {
+        return drugInformationSheetMapper.selecetDrugInformationSheetById(drugId);
     }
 }

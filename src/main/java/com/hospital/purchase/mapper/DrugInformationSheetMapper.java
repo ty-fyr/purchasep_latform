@@ -41,11 +41,14 @@ public interface DrugInformationSheetMapper {
      */
     List<DummyPositionSensitiveRecordWithChildren> finxx();
 
-    //查询全部
+    //查询全部药品信息
     List<DrugInformationSheet> selecetDrugInformationSheet();
 
     //条件查询
     List<DrugInformationSheet> findSerchBean(SelectDto selectDto);
+
+    //通过id查询单条药品信息
+    DrugInformationSheet selecetDrugInformationSheetById(Integer drugId);
 }
 
 

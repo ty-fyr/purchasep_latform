@@ -67,6 +67,27 @@ public class DrugInformationSheet {
 
     private DrugCategory drugCategory;
 
+    private SupplierManagement supplierManagement;
+
+    private Supplier supplier;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public SupplierManagement getSupplierManagement() {
+        return supplierManagement;
+    }
+
+    public void setSupplierManagement(SupplierManagement supplierManagement) {
+        this.supplierManagement = supplierManagement;
+    }
+
+
     private  Enterprise enterpris;
 
     private  QualityLevel qualityLeve;
