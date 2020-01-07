@@ -1,5 +1,7 @@
 package com.hospital.purchase.service.impl;
 
+import com.hospital.purchase.common.enums.ErrorEnum;
+import com.hospital.purchase.common.exception.PurchasepRuntimeException;
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
 import com.hospital.purchase.mapper.DrugInformationSheetMapper;
@@ -15,19 +17,20 @@ import java.util.List;
  * @create YEAR−YEAR−{MONTH}-30 18:11
  */
 @Service
-public class CategoryServiceimpl implements  CategoryService{
+public class CategoryServiceimpl implements CategoryService {
 
     @Autowired
     private DrugInformationSheetMapper drugInformationSheetMapper;
 
-    @Override
-    public List<DrugInformationSheet> findall() {
-        return drugInformationSheetMapper.findall();
-    }
     /**
-     *
      * @return
      */
+    public List<DummyPositionSensitiveRecordWithChildren> findall() {
+
+       return drugInformationSheetMapper.findall();
+    }
+
+
     public List<DrugCategory> seldrugc() {
         return drugInformationSheetMapper.seldrugc();
     }
@@ -37,10 +40,10 @@ public class CategoryServiceimpl implements  CategoryService{
         return drugInformationSheetMapper.findadd(children);
     }
 
+
     @Override
-    public List<DrugInformationSheet> finxx() {
+    public List<DummyPositionSensitiveRecordWithChildren> finxx() {
         return drugInformationSheetMapper.finxx();
     }
-
 
 }

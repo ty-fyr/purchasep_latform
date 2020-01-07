@@ -15,7 +15,7 @@ public interface DrugInformationSheetMapper {
      * 药品品目查询
      * @return
      */
-    List<DrugInformationSheet> findall ();
+    List<DummyPositionSensitiveRecordWithChildren> findall ();
 
     /**
      * 查询药品类别
@@ -39,16 +39,13 @@ public interface DrugInformationSheetMapper {
      * 查询药品信息
      * @return
      */
-    List<DrugInformationSheet> finxx();
+    List<DummyPositionSensitiveRecordWithChildren> finxx();
 
-    //查询全部药品信息
+    //查询全部
     List<DrugInformationSheet> selecetDrugInformationSheet();
 
     //条件查询
     List<DrugInformationSheet> findSerchBean(SelectDto selectDto);
-
-    //通过id查询单条药品信息
-    DrugInformationSheet selecetDrugInformationSheetById(Integer drugId);
 }
 
 

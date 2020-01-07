@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!--suppress ALL-->
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
     <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <meta charset="UTF-8">
-    <title>选择供货</title>
+    <title>商品管理</title>
 
 </head>
 <body>
@@ -62,8 +61,8 @@
             <td>
                 <select th:id="descripId">
                     <option th:value="-1">请选择</option>
-                    <option th:value="0" th:if="${selectDto?.descripId=='0'?'selected':''}" >正常</option>
-                    <option th:value="1" th:if="${selectDto?.descripId=='1'?'selected':''}" >暂停交易</option>
+                    <option th:value="0">正常</option>
+                    <option th:value="1">暂停交易</option>
                 </select>
             </td>
         </tr>
@@ -167,9 +166,9 @@
             success:function (cc) {
                 for(var i=0;i<cc.length;i++){
                     if(a==cc[i].levelId){
-                        $("#leveId").append("<option selected value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                        $("#leveId").append("<option selected th:value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
                     }else {
-                        $("#leveId").append("<option value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                        $("#leveId").append("<option th:value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
                     }
                 }
             }
@@ -186,9 +185,9 @@
             success:function (cc) {
                 for(var i=0;i<cc.length;i++){
                     if(a==cc[i].dcId){
-                        $("#dcId").append("<option selected value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
+                        $("#dcId").append("<option selected th:value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
                     }else {
-                        $("#dcId").append("<option value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
+                        $("#dcId").append("<option th:value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
                     }
                 }
             }

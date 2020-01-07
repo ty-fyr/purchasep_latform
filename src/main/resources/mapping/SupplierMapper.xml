@@ -11,7 +11,83 @@
   <sql id="Base_Column_List">
     supplier_id, Supplier_name, "Registered address", business_license, Registration_time
   </sql>
-  <select id="findSupplier" resultMap="BaseResultMap">
-    SELECT * FROM supplier
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.Supplier">
+    insert into supplier (supplier_id, Supplier_name, "Registered address", 
+      business_license, Registration_time)
+    values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{registeredAddress,jdbcType=VARCHAR}, 
+      #{businessLicense,jdbcType=VARCHAR}, #{registrationTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.Supplier">
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierName != null">
+        Supplier_name,
+      </if>
+      <if test="registeredAddress != null">
+        "Registered address",
+      </if>
+      <if test="businessLicense != null">
+        business_license,
+      </if>
+      <if test="registrationTime != null">
+        Registration_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredAddress != null">
+        #{registeredAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null">
+        #{registrationTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.Supplier">
+    update supplier
+    <set>
+      <if test="supplierName != null">
+        Supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredAddress != null">
+        "Registered address" = #{registeredAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        business_license = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null">
+        Registration_time = #{registrationTime,jdbcType=DATE},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.Supplier">
+    update supplier
+    set Supplier_name = #{supplierName,jdbcType=VARCHAR},
+      "Registered address" = #{registeredAddress,jdbcType=VARCHAR},
+      business_license = #{businessLicense,jdbcType=VARCHAR},
+      Registration_time = #{registrationTime,jdbcType=DATE}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
 </mapper>

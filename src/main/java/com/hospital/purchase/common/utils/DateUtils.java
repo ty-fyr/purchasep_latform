@@ -1,4 +1,4 @@
-package com.hospital.purchase.utils;
+package com.hospital.purchase.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

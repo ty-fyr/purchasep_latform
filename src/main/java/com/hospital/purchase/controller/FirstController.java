@@ -5,7 +5,6 @@ import com.hospital.purchase.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,6 +21,7 @@ import java.util.List;
  */
 @Controller
 public class FirstController {
+
     @Autowired
     private PurchaseService purchaseService;
     @RequestMapping("/query")
@@ -46,7 +46,7 @@ public class FirstController {
     }
 /*    //跳转到采购单查询
     @RequestMapping("/purchaseQuery")
-    public ModelAndView purchaseQuery(SearchDto searchDto, ModelAndView modelAndView){
+    public ModelAndView purchaseQuery(SearchDTO searchDto, ModelAndView modelAndView){
         List<Purchase> purchases = purchaseService.selectBySearchBean(searchDto);
 
         modelAndView.addObject("purchases",purchases);

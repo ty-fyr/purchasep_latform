@@ -6,7 +6,11 @@ import com.hospital.purchase.domain.dto.SearchDTO;
 import java.util.List;
 
 public interface PurchaseService {
-    //查询全部
+    /**
+     *   查询所有
+     *   nfkjas
+     * @return List<Purchase> 采购单集合
+     */
     List<Purchase> selectAll();
     //动态查询
     List<Purchase> selectBySearchBean(SearchDTO searchDto);

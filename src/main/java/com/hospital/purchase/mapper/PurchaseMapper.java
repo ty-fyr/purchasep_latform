@@ -1,12 +1,12 @@
 package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.Purchase;
-import com.hospital.purchase.domain.dto.SearchDTO;
 import org.apache.ibatis.annotations.Mapper;
-
-
+import com.hospital.purchase.domain.dto.SearchDTO;
 
 import java.util.List;
+
+
 
 @Mapper
 public interface PurchaseMapper {
@@ -21,6 +21,15 @@ public interface PurchaseMapper {
     List<Purchase> selectByMHCX (Purchase purchase);
 
 
+    int insert(Purchase record);
+
+    int insertSelective(Purchase record);
+
+    Purchase selectByPrimaryKey(Integer purId);
+
+    int updateByPrimaryKeySelective(Purchase record);
+
+    int updateByPrimaryKey(Purchase record);
 
     //查询全部
     List<Purchase> selectAll();

@@ -24,15 +24,7 @@ public class SelectDto {
     private Integer leveId;
     private Integer dcId;
     private Integer descripId;
-    private Integer supplierId;
 
-    public Integer getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
 
     public Integer getDrugSerialNumber() {
         return drugSerialNumber;

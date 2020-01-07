@@ -1,10 +1,18 @@
 package com.hospital.purchase.domain;
 
-import java.util.Date;
+import com.hospital.purchase.common.utils.DateUtils;
+import lombok.*;
 
+import java.util.Date;
+import java.util.Objects;
+
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Purchase {
-    //主键id
-    private Integer purId;
     //采购单Id
     private Integer piId;
     // 药品id
@@ -43,7 +51,11 @@ public class Purchase {
     private Integer supplierId;
     //交易id
     private Integer tiId;
+    private Hospital hospital;
+    private TransactionInfo transactionInfo;
 
+    //医院名称
+    private String hospital_name;
 
     private String startTimeStr;//开始采购时间字符串
     private String overTimeStr;//结束采购时间字符串
@@ -52,221 +64,28 @@ public class Purchase {
     private String assessorTimeStr;//审核采购时间字符串
     private String descripIdStr;//采购单状态字符串
 
-    public String getStartTimeStr() {
-        return startTimeStr;
+    public void transfer() {
+        if (Objects.nonNull(this.getStartTime())) {
+            this.setStartTimeStr(DateUtils.dateFormat(this.getStartTime(), "yyyy-MM-dd"));
+        }
+        if (this.getOverTime() != null) {
+            this.setOverTimeStr(DateUtils.dateFormat(this.getOverTime(), "yyyy-MM-dd"));
+        }
+        if (this.getActivateTime() != null) {
+            this.setActivateTimeStr(DateUtils.dateFormat(this.getActivateTime(), "yyyy-MM-dd"));
+        }
+        if (this.getSubmitTime() != null) {
+            this.setSubmitTimeStr(DateUtils.dateFormat(this.getSubmitTime(), "yyyy-MM-dd"));
+        }
+        if (this.getAssessorTime() != null) {
+            this.setAssessorTimeStr(DateUtils.dateFormat(this.getAssessorTime(), "yyyy-MM-dd"));
+        }
+        if (Objects.equals(this.getDescripId(),0)) {
+            this.setDescripIdStr("已入库");
+        } else if (Objects.equals(this.getDescripId(),1)) {
+            this.setDescripIdStr("未入库");
+        }
     }
 
-    public void setStartTimeStr(String startTimeStr) {
-        this.startTimeStr = startTimeStr;
-    }
 
-    public String getOverTimeStr() {
-        return overTimeStr;
-    }
-
-    public void setOverTimeStr(String overTimeStr) {
-        this.overTimeStr = overTimeStr;
-    }
-
-    public String getActivateTimeStr() {
-        return activateTimeStr;
-    }
-
-    public void setActivateTimeStr(String activateTimeStr) {
-        this.activateTimeStr = activateTimeStr;
-    }
-
-    public String getSubmitTimeStr() {
-        return submitTimeStr;
-    }
-
-    public void setSubmitTimeStr(String submitTimeStr) {
-        this.submitTimeStr = submitTimeStr;
-    }
-
-    public String getAssessorTimeStr() {
-        return assessorTimeStr;
-    }
-
-    public void setAssessorTimeStr(String assessorTimeStr) {
-        this.assessorTimeStr = assessorTimeStr;
-    }
-
-    public String getDescripIdStr() {
-        return descripIdStr;
-    }
-
-    public void setDescripIdStr(String descripIdStr) {
-        this.descripIdStr = descripIdStr;
-    }
-
-    private TransactionInfo transaction;
-
-    public TransactionInfo getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(TransactionInfo transaction) {
-        this.transaction = transaction;
-    }
-
-    public Integer getPurId() {
-        return purId;
-    }
-
-    public void setPurId(Integer purId) {
-        this.purId = purId;
-    }
-
-    public Integer getPiId() {
-        return piId;
-    }
-
-    public void setPiId(Integer piId) {
-        this.piId = piId;
-    }
-
-    public Integer getDrugId() {
-        return drugId;
-    }
-
-    public void setDrugId(Integer drugId) {
-        this.drugId = drugId;
-    }
-
-    public Integer getResult() {
-        return result;
-    }
-
-    public void setResult(Integer result) {
-        this.result = result;
-    }
-
-    public String getOpinion() {
-        return opinion;
-    }
-
-    public void setOpinion(String opinion) {
-        this.opinion = opinion;
-    }
-
-    public Integer getHospitalId() {
-        return hospitalId;
-    }
-
-    public void setHospitalId(Integer hospitalId) {
-        this.hospitalId = hospitalId;
-    }
-
-    public Integer getPurchaseNumber() {
-        return purchaseNumber;
-    }
-
-    public void setPurchaseNumber(Integer purchaseNumber) {
-        this.purchaseNumber = purchaseNumber;
-    }
-
-    public String getPurchaseName() {
-        return purchaseName;
-    }
-
-    public void setPurchaseName(String purchaseName) {
-        this.purchaseName = purchaseName;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getOverTime() {
-        return overTime;
-    }
-
-    public void setOverTime(Date overTime) {
-        this.overTime = overTime;
-    }
-
-    public Date getActivateTime() {
-        return activateTime;
-    }
-
-    public void setActivateTime(Date activateTime) {
-        this.activateTime = activateTime;
-    }
-
-    public Date getSubmitTime() {
-        return submitTime;
-    }
-
-    public void setSubmitTime(Date submitTime) {
-        this.submitTime = submitTime;
-    }
-
-    public Date getAssessorTime() {
-        return assessorTime;
-    }
-
-    public void setAssessorTime(Date assessorTime) {
-        this.assessorTime = assessorTime;
-    }
-
-    public Integer getDescripId() {
-        return descripId;
-    }
-
-    public void setDescripId(Integer descripId) {
-        this.descripId = descripId;
-    }
-
-    public Integer getIsdel() {
-        return isdel;
-    }
-
-    public void setIsdel(Integer isdel) {
-        this.isdel = isdel;
-    }
-
-    public String getAuditor() {
-        return auditor;
-    }
-
-    public void setAuditor(String auditor) {
-        this.auditor = auditor;
-    }
-
-    public String getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
-
-    public String getContactsph() {
-        return contactsph;
-    }
-
-    public void setContactsph(String contactsph) {
-        this.contactsph = contactsph;
-    }
-
-    public Integer getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public Integer getTiId() {
-        return tiId;
-    }
-
-    public void setTiId(Integer tiId) {
-        this.tiId = tiId;
-    }
 }
