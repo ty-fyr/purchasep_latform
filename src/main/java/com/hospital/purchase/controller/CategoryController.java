@@ -46,7 +46,6 @@ public class CategoryController {
     }
     /**
      * 药品品目查询
-
      */
     @RequestMapping("/names")
     public String names(Model model){
@@ -63,7 +62,7 @@ public class CategoryController {
     @RequestMapping("/findxx")
     public String findxx(Model model){
         List<DrugInformationSheet> finxx = categoryService.finxx();
-        model.addAttribute("finxx",finxx);
+        model.addAttribute("findxx",finxx);
         return "drugna";
     }
     /**
@@ -76,6 +75,15 @@ public class CategoryController {
         int finda = categoryService.findadd(children);
         System.out.println(finda);
         String json = JSON.toJSONString(finda);
+        return json;
+    }
+
+    @RequestMapping("/xxadd")
+    @ResponseBody
+    public  String xxadd(DrugInformationSheet children){
+        int xxadd = categoryService.xxadd(children);
+        System.out.println(xxadd);
+        String json = JSON.toJSONString(xxadd);
         return json;
     }
 }

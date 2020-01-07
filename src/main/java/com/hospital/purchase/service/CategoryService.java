@@ -16,6 +16,11 @@ public interface CategoryService {
      * @return
      */
     List<DrugInformationSheet> findall ();
+    /**
+     *添加药品品目
+     * @return
+     */
+    int xxadd(DrugInformationSheet children);
 
     /**
      * 药品类型查询
@@ -32,4 +37,5 @@ public interface CategoryService {
 
      */
     List<DrugInformationSheet> finxx();
+
 }
