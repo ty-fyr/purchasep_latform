@@ -279,4 +279,27 @@
     #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1
     );
   </insert>
+  <select id="finxx" resultMap="BaseResultMap">
+    SELECT
+	dsi.drug_serial_number,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	ui.units,
+	dsi.conversion_factor,
+	ep.enterprise_name,
+	dsi.trade_name,
+	dsi.the_price,
+	ql.level_type,
+	dc.drug_type,
+	dsi.descrip_id
+FROM
+	drug_information_sheet dsi
+LEFT JOIN units ui ON dsi.units = ui.units_id
+LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+LEFT JOIN enterprise ep ON dsi.enterprise_id = ep.enterprise_id
+LEFT JOIN quality_level ql ON dsi.level_id = ql.level_id
+WHERE
+	dsi.proxy_id = 1;
+  </select>
 </mapper>
