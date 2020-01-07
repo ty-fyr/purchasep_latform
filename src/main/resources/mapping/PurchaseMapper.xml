@@ -37,7 +37,7 @@
     </association>
   </resultMap>
 
-    <!--按照采购单查询-->
+    <!--按照采购单查询..-->
   <select id="selectByPrimaryName" resultMap="BaseResultMap" >
 SELECT
 	p.hospital_id,

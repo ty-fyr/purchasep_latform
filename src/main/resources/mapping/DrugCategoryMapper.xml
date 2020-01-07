@@ -10,6 +10,6 @@
     dc_id, drug_type, state
   </sql>
   <select id="findDrugCategory" resultMap="BaseResultMap">
-    SELECT * FROM drug_category
+    SELECT * FROM drug_category;
   </select>
 </mapper>

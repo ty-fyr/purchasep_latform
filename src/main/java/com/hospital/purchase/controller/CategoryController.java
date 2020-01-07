@@ -46,7 +46,7 @@ public class CategoryController {
     }
     /**
      * 药品品目查询
-     * @return
+
      */
     @RequestMapping("/names")
     public String names(Model model){

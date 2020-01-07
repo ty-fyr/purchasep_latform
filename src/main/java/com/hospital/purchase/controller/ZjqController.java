@@ -22,22 +22,6 @@ public class ZjqController {
         return "query_statistics";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //页面跳转
 
     @RequestMapping("supplier")

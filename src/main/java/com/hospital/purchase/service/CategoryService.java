@@ -29,7 +29,7 @@ public interface CategoryService {
     int findadd(DrugInformationSheet children);
     /**
      * 查询药品信息
-     * @return
+
      */
     List<DrugInformationSheet> finxx();
 }

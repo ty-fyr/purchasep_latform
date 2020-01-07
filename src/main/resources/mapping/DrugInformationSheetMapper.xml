@@ -276,7 +276,7 @@
     (
     null,#{drugSerialNumber},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{enterpriseId},#{tradeName},
     #{thePrice},#{approvalNumber},#{thePrice},#{whetherImport},#{packaging},#{packingUnit},#{latestRetailPrice},#{sourcePrice},#{levelId},
-    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1
+    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1;
     );
   </insert>
   <select id="finxx" resultMap="BaseResultMap">

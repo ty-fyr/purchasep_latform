@@ -35,7 +35,7 @@ public class UserController {
 //            //账号或者密码错误，返回主页面
 //            model.addAttribute("msg","账号密码出错");
 //            return "index";
-//        }
+
 
 
     }

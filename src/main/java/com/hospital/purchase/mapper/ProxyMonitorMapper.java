@@ -1,7 +1,7 @@
 package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.ProxyMonitor;
-
+//
 public interface ProxyMonitorMapper {
     int deleteByPrimaryKey(Integer proxyId);
 

@@ -37,7 +37,6 @@ public interface DrugInformationSheetMapper {
 
     /**
      * 查询药品信息
-     * @return
      */
     List<DrugInformationSheet> finxx();
 
