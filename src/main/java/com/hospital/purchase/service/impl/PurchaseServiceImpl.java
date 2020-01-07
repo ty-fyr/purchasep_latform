@@ -1,7 +1,7 @@
 package com.hospital.purchase.service.impl;
 
 import com.hospital.purchase.domain.Purchase;
-import com.hospital.purchase.domain.dto.SearchDto;
+import com.hospital.purchase.domain.dto.SearchDTO;
 import com.hospital.purchase.mapper.PurchaseMapper;
 import com.hospital.purchase.service.PurchaseService;
 import com.hospital.purchase.utils.DateUtils;
@@ -46,7 +46,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     //按采购单查询
     @Override
-    public List<Purchase> selectBySearchBean(SearchDto searchDto) {
+    public List<Purchase> selectBySearchBean(SearchDTO searchDto) {
         return purchaseMapper.selectBySearchBean(searchDto);
     }
 }

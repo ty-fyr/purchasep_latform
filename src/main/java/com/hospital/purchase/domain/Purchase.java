@@ -44,6 +44,62 @@ public class Purchase {
     //交易id
     private Integer tiId;
 
+
+    private String startTimeStr;//开始采购时间字符串
+    private String overTimeStr;//结束采购时间字符串
+    private String activateTimeStr;//建单采购时间字符串
+    private String submitTimeStr;//提交采购时间字符串
+    private String assessorTimeStr;//审核采购时间字符串
+    private String descripIdStr;//采购单状态字符串
+
+    public String getStartTimeStr() {
+        return startTimeStr;
+    }
+
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
+    }
+
+    public String getOverTimeStr() {
+        return overTimeStr;
+    }
+
+    public void setOverTimeStr(String overTimeStr) {
+        this.overTimeStr = overTimeStr;
+    }
+
+    public String getActivateTimeStr() {
+        return activateTimeStr;
+    }
+
+    public void setActivateTimeStr(String activateTimeStr) {
+        this.activateTimeStr = activateTimeStr;
+    }
+
+    public String getSubmitTimeStr() {
+        return submitTimeStr;
+    }
+
+    public void setSubmitTimeStr(String submitTimeStr) {
+        this.submitTimeStr = submitTimeStr;
+    }
+
+    public String getAssessorTimeStr() {
+        return assessorTimeStr;
+    }
+
+    public void setAssessorTimeStr(String assessorTimeStr) {
+        this.assessorTimeStr = assessorTimeStr;
+    }
+
+    public String getDescripIdStr() {
+        return descripIdStr;
+    }
+
+    public void setDescripIdStr(String descripIdStr) {
+        this.descripIdStr = descripIdStr;
+    }
+
     private TransactionInfo transaction;
 
     public TransactionInfo getTransaction() {

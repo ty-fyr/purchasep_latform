@@ -1,7 +1,6 @@
 package com.hospital.purchase.controller;
 
 import com.hospital.purchase.domain.Purchase;
-import com.hospital.purchase.domain.dto.SearchDto;
 import com.hospital.purchase.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

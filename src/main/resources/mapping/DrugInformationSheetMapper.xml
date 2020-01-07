@@ -221,5 +221,62 @@
   </select>
   <select id="seldrugc" resultMap="Category">
     SELECT * from drug_category;
-</select>
+  </select>
+  <insert id="findadd">
+    INSERT INTO `drug_purchase`.`drug_information_sheet` (
+    `drug_id`,
+    `drug_item_no`,
+    `generic_drug`,
+    `dosage_form`,
+    `specification`,
+    `units`,
+    `conversion_factor`,
+    `dc_id`,
+    `descrip_id`,
+    `isdel`,
+    `proxy_id`
+    )
+    VALUES
+    (
+    null,#{drugItemNo},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{dcId},#{descripId},1,0
+    );
+  </insert>
+
+  <insert id="xxadd">
+    INSERT INTO `drug_purchase`.`drug_information_sheet` (
+    `drug_id`,
+    `drug_serial_number`,
+    `generic_drug`,
+    `dosage_form`,
+    `specification`,
+    `units`,
+    `conversion_factor`,
+    `enterprise_id`,
+    `trade_name`,
+    `the_price`,
+    `approval_number`,
+    `approval_number_date`,
+    `whether_import`,
+    `packaging`,
+    `packing_unit`,
+    `latest_retail_price`,
+    `Source_price`,
+    `level_id`,
+    `quality_hierarchy`,
+    `inspection_report`,
+    `drug_inspection`,
+    `drug_inspection_report`,
+    `dc_id`,
+    `descrip_id`,
+    `description`,
+    `isdel`,
+    `proxy_id`
+    )
+    VALUES
+    (
+    null,#{drugSerialNumber},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{enterpriseId},#{tradeName},
+    #{thePrice},#{approvalNumber},#{thePrice},#{whetherImport},#{packaging},#{packingUnit},#{latestRetailPrice},#{sourcePrice},#{levelId},
+    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1
+    );
+  </insert>
 </mapper>
