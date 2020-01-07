@@ -20,15 +20,14 @@ public class CategoryServiceimpl implements  CategoryService{
     @Autowired
     private DrugInformationSheetMapper drugInformationSheetMapper;
 
+    @Override
+    public List<DrugInformationSheet> findall() {
+        return drugInformationSheetMapper.findall();
+    }
     /**
      *
      * @return
      */
-    public List<DummyPositionSensitiveRecordWithChildren> findall() {
-        return drugInformationSheetMapper.findall();
-    }
-
-
     public List<DrugCategory> seldrugc() {
         return drugInformationSheetMapper.seldrugc();
     }
@@ -38,10 +37,10 @@ public class CategoryServiceimpl implements  CategoryService{
         return drugInformationSheetMapper.findadd(children);
     }
 
-
     @Override
-    public List<DummyPositionSensitiveRecordWithChildren> finxx() {
+    public List<DrugInformationSheet> finxx() {
         return drugInformationSheetMapper.finxx();
     }
+
 
 }

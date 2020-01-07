@@ -15,7 +15,7 @@ public interface CategoryService {
      * 药品品目查询
      * @return
      */
-    List<DummyPositionSensitiveRecordWithChildren> findall ();
+    List<DrugInformationSheet> findall ();
 
     /**
      * 药品类型查询
@@ -31,5 +31,5 @@ public interface CategoryService {
      * 查询药品信息
      * @return
      */
-    List<DummyPositionSensitiveRecordWithChildren> finxx();
+    List<DrugInformationSheet> finxx();
 }

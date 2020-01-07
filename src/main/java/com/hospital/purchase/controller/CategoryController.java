@@ -50,7 +50,7 @@ public class CategoryController {
      */
     @RequestMapping("/names")
     public String names(Model model){
-        List<DummyPositionSensitiveRecordWithChildren> findal = categoryService.findall();
+        List<DrugInformationSheet> findal = categoryService.findall();
         model.addAttribute("findall",findal);
         return "names";
     }
@@ -62,7 +62,7 @@ public class CategoryController {
      */
     @RequestMapping("/findxx")
     public String findxx(Model model){
-        List<DummyPositionSensitiveRecordWithChildren> finxx = categoryService.finxx();
+        List<DrugInformationSheet> finxx = categoryService.finxx();
         model.addAttribute("finxx",finxx);
         return "drugna";
     }
