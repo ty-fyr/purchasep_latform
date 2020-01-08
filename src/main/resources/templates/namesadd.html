@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>添加</title>
+
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="../static/plugins/adminLTE/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../static/plugins/adminLTE/js/app.min.js"></script>
     <script type="text/javascript">
         $(function() {
             $.ajax({
@@ -27,73 +24,47 @@
             })
         })
     </script>
-    <script type="text/javascript">
-        function finadd() {
-            $.ajax({
-                url: "findadd",
-                data: $("#findadd-form").serialize(),
-                type:"post",
-                dataType:"json",
-                success : function(result) {
-                    if (result == 1) {
-                        window.location.href = "/names";
-                    } else {
-                        alert("添加失败，请重试")
-                        window.location.href = "losing.html";
-                    }
-                }
-            })
-        }
-    </script>
 </head>
 <body>
-    <h2 align="center">药品品目添加</h2>
-<form id="findadd-form">
+    <h2 align="center">药品目录添加</h2>
+<form>
 <table align="center">
     <tr>
         <td>
-            <input name="drugItemNo"/>药品品目号
+            <input/>通用名</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>剂型</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>规格</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>单位</td>
+    </tr>
+    <tr>
+        <td>
+            <input/>转换系数</td>
+    </tr>
+    <tr>
+        <td>
+            <select name="seldrug" id="seldrugid"></select>药品类别
         </td>
     </tr>
     <tr>
         <td>
-            <input name="genericDrug"/>通用名
+            <input/>交易状态
         </td>
     </tr>
     <tr>
-        <td>
-            <input name="dosageForm"/>剂型</td>
-    </tr>
-    <tr>
-        <td>
-            <input name="specification"/>规格</td>
-    </tr>
-    <tr>
-        <td>
-            <input name="units"/>单位</td>
-    </tr>
-    <tr>
-        <td>
-            <input name="conversionFactor"/>转换系数</td>
-    </tr>
-    <tr>
-        <td>
-            <select name="dcId" id="seldrugid"></select>药品类别
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <select name="descripId">
-                <option value="0">正常</option>
-                <option value="1">非正常</option>
-            </select>交易状态
-        </td>
-    </tr>
-    <tr>
-        <td><button class="btn btn-success" onclick="finadd()">添加</button>
-        <input type="reset" class="btn btn-danger"></td>
+        <td><button class="btn btn-success">添加</button>
+        <input type="reset"></td>
     </tr>
 </table>
-</form>
 </body>
+
+</form>
 </html>

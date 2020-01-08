@@ -25,7 +25,6 @@ public class SelectDto {
     private Integer dcId;
     private Integer descripId;
 
-
     public Integer getDrugSerialNumber() {
         return drugSerialNumber;
     }

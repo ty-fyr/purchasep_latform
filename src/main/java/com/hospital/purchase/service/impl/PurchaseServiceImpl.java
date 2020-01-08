@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
-
     @Autowired
     private PurchaseMapper purchaseMapper;
 
@@ -27,9 +27,14 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseList;
     }
     //
-    //按采购单查询
+//按采购单查询
     @Override
     public List<Purchase> selectBySearchBean(SearchDTO searchDto) {
         return purchaseMapper.selectBySearchBean(searchDto);
+    }
+
+    @Override
+    public List<Purchase> seleLike(Map<String, Object> map) {
+        return purchaseMapper.seleLike(map);
     }
 }

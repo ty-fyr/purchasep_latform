@@ -1,27 +1,26 @@
 package com.hospital.purchase.domain;
 
 public class TransactionInfo {
-    //交易信息主键
     private Integer tiId;
-    //供货状态(1代表供货,0代表断货)
+
     private Integer supplyStatus;
-    //订货数量
+
     private Integer orderQuantity;
-    //订货金额
+
     private Long orderAmount;
-    //送货量
+
     private Integer deliveryVolume;
-    //送货金额
+
     private Long deliveryAmount;
-    //退货量
+
     private Integer returnNumber;
-    //结算量
+
     private Integer settlementNumber;
-    //结算金额
+
     private Long settlementAmount;
-    //采购单id
+
     private Integer piId;
-    //isdel
+
     private Integer isdel;
 
     public Integer getTiId() {

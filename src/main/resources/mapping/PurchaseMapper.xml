@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.purchase.mapper.PurchaseMapper">
   <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.Purchase">
-    <id column="pur_id" jdbcType="INTEGER" property="purId" />
-    <result column="pi_id" jdbcType="VARCHAR" property="piId" />
+    <id column="pi_id" jdbcType="INTEGER" property="piId" />
     <result column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="result" jdbcType="INTEGER" property="result" />
     <result column="opinion" jdbcType="VARCHAR" property="opinion" />
@@ -22,107 +21,52 @@
     <result column="contactsph" jdbcType="VARCHAR" property="contactsph" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="ti_id" jdbcType="INTEGER" property="tiId" />
-    <association property="transaction" javaType="com.hospital.purchase.domain.TransactionInfo">
-      <id column="ti_id" jdbcType="INTEGER" property="tiId" />
-      <result column="supply_status" jdbcType="INTEGER" property="supplyStatus" />
-      <result column="order_quantity" jdbcType="INTEGER" property="orderQuantity" />
-      <result column="order_amount" jdbcType="DECIMAL" property="orderAmount" />
-      <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume" />
-      <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount" />
-      <result column="return_ number" jdbcType="INTEGER" property="returnNumber" />
-      <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber" />
-      <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount" />
-      <result column="pi_id" jdbcType="INTEGER" property="piId" />
-      <result column="isdel" jdbcType="INTEGER" property="isdel" />
-    </association>
+    <!--一对一医院-->
     <association property="hospital" javaType="com.hospital.purchase.domain.Hospital">
-      <id column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
-      <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
-      <result column="Hospital_number" jdbcType="VARCHAR" property="hospitalNumber" />
-      <result column="Registered_address" jdbcType="VARCHAR" property="registeredAddress" />
-      <result column="business_licence" jdbcType="VARCHAR" property="businessLicence" />
-      <result column="registration_time" jdbcType="DATE" property="registrationTime" />
+      <id column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
+      <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
+      <result column="Hospital_number" jdbcType="VARCHAR" property="hospitalNumber"/>
+      <result column="Registered_address" jdbcType="VARCHAR" property="registeredAddress"/>
+      <result column="business_licence" jdbcType="VARCHAR" property="businessLicence"/>
+      <result column="registration_time" jdbcType="DATE" property="registrationTime"/>
     </association>
+
   </resultMap>
 
-    <!--按照采购单查询..-->
-  <select id="selectByPrimaryName" resultMap="BaseResultMap" >
-SELECT
-	p.hospital_id,
-	p.Purchase_number,
-	p.Purchase_name,
-	p.descrip_id,
-	p.start_time,
-	p.over_time,
-	p.activate_time,
-	p.submit_time,
-	p.assessor_time,
-	t.order_quantity,
-	t.order_amount,
-	t.delivery_volume,
-	t.delivery_amount,
-	t.`return_ number`,
-	t.settlement_number,
-	t.settlement_amount
-    FROM
-	`purchase` p
-	LEFT JOIN transaction_info t ON p.pi_id = t.pi_id
-  </select>
-  <!--模糊查询-->
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT
-    *
-    FROM
-    purchase p,
-    transaction_info t
-    <if test="purchaseNumber !=null " >
-      AND Purchase_number LIKE concat('%',#{purchaseNumber},'%')
-    </if>
-    <if test="purchaseName != null " >
-      AND Purchase_name LIKE concat('%',#{purchaseName},'%')
-    </if>
-    <if test="hospitalId != null " >
-      AND hospital_id LIKE concat('%',#{hospitalId},'%')
-    </if>
-  </select>
-
-
-
-
-
-
   <sql id="Base_Column_List">
-    pur_id, pi_id, drug_id, result, opinion, hospital_id, Purchase_number, Purchase_name,
-    start_time, over_time, activate_time, submit_time, assessor_time, descrip_id, isdel,
-    auditor, contacts, contactsph, supplier_id, ti_id
+    pi_id, drug_id, result, opinion, hospital_id, Purchase_number, Purchase_name, start_time,
+    over_time, activate_time, submit_time, assessor_time, descrip_id, isdel, auditor,
+    contacts, contactsph, supplier_id, ti_id
   </sql>
-
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchase
+    where pi_id = #{piId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from purchase
-    where pur_id = #{purId,jdbcType=INTEGER}
+    where pi_id = #{piId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hospital.purchase.domain.Purchase">
-    insert into purchase (pur_id, pi_id, drug_id,
-      result, opinion, hospital_id,
-      Purchase_number, Purchase_name, start_time,
-      over_time, activate_time, submit_time,
-      assessor_time, descrip_id, isdel,
-      auditor, contacts, contactsph,
-      supplier_id, ti_id)
-    values (#{purId,jdbcType=INTEGER}, #{piId,jdbcType=VARCHAR}, #{drugId,jdbcType=INTEGER},
-      #{result,jdbcType=INTEGER}, #{opinion,jdbcType=VARCHAR}, #{hospitalId,jdbcType=INTEGER},
-      #{purchaseNumber,jdbcType=INTEGER}, #{purchaseName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE},
-      #{overTime,jdbcType=DATE}, #{activateTime,jdbcType=DATE}, #{submitTime,jdbcType=DATE},
-      #{assessorTime,jdbcType=DATE}, #{descripId,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER},
-      #{auditor,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{contactsph,jdbcType=VARCHAR},
-      #{supplierId,jdbcType=INTEGER}, #{tiId,jdbcType=INTEGER})
+    insert into purchase (pi_id, drug_id, result,
+      opinion, hospital_id, Purchase_number,
+      Purchase_name, start_time, over_time,
+      activate_time, submit_time, assessor_time,
+      descrip_id, isdel, auditor,
+      contacts, contactsph, supplier_id,
+      ti_id)
+    values (#{piId,jdbcType=INTEGER}, #{drugId,jdbcType=INTEGER}, #{result,jdbcType=INTEGER},
+      #{opinion,jdbcType=VARCHAR}, #{hospitalId,jdbcType=INTEGER}, #{purchaseNumber,jdbcType=INTEGER},
+      #{purchaseName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{overTime,jdbcType=DATE},
+      #{activateTime,jdbcType=DATE}, #{submitTime,jdbcType=DATE}, #{assessorTime,jdbcType=DATE},
+      #{descripId,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}, #{auditor,jdbcType=VARCHAR},
+      #{contacts,jdbcType=VARCHAR}, #{contactsph,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER},
+      #{tiId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hospital.purchase.domain.Purchase">
     insert into purchase
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="purId != null">
-        pur_id,
-      </if>
       <if test="piId != null">
         pi_id,
       </if>
@@ -182,11 +126,8 @@ SELECT
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="purId != null">
-        #{purId,jdbcType=INTEGER},
-      </if>
       <if test="piId != null">
-        #{piId,jdbcType=VARCHAR},
+        #{piId,jdbcType=INTEGER},
       </if>
       <if test="drugId != null">
         #{drugId,jdbcType=INTEGER},
@@ -247,9 +188,6 @@ SELECT
   <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.Purchase">
     update purchase
     <set>
-      <if test="piId != null">
-        pi_id = #{piId,jdbcType=VARCHAR},
-      </if>
       <if test="drugId != null">
         drug_id = #{drugId,jdbcType=INTEGER},
       </if>
@@ -305,12 +243,11 @@ SELECT
         ti_id = #{tiId,jdbcType=INTEGER},
       </if>
     </set>
-    where pur_id = #{purId,jdbcType=INTEGER}
+    where pi_id = #{piId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.Purchase">
     update purchase
-    set pi_id = #{piId,jdbcType=VARCHAR},
-      drug_id = #{drugId,jdbcType=INTEGER},
+    set drug_id = #{drugId,jdbcType=INTEGER},
       result = #{result,jdbcType=INTEGER},
       opinion = #{opinion,jdbcType=VARCHAR},
       hospital_id = #{hospitalId,jdbcType=INTEGER},
@@ -328,7 +265,7 @@ SELECT
       contactsph = #{contactsph,jdbcType=VARCHAR},
       supplier_id = #{supplierId,jdbcType=INTEGER},
       ti_id = #{tiId,jdbcType=INTEGER}
-    where pur_id = #{purId,jdbcType=INTEGER}
+    where pi_id = #{piId,jdbcType=INTEGER}
   </update>
     <!--查询全部采购单信息-->
     <select id="selectAll" resultMap="BaseResultMap">
@@ -378,5 +315,29 @@ SELECT
             and h.hospital_name like ('%',#{hospitalName},'%')
         </if>
 
+    </select>
+    <select id="seleLike" resultMap="BaseResultMap">
+        select *,GROUP_CONCAT(hs.hospital_name) allToxin
+        from purchase pr,hospital hs
+        where pr.hospital_id = hs.hospital_id
+        GROUP BY pr.pi_id
+        <if test="purchaseNumber!=null and purchaseNumber!=''" >
+            and pr.Purchase_number like concat('%',#{purchaseNumber},'%')
+        </if>
+        <if test="purchaseName!=null and purchaseName!=''">
+            and pr.Purchase_name like concat('%',#{purchaseName},'%')
+        </if>
+        <if test="descripId!=null and descripId!=''">
+            and pr.descrip_id like concat('%',#{descripId},'%')
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            and pr.start_time like concat('%',#{startTime},'%')
+        </if>
+        <if test="overTime!=null and overTime!=''">
+            and pr.over_time like concat('%',#{overTime},'%')
+        </if>
+        <if test="hospitalName!=null and hospitalName!=''">
+            and hs.hospital_id = #{hospitalName}
+        </if>
     </select>
 </mapper>

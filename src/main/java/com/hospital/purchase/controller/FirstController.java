@@ -21,7 +21,6 @@ import java.util.List;
  */
 @Controller
 public class FirstController {
-
     @Autowired
     private PurchaseService purchaseService;
     @RequestMapping("/query")
@@ -46,7 +45,7 @@ public class FirstController {
     }
 /*    //跳转到采购单查询
     @RequestMapping("/purchaseQuery")
-    public ModelAndView purchaseQuery(SearchDTO searchDto, ModelAndView modelAndView){
+    public ModelAndView purchaseQuery(SearchDto searchDto, ModelAndView modelAndView){
         List<Purchase> purchases = purchaseService.selectBySearchBean(searchDto);
 
         modelAndView.addObject("purchases",purchases);

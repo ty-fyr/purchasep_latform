@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>采购单审核</title>
+    <style>
+        .button{
+            margin-top:10px;
+            width: 50px;
+            height: 30px;
+            background-color: #1aa5fb;
+        }
+        .table{
+            margin-top:20px;
+            width: 1000px;
+            border-color: #eff7ff;
+        }
+        .select{
+            width: 174px;
+            height: 20px;
+        }
+        .table1{
+            font-size: 0.5px;
+            margin-top:30px;
+            width: 1200px;
+            height: 1px;
+        }
+    </style>
+    <script type="text/javascript" src="../static/js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/plugins/sui/sui.min.js"></script>
+    <script type="text/javascript" src="../static/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+    <script src="../static/js/pages/jquery.slideunlock.js"></script>
+    <script src="../static/js/jquery1.11.3-jquery.min.js"></script>
+    <script src="../static/js/IM-index.js"></script>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}">
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body class="hold-transition skin-green sidebar-mini">
+<form action="/purchase" id="form1" method="post">
+<table  id="tab1" border="1" width="800" align="center">
+    <tr style="background-color: #9acfea;"> <th colspan="5"><img src="../static/img/jiantou.png">采购单审核</th></tr>
+    <tr>
+        <td>采购单编号: <input type="text" placeholder="请输入编号" name="purchaseNumber" /></td>
+        <td>采购单名称:<input type="text" placeholder="请输入名称" name="purchaseName" /></td>
+    </tr>
+    <tr>
+        <td>采购单状态: <select th:switch="${l.descripId}" name="descripId" >
+                            <option value="0">审核通过</option> <option value="1">审核不通过</option>
+                        </select>
+        </td>
+        <td>
+            <lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购时间:</lable>
+            <input type="hidden" style="width:74px; height: 15px" id="qaz"/>
+            <select name="year" id="year" >
+                <option value="">请选择</option>
+                <option value="1950">1950</option>
+                <option value="1951">1951</option>
+                <option value="1952">1952</option>
+                <option value="1953">1953</option>
+                <option value="1954">1954</option>
+                <option value="1955">1955</option>
+                <option value="1956">1956</option>
+                <option value="1957">1957</option>
+                <option value="1958">1958</option>
+                <option value="1959">1959</option>
+                <option value="1960">1960</option>
+                <option value="1961">1961</option>
+                <option value="1962">1962</option>
+                <option value="1963">1963</option>
+                <option value="1964">1964</option>
+                <option value="1965">1965</option>
+                <option value="1966">1966</option>
+                <option value="1967">1967</option>
+                <option value="1968">1968</option>
+                <option value="1969">1969</option>
+                <option value="1970">1970</option>
+                <option value="1971">1971</option>
+                <option value="1972">1972</option>
+                <option value="1973">1973</option>
+                <option value="1974">1974</option>
+                <option value="1975">1975</option>
+                <option value="1976">1976</option>
+                <option value="1977">1977</option>
+                <option value="1978">1978</option>
+                <option value="1979">1979</option>
+                <option value="1980">1980</option>
+                <option value="1981">1981</option>
+                <option value="1982">1982</option>
+                <option value="1983">1983</option>
+                <option value="1984">1984</option>
+                <option value="1985">1985</option>
+                <option value="1986">1986</option>
+                <option value="1987">1987</option>
+                <option value="1988">1988</option>
+                <option value="1989">1989</option>
+                <option value="1990">1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+                <option value="2037">2037</option>
+                <option value="2038">2038</option>
+                <option value="2039">2039</option>
+                <option value="2040">2040</option>
+                <option value="2041">2041</option>
+                <option value="2042">2042</option>
+                <option value="2043">2043</option>
+                <option value="2044">2044</option>
+                <option value="2045">2045</option>
+                <option value="2046">2046</option>
+                <option value="2047">2047</option>
+                <option value="2048">2048</option>
+                <option value="2049">2049</option>
+                <option value="2050">2050</option>
+                <option value="2051">2051</option>
+                <option value="2052">2052</option>
+                <option value="2053">2053</option>
+                <option value="2054">2054</option>
+                <option value="2055">2055</option>
+                <option value="2056">2056</option>
+                <option value="2057">2057</option>
+                <option value="2058">2058</option>
+                <option value="2059">2059</option>
+                <option value="2060">2060</option>
+                <option value="2061">2061</option>
+                <option value="2062">2062</option>
+                <option value="2063">2063</option>
+                <option value="2064">2064</option>
+                <option value="2065">2065</option>
+                <option value="2066">2066</option>
+                <option value="2067">2067</option>
+                <option value="2068">2068</option>
+                <option value="2069">2069</option>
+                <option value="2070">2070</option>
+                <option value="2071">2071</option>
+                <option value="2072">2072</option>
+                <option value="2073">2073</option>
+                <option value="2074">2074</option>
+                <option value="2075">2075</option>
+                <option value="2076">2076</option>
+                <option value="2077">2077</option>
+                <option value="2078">2078</option>
+                <option value="2079">2079</option>
+                <option value="2080">2080</option>
+                <option value="2081">2081</option>
+                <option value="2082">2082</option>
+                <option value="2083">2083</option>
+                <option value="2084">2084</option>
+                <option value="2085">2085</option>
+                <option value="2086">2086</option>
+                <option value="2087">2087</option>
+                <option value="2088">2088</option>
+                <option value="2089">2089</option>
+                <option value="2090">2090</option>
+                <option value="2091">2091</option>
+                <option value="2092">2092</option>
+                <option value="2093">2093</option>
+                <option value="2094">2094</option>
+                <option value="2095">2095</option>
+                <option value="2096">2096</option>
+                <option value="2097">2097</option>
+                <option value="2098">2098</option>
+                <option value="2099">2099</option>
+                <option value="2100">2100</option>
+                <option value="2101">2101</option>
+                <option value="2102">2102</option>
+                <option value="2103">2103</option>
+                <option value="2104">2104</option>
+                <option value="2105">2105</option>
+                <option value="2106">2106</option>
+                <option value="2107">2107</option>
+                <option value="2108">2108</option>
+                <option value="2109">2109</option>
+                <option value="2110">2110</option>
+                <option value="2111">2111</option>
+                <option value="2112">2112</option>
+                <option value="2113">2113</option>
+                <option value="2114">2114</option>
+                <option value="2115">2115</option>
+                <option value="2116">2116</option>
+                <option value="2117">2117</option>
+                <option value="2118">2118</option>
+                <option value="2119">2119</option>
+                <option value="2120">2120</option>
+                <option value="2121">2121</option>
+                <option value="2122">2122</option>
+                <option value="2123">2123</option>
+                <option value="2124">2124</option>
+                <option value="2125">2125</option>
+                <option value="2126">2126</option>
+                <option value="2127">2127</option>
+                <option value="2128">2128</option>
+                <option value="2129">2129</option>
+                <option value="2130">2130</option>
+                <option value="2131">2131</option>
+                <option value="2132">2132</option>
+                <option value="2133">2133</option>
+                <option value="2134">2134</option>
+                <option value="2135">2135</option>
+                <option value="2136">2136</option>
+                <option value="2137">2137</option>
+                <option value="2138">2138</option>
+                <option value="2139">2139</option>
+                <option value="2140">2140</option>
+                <option value="2141">2141</option>
+                <option value="2142">2142</option>
+                <option value="2143">2143</option>
+                <option value="2144">2144</option>
+                <option value="2145">2145</option>
+                <option value="2146">2146</option>
+                <option value="2147">2147</option>
+                <option value="2148">2148</option>
+                <option value="2149">2149</option>
+                <option value="2150">2150</option>
+                <option value="2151">2151</option>
+                <option value="2152">2152</option>
+                <option value="2153">2153</option>
+                <option value="2154">2154</option>
+                <option value="2155">2155</option>
+                <option value="2156">2156</option>
+                <option value="2157">2157</option>
+                <option value="2158">2158</option>
+                <option value="2159">2159</option>
+                <option value="2160">2160</option>
+                <option value="2161">2161</option>
+                <option value="2162">2162</option>
+                <option value="2163">2163</option>
+                <option value="2164">2164</option>
+                <option value="2165">2165</option>
+                <option value="2166">2166</option>
+                <option value="2167">2167</option>
+                <option value="2168">2168</option>
+                <option value="2169">2169</option>
+                <option value="2170">2170</option>
+                <option value="2171">2171</option>
+                <option value="2172">2172</option>
+                <option value="2173">2173</option>
+                <option value="2174">2174</option>
+                <option value="2175">2175</option>
+                <option value="2176">2176</option>
+                <option value="2177">2177</option>
+                <option value="2178">2178</option>
+                <option value="2179">2179</option>
+                <option value="2180">2180</option>
+                <option value="2181">2181</option>
+                <option value="2182">2182</option>
+                <option value="2183">2183</option>
+                <option value="2184">2184</option>
+                <option value="2185">2185</option>
+                <option value="2186">2186</option>
+                <option value="2187">2187</option>
+                <option value="2188">2188</option>
+                <option value="2189">2189</option>
+                <option value="2190">2190</option>
+                <option value="2191">2191</option>
+                <option value="2192">2192</option>
+                <option value="2193">2193</option>
+                <option value="2194">2194</option>
+                <option value="2195">2195</option>
+                <option value="2196">2196</option>
+                <option value="2197">2197</option>
+                <option value="2198">2198</option>
+                <option value="2199">2199</option>
+            </select>
+        <span> &nbsp;年</span>
+        <select name="month" id="month" class="month">
+            <option value="">请选择</option>
+        </select>
+        <span> &nbsp;月 </span>
+        <select name="day" id="day" class="day">
+            <option value="">请选择</option>
+        </select>
+        <span> &nbsp;日</span>
+        </td>
+    </tr>
+    <tr>
+        <td>医院名称:<input type="text" placeholder="请输入名称" name="hospitalName" /></td>
+    </tr>
+</table>
+    <div style="text-align:center">
+    <input type="submit" id="sou" value="查询"/>
+    </div>
+  <table id="tab2" border="2" width="1000" align="center">
+      <thead>
+      <tr style="background-color: #9acfea;"> <th colspan="5"><input type="submit" value="提交审核结果" /></th></tr>
+      <tr>
+          <th colspan="0">序号</th>
+          <td colspan="0"><input name="SampleId" type="checkbox" id="checkbox1">选择</td>
+          <td colspan="0">审核结果</td>
+          <td colspan="0">审核意见</td>
+          <td colspan="0">医院名称</td>
+          <td colspan="0">采购单编号</td>
+          <td colspan="0">采购单名称</td>
+          <td colspan="0">开始时间</td>
+          <td colspan="0">结束时间</td>
+          <td colspan="0">建单时间</td>
+          <td colspan="0">提交时间</td>
+          <td colspan="0">审核时间</td>
+          <td colspan="0">采购单状态</td>
+          <td colspan="0">查看</td>
+      </tr>
+      </thead>
+      <tbody>
+          <tr th:each="l:${list}">
+              <td colspan="1" th:text="${l.piId}"></td>
+              <td colspan="1"><input name="SampleId" type="checkbox" id="checkbox2"></td>
+              <td colspan="1" th:text="${l.result}"></td>
+              <td colspan="1" th:text="${l.opinion}"></td>
+              <td colspan="1" th:text="${l.hospital.hospitalName}"></td>
+              <td colspan="1" th:text="${l.purchaseNumber}"></td>
+              <td colspan="1" th:text="${l.purchaseName}"></td>
+              <td colspan="1" th:text="${#dates.format(l.startTime,'yyyy-MM-dd')}"></td>
+              <td colspan="1" th:text="${#dates.format(l.overTime,'yyyy-MM-dd')}"></td>
+              <td colspan="1" th:text="${#dates.format(l.activateTime,'yyyy-MM-dd')}"></td>
+              <td colspan="1" th:text="${#dates.format(l.submitTime,'yyyy-MM-dd')}"></td>
+              <td colspan="1" th:text="${#dates.format(l.assessorTime,'yyyy-MM-dd')}"></td>
+              <td>
+                  <select th:switch="${l.descripId}">
+                      <option th:case="0">审核通过</option>
+                      <option th:case="1">审核不通过</option>
+                      <option th:case="*">其他</option>
+                  </select>
+              </td>
+              <td colspan="1"><input name="bb" type="button" value="查看" id="bet"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+
+<script type="text/javascript">
+    $("#sou").click(function () {
+        if(confirm('')){
+            $("#form1").submit();
+            window.location.href="/purchase";
+        }else {
+            confirm('')
+        }
+    })
+</script>
+
+
+</body>
+</html>

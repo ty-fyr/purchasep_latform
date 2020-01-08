@@ -10,40 +10,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-public class ZjqController {
+public class zjqcontroller {
 
     @Autowired
     ZjqService zjqService;
 
     @RequestMapping("qubuchaxun")
-    public String qubuchaxun(Model model){
+    public String qubuchaxun(Model model) {
         List<Purchase> purchases = zjqService.selectByPrimaryName();
-        model.addAttribute("purchases",purchases);
+        model.addAttribute("purchases", purchases);
         return "query_statistics";
     }
+
 
     //页面跳转
 
     @RequestMapping("supplier")
-    public String supplier(){
+    public String supplier() {
         return "by_supplier";
     }
+
     @RequestMapping("purchasing")
-    public String purchasing(){
+    public String purchasing() {
         return "purchasing_hospital";
     }
 
     @RequestMapping("transaction")
-    public String transaction(){
+    public String transaction() {
         return "by_transaction";
     }
 
     @RequestMapping("drug")
-    public String drug(){
+    public String drug() {
         return "drug_trade";
     }
-
-
 
 
 

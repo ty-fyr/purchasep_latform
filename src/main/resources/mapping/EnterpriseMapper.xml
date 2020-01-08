@@ -7,4 +7,76 @@
     <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
     <result column="registration_time" jdbcType="DATE" property="registrationTime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    enterprise_id, enterprise_name, business_license, registration_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.Enterprise">
+    insert into enterprise (enterprise_id, enterprise_name, business_license, 
+      registration_time)
+    values (#{enterpriseId,jdbcType=INTEGER}, #{enterpriseName,jdbcType=VARCHAR}, #{businessLicense,jdbcType=VARCHAR}, 
+      #{registrationTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.Enterprise">
+    insert into enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="businessLicense != null">
+        business_license,
+      </if>
+      <if test="registrationTime != null">
+        registration_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null">
+        #{registrationTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.Enterprise">
+    update enterprise
+    <set>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        business_license = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null">
+        registration_time = #{registrationTime,jdbcType=DATE},
+      </if>
+    </set>
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.Enterprise">
+    update enterprise
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      business_license = #{businessLicense,jdbcType=VARCHAR},
+      registration_time = #{registrationTime,jdbcType=DATE}
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
 </mapper>

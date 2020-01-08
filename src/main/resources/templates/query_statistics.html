@@ -20,7 +20,10 @@
             height: 20px;
         }
         .table1{
+            font-size: 0.5px;
             margin-top:30px;
+            width: 1200px;
+            height: 1px;
         }
     </style>
 </head>
@@ -29,7 +32,7 @@
     <center>
         <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
             <tr>
-                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">|按采购单查询</th>
+                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">|按采购单查询</th>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">采购单编号:</td>
@@ -41,11 +44,7 @@
                 <td bgcolor="#eff7ff">采购单状态:</td>
                 <td>
                     <select class="select">
-                        <option value="-1">全部</option>
-                        <option value="0">未确认送货</option>
-                        <option value="1">已入库</option>
-                        <option value="2">已发货</option>
-                        <option value="3">无法供货</option>
+                        <option value="-1">请选择</option>
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">采购医院:</td>
@@ -55,10 +54,7 @@
                 <td bgcolor="#eff7ff">供货商:</td>
                 <td>
                     <select class="select">
-                        <option value="-1">全部</option>
-                        <option value="0">供货商1</option>
-                        <option value="1">供货商2</option>
-                        <option value="2">供货商3</option>
+                        <option value="-1">请选择</option>
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">统计时间:</td>
@@ -92,20 +88,13 @@
                 <td bgcolor="#eff7ff">质量层次:</td>
                 <td>
                     <select class="select">
-                        <option value="-1">全部</option>
-                        <option value="0">特别好</option>
-                        <option value="1">很好</option>
-                        <option value="2">好</option>
-                        <option value="3">不好</option>
-                        <option value="4">很差</option>
+                        <option value="-1">请选择</option>
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">药品类别: </td>
                 <td>
                     <select class="select">
-                        <option value="-1">全部</option>
-                        <option value="0">进口药</option>
-                        <option value="1">国产药</option>
+                        <option value="-1">请选择</option>
                     </select>
                 </td>
             </tr>
@@ -136,27 +125,6 @@
             <td>结算量</td>
             <td>结算金额</td>
         </tr>
-
-        <tr th:each="th : ${purchases}">
-            <td th:text="${th.hospitalId}"></td>
-           <td th:text="${th.purchaseNumber}"></td>
-            <td th:text="${th.purchaseName}"></td>
-            <td th:text="${th.descripId}"></td>
-            <td th:text="${#dates.format(th.startTime, 'yyyy-MM-dd')}"> </td>
-            <td th:text="${#dates.format(th.overTime, 'yyyy-MM-dd')}"> </td>
-            <td th:text="${#dates.format(th.activateTime, 'yyyy-MM-dd')}"> </td>
-            <td th:text="${#dates.format(th.submitTime, 'yyyy-MM-dd')}"> </td>
-            <td th:text="${#dates.format(th.assessorTime, 'yyyy-MM-dd')}"> </td>
-            <td th:text="${th.transaction.orderQuantity}"></td>
-            <td th:text="${th.transaction.orderAmount}"></td>
-            <td th:text="${th.transaction.deliveryVolume}"></td>
-            <td th:text="${th.transaction.deliveryAmount}"></td>
-            <td th:text="${th.transaction.returnNumber}"></td>
-            <td th:text="${th.transaction.settlementNumber}"></td>
-            <td th:text="${th.transaction.settlementAmount}"></td>
-            <td th:text="${th.transaction.settlementAmount}"></td>
-        </tr>
-
     </table>
     </center>
 </div>

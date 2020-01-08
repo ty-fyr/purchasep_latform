@@ -4,14 +4,18 @@ import com.hospital.purchase.domain.Purchase;
 import com.hospital.purchase.domain.dto.SearchDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PurchaseService {
-    /**
-     *   查询所有
-     *   nfkjas
-     * @return List<Purchase> 采购单集合
-     */
-    List<Purchase> selectAll();
+
+    //查询全部
+    List<Purchase> selectAll();//
     //动态查询
     List<Purchase> selectBySearchBean(SearchDTO searchDto);
+
+         /*
+          * 采购表查询
+          *
+          */
+   List<Purchase> seleLike(Map<String,Object> map);
 }
