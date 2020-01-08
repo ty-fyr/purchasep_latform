@@ -36,10 +36,20 @@
       <result column="units" jdbcType="VARCHAR" property="units" />
       <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
     </association>
+    <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
+      <id column="eenterpriseId" property="enterpriseId"/>
+      <result column="enterprise_name" property="enterpriseName"/>
+      <result column="business_license" property="businessLicense"/>
+      <result column="registration_time" property="registrationTime"/>
+    </association>
+    <association property="qualityLevel" javaType="com.hospital.purchase.domain.QualityLevel">
+      <id column="qlevelId" property="levelId"/>
+      <result column="level_type" property="levelType"/>
+    </association>
     <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
-      <id column="dc_id" jdbcType="INTEGER" property="dcId" />
-      <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
-      <result column="state" jdbcType="VARCHAR" property="state" />
+      <id column="drdcId" property="dcId"/>
+      <result column="drug_type" property="drugType"/>
+      <result column="state" property="state"/>
     </association>
   </resultMap>
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
@@ -47,6 +57,7 @@
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
+
   <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.DrugInformationSheet">
     <id column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
@@ -76,6 +87,7 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="isdel" jdbcType="INTEGER" property="isdel" />
     <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+
     <association property="units1" javaType="com.hospital.purchase.domain.Units">
       <id column="unitsId" property="unitsId"/>
       <result column="uunits" property="units"/>
@@ -110,6 +122,13 @@
         <result column="Registration_time" property="registrationTime"/>
       </association>
     </association>
+  </resultMap>
+
+  <resultMap id="entise" type="com.hospital.purchase.domain.Enterprise">
+    <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+    <result column="registration_time" jdbcType="DATE" property="registrationTime" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -222,6 +241,10 @@
   <select id="seldrugc" resultMap="Category">
     SELECT * from drug_category;
   </select>
+  <select id="scqy" resultMap="entise">
+   SELECT * from enterprise
+  </select>
+
   <insert id="findadd">
     INSERT INTO `drug_purchase`.`drug_information_sheet` (
     `drug_id`,
@@ -279,7 +302,7 @@
     #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1;
     );
   </insert>
-  <select id="finxx" resultMap="BaseResultMap">
+  <select id="finxx" resultMap="DrugInformationSheet">
     SELECT
 	dsi.drug_serial_number,
 	dsi.generic_drug,

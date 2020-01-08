@@ -2,6 +2,7 @@ package com.hospital.purchase.service.impl;
 
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
+import com.hospital.purchase.domain.Enterprise;
 import com.hospital.purchase.mapper.DrugInformationSheetMapper;
 import com.hospital.purchase.service.CategoryService;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
@@ -15,7 +16,7 @@ import java.util.List;
 
  */
 @Service
-public class CategoryServiceimpl implements  CategoryService{
+class CategoryServiceimpl implements  CategoryService{
 
     @Autowired
     private DrugInformationSheetMapper drugInformationSheetMapper;
@@ -24,6 +25,12 @@ public class CategoryServiceimpl implements  CategoryService{
     public List<DrugInformationSheet> findall() {
         return drugInformationSheetMapper.findall();
     }
+
+    @Override
+    public int xxadd(DrugInformationSheet children) {
+        return drugInformationSheetMapper.xxadd(children);
+    }
+
     /**
      *
      * @return
@@ -42,5 +49,9 @@ public class CategoryServiceimpl implements  CategoryService{
         return drugInformationSheetMapper.finxx();
     }
 
+    @Override
+    public List<Enterprise> scqy() {
+        return drugInformationSheetMapper.scqy();
+    }
 
 }

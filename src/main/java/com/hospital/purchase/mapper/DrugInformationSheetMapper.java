@@ -3,6 +3,7 @@ package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
+import com.hospital.purchase.domain.Enterprise;
 import com.hospital.purchase.domain.dto.SelectDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
@@ -40,6 +41,12 @@ public interface DrugInformationSheetMapper {
      */
     List<DrugInformationSheet> finxx();
 
+    /**
+     * 生产企业
+     * @return
+     */
+    List<Enterprise> scqy();
+
     //查询全部药品信息
     List<DrugInformationSheet> selecetDrugInformationSheet();
 
@@ -48,6 +55,9 @@ public interface DrugInformationSheetMapper {
 
     //通过id查询单条药品信息
     DrugInformationSheet selecetDrugInformationSheetById(Integer drugId);
+
+
+
 }
 
 

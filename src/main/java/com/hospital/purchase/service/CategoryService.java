@@ -2,6 +2,7 @@ package com.hospital.purchase.service;
 
 import com.hospital.purchase.domain.DrugCategory;
 import com.hospital.purchase.domain.DrugInformationSheet;
+import com.hospital.purchase.domain.Enterprise;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
 
 import java.util.List;
@@ -34,8 +35,13 @@ public interface CategoryService {
     int findadd(DrugInformationSheet children);
     /**
      * 查询药品信息
-
      */
     List<DrugInformationSheet> finxx();
+
+    /**
+     * 生产企业
+     * @return
+     */
+    List<Enterprise> scqy();
 
 }
