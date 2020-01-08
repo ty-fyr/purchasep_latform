@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
+    //
     @Override
     public User seleAll(String username,String password) {
         return userMapper.seleAll(username,password);

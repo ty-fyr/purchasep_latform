@@ -26,7 +26,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseList.forEach(Purchase::transfer);
         return purchaseList;
     }
-
+    //
     //按采购单查询
     @Override
     public List<Purchase> selectBySearchBean(SearchDTO searchDto) {

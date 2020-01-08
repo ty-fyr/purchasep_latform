@@ -13,7 +13,7 @@ public class ZjqServiceImpl implements ZjqService {
 
     @Autowired
     PurchaseMapper Mapper;
-
+//
 
     @Override
     public List<Purchase> selectByPrimaryName() {

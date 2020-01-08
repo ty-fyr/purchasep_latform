@@ -82,25 +82,39 @@
         <td>修改</td>
         <td>删除</td>
     </tr>
-        <tr th:each="fin : ${finxx}">
+        <tr th:each="fin : ${findxx}">
         <td th:text="${fin.drugSerialNumber}"></td>
         <td th:text="${fin.genericDrug}"></td>
         <td th:text="${fin.dosageForm}"></td>
         <td th:text="${fin.specification}"></td>
         <td th:text="${fin.units1.units}"></td>
         <td th:text="${fin.conversionFactor}"></td>
-        <td th:text="${fin.enterpris.enterpriseName}"></td>
+        <td th:text="${fin.enterprise.enterpriseName}"></td>
         <td th:text="${fin.tradeName}"></td>
         <td th:text="${fin.thePrice}"></td>
-        <td th:text="${fin.qualityLeve.levelType}"></td>
+        <td th:text="${fin.qualityLevel.levelType}"></td>
         <td th:text="${fin.drugCategory.drugType}"></td>
-         <td>
-             <select th:switch="${fin.descripId}">
-                <option th:case="1">正常</option>
-                <option th:case="0">非正常</option>
-                <option th:case="*">其他</option>
-             </select>
+        <td>
+            <select th:switch="${fin.descripId}">
+                    <option th:case="1">正常</option>
+                    <option th:case="0">非正常</option>
+                    <option th:case="*">其他</option>
+            </select>
         </td>
+
+
+
+
+
+
+
+
+
+
+       <!--
+
+
+         -->
         <td><button type="button" class="btn btn-default">查看</button></td>
         <td><button type="button" class="btn btn-success">修改</button></td>
         <td><button type="button" class="btn btn-danger">删除</button></td>

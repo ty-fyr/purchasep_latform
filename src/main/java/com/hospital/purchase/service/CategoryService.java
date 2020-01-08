@@ -15,7 +15,12 @@ public interface CategoryService {
      * 药品品目查询
      * @return
      */
-    List<DummyPositionSensitiveRecordWithChildren> findall ();
+    List<DrugInformationSheet> findall ();
+    /**
+     *添加药品品目
+     * @return
+     */
+    int xxadd(DrugInformationSheet children);
 
     /**
      * 药品类型查询
@@ -29,7 +34,8 @@ public interface CategoryService {
     int findadd(DrugInformationSheet children);
     /**
      * 查询药品信息
-     * @return
+
      */
-    List<DummyPositionSensitiveRecordWithChildren> finxx();
+    List<DrugInformationSheet> finxx();
+
 }
