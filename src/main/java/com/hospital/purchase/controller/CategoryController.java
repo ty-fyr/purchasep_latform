@@ -2,6 +2,7 @@ package com.hospital.purchase.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.hospital.purchase.domain.DrugCategory;
+import com.hospital.purchase.domain.Enterprise;
 import com.hospital.purchase.service.CategoryService;
 import com.hospital.purchase.domain.DrugInformationSheet;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
@@ -44,6 +45,13 @@ public class CategoryController {
         String json = JSON.toJSONString(seldrugc);
         return json;
     }
+
+ /*   @RequestMapping(value = "seldrugc", produces = "application/json; charset=utf-8")
+    public String scqy(){
+        List<Enterprise> scqy = categoryService.scqy();
+        String json = JSON.toJSONString(scqy);
+        return json;
+    }*/
     /**
      * 药品品目查询
      */
