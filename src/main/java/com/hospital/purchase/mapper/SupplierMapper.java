@@ -2,6 +2,8 @@ package com.hospital.purchase.mapper;
 
 import com.hospital.purchase.domain.Supplier;
 
+import java.util.List;
+
 public interface SupplierMapper {
     int deleteByPrimaryKey(Integer supplierId);
 
@@ -14,4 +16,6 @@ public interface SupplierMapper {
     int updateByPrimaryKeySelective(Supplier record);
 
     int updateByPrimaryKey(Supplier record);
+
+    List<Supplier> findSupplier();
 }

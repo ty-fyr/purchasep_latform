@@ -38,6 +38,7 @@ public interface DrugInformationSheetMapper {
 
     /**
      * 查询药品信息
+     * @return
      */
     List<DrugInformationSheet> finxx();
 
@@ -49,6 +50,8 @@ public interface DrugInformationSheetMapper {
 
     //查询全部药品信息
     List<DrugInformationSheet> selecetDrugInformationSheet();
+    //查询全部药品信息
+    List<DrugInformationSheet> selecetDrugInformationSheet1();
 
     //条件查询
     List<DrugInformationSheet> findSerchBean(SelectDto selectDto);
@@ -56,8 +59,8 @@ public interface DrugInformationSheetMapper {
     //通过id查询单条药品信息
     DrugInformationSheet selecetDrugInformationSheetById(Integer drugId);
 
-
-
+    //修改药品维护信息
+    void updateInfo(SelectDto selectDto);
 }
 
 

@@ -1,14 +1,13 @@
 package com.hospital.purchase.domain;
 
 import com.hospital.purchase.utils.DateUtils;
-import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
 
-
-
 public class Purchase {
+    //主键id
+    private Integer purId;
     //采购单Id
     private Integer piId;
     // 药品id
@@ -47,6 +46,10 @@ public class Purchase {
     private Integer supplierId;
     //交易id
     private Integer tiId;
+
+    private TransactionInfo transaction;
+
+    //医院名称
     private Hospital hospital;
     private TransactionInfo transactionInfo;
     //医院名称
@@ -58,6 +61,24 @@ public class Purchase {
     private String submitTimeStr;//提交采购时间字符串
     private String assessorTimeStr;//审核采购时间字符串
     private String descripIdStr;//采购单状态字符串
+
+
+
+    public TransactionInfo getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(TransactionInfo transaction) {
+        this.transaction = transaction;
+    }
+
+    public Integer getPurId() {
+        return purId;
+    }
+
+    public void setPurId(Integer purId) {
+        this.purId = purId;
+    }
 
     public Integer getPiId() {
         return piId;

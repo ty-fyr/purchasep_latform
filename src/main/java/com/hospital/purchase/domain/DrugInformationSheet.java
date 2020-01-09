@@ -66,7 +66,78 @@ public class DrugInformationSheet {
     private QualityLevel qualityLevel;
 
     private DrugCategory drugCategory;
-	
+
+    private SupplierManagement supplierManagement;
+
+    private Supplier supplier;
+
+    private String approvalNumberDateStr;
+
+    private String drugInspectionReportStr;
+
+    private Purchase purchase;
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
+
+    public String getApprovalNumberDateStr() {
+        return approvalNumberDateStr;
+    }
+
+    public void setApprovalNumberDateStr(String approvalNumberDateStr) {
+        this.approvalNumberDateStr = approvalNumberDateStr;
+    }
+
+    public String getDrugInspectionReportStr() {
+        return drugInspectionReportStr;
+    }
+
+    public void setDrugInspectionReportStr(String drugInspectionReportStr) {
+        this.drugInspectionReportStr = drugInspectionReportStr;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public SupplierManagement getSupplierManagement() {
+        return supplierManagement;
+    }
+
+    public void setSupplierManagement(SupplierManagement supplierManagement) {
+        this.supplierManagement = supplierManagement;
+    }
+
+
+    private  Enterprise enterpris;
+
+    private  QualityLevel qualityLeve;
+
+    public QualityLevel getQualityLeve() {
+        return qualityLeve;
+    }
+
+    public void setQualityLeve(QualityLevel qualityLeve) {
+        this.qualityLeve = qualityLeve;
+    }
+
+    public Enterprise getEnterpris() {
+        return enterpris;
+    }
+
+    public void setEnterpris(Enterprise enterpris) {
+        this.enterpris = enterpris;
+    }
+
     public DrugCategory getDrugCategory() {
         return drugCategory;
     }

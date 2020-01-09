@@ -8,7 +8,8 @@
     <result column="order_amount" jdbcType="DECIMAL" property="orderAmount" />
     <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume" />
     <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount" />
-    <result column="return_ number" jdbcType="INTEGER" property="returnNumber" />
+    <result column="return_number" jdbcType="INTEGER" property="returnNumber" />
+    <result column="return_amount" jdbcType="INTEGER" property="returnAmount" />
     <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber" />
     <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount" />
     <result column="pi_id" jdbcType="INTEGER" property="piId" />
