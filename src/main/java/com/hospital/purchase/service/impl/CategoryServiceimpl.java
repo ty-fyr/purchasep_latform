@@ -1,8 +1,6 @@
 package com.hospital.purchase.service.impl;
 
-import com.hospital.purchase.domain.DrugCategory;
-import com.hospital.purchase.domain.DrugInformationSheet;
-import com.hospital.purchase.domain.Enterprise;
+import com.hospital.purchase.domain.*;
 import com.hospital.purchase.mapper.DrugInformationSheetMapper;
 import com.hospital.purchase.service.CategoryService;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
@@ -13,8 +11,9 @@ import java.util.List;
 
 /**
  * @author shkstart
-
  */
+
+
 @Service
 class CategoryServiceimpl implements  CategoryService{
 
@@ -31,10 +30,7 @@ class CategoryServiceimpl implements  CategoryService{
         return drugInformationSheetMapper.xxadd(children);
     }
 
-    /**
-     *
-     * @return
-     */
+
     public List<DrugCategory> seldrugc() {
         return drugInformationSheetMapper.seldrugc();
     }
@@ -53,5 +49,37 @@ class CategoryServiceimpl implements  CategoryService{
     public List<Enterprise> scqy() {
         return drugInformationSheetMapper.scqy();
     }
+
+    @Override
+    public List<QualityLevel> quali() {
+        return drugInformationSheetMapper.quali();
+    }
+
+    @Override
+    public DrugInformationSheet uptefind(Integer id) {
+        return drugInformationSheetMapper.uptefind(id);
+    }
+
+    @Override
+    public List<Units> unfind() {
+        return drugInformationSheetMapper.unfind();
+    }
+
+    @Override
+    public int upayy(DrugInformationSheet children) {
+        int upayy = drugInformationSheetMapper.upayy(children);
+        return upayy;
+    }
+
+    @Override
+    public List<DrugInformationSheet> mhfind(DrugInformationSheet children) {
+        return drugInformationSheetMapper.mhfind(children);
+    }
+
+    @Override
+    public int delfind(int ids) {
+        return drugInformationSheetMapper.delfind(ids);
+    }
+
 
 }

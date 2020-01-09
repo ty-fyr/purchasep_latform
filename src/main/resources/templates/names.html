@@ -3,6 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>药品品目查询</title>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/plugins/adminLTE/js/app.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $.ajax({
+                url:"unt",
+                type:"post",
+                datatype:"json",
+                success:function (result) {
+                    console.log(result);
+                    var  v="<option>请选择</option>"
+                    for (var i = 0; i <result.length ; i++) {
+                        v+="<option value='"+result[i].unitsId+"'>"+result[i].units+"</option>";
+                    }
+                    $("#unt1").append(v);
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        function delfind() {
+            $.ajax({
+                url:"delfind",
+                type:"post",
+                data:"i",
+                dataType:"json",
+                success:function (reuslt) {
+                    if (result.equals(1)) {
+                        window.location.href = "/names";
+                    } else {
+                        alert("添加失败，请重试")
+                        window.location.href = "losing.html";
+                    }
+                }
+            })
+        }
+
+    </script>
     <style>
         .button{
             background-color: #1aa5fb;
@@ -18,33 +61,37 @@
 <body>
 <div class="biankuang">
     <center>
+      <form action="mhfind" method="post" >
         <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
             <tr>
                 <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">药品品目查询</th>
             </tr>
             <tr>
-                <td bgcolor="#b0c4de" color="red">药品品目号:</td>
-                <td><input/></td>
+                <td bgcolor="#b0c4de" color="red" name="">药品品目号:</td>
+                <td><input name="drugItemNo"/></td>
                 <td bgcolor="#b0c4de">通用名:</td>
-                <td><input/></td>
+                <td><input name="genericDrug" /></td>
             </tr>
             <tr>
                 <td bgcolor="#b0c4de">剂型:</td>
-                <td><input/></td>
+                <td><input name="dosageForm" /></td>
                 <td bgcolor="#b0c4de">规格:</td>
-                <td><input/></td>
+                <td><input name="specification" /></td>
             </tr>
             <tr>
-                <td bgcolor="#b0c4de">单位:</td>
-                <td><input/></td>
+                <td bgcolor="#b0c4de"> 单位:</td>
+                <td><select name="units" id="unt1">
+
+                </select></td>
                 <td bgcolor="#b0c4de">转换系数:</td>
-                <td><input/></td>
+                <td><input name="conversionFactor" /></td>
             </tr>
         </table>
-        &nbsp;
-        <button class="btn btn-link">查询</button>&nbsp;<button class="btn btn-link">导出</button>
+          <input type="submit"value="查询">
+      </form>
+
     </center>
-    <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;<button class="btn btn-link">导出</button>
+    <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;<button class="btn btn-link">导入</button> <button class="btn btn-link">导出</button>
     <table class="table table-bordered" >
     <tr>
         <td>药品品目号</td>
@@ -59,6 +106,7 @@
         <td>修改</td>
         <td>删除</td>
     </tr><!--th:text="${find.descripId}"-->
+
        <tr th:each="find : ${findall}">
            <td th:text="${find.drugItemNo}"></td>
            <td th:text="${find.genericDrug}"></td>
@@ -66,7 +114,7 @@
            <td th:text="${find.specification}"></td>
            <td th:text="${find.units1.units}"></td>
            <td th:text="${find.conversionFactor}"></td>
-           <td th:text="${find.drugCategory.drugType}"></td>
+          <td th:text="${find.drugCategory.drugType}"></td>
            <td>
                <select th:switch="${find.descripId}">
                <option th:case="1">正常</option>
@@ -75,8 +123,8 @@
                </select>
            </td>
            <td><button type="button" class="btn btn-default">查看</button></td>
-           <td><button type="button" class="btn btn-success">修改</button></td>
-           <td><button type="button" class="btn btn-danger">删除</button></td>
+           <td><button type="button" class="btn btn-success"><a th:href="@{'uptefind'}">修改</a></button></td>
+           <td><button type="button" class="btn btn-danger" ><a th:href="@{'delfind?ids='+${find.drugId}}">删除</a></button></td>
        </tr>
     </table>
 </div>

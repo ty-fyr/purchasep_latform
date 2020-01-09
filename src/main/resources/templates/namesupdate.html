@@ -12,6 +12,7 @@
     <script src="../static/plugins/adminLTE/js/app.min.js"></script>
     <script type="text/javascript">
         $(function() {
+            var aa = $("#serugid").val()
             $.ajax({
                 url:"seldrugc",
                 type:"post",
@@ -20,6 +21,9 @@
                     console.log(result);
                    var  v="<option>请选择</option>"
                     for (var i = 0; i <result.length ; i++) {
+                        if (result[i].drugType==aa){
+                        v+="<option selected = 'selected' value='"+result[i].dcId+"'>"+result[i].drugType+"</option>";
+                        }
                         v+="<option value='"+result[i].dcId+"'>"+result[i].drugType+"</option>";
                     }
                     $("#seldrugid").append(v);
@@ -30,6 +34,7 @@
 
     <script type="text/javascript">
         $(function() {
+            var aa = $("#untid").val()
             $.ajax({
                 url:"unt",
                 type:"post",
@@ -38,6 +43,9 @@
                     console.log(result);
                     var  v="<option>请选择</option>"
                     for (var i = 0; i <result.length ; i++) {
+                       if (result[i].units==aa){
+                           v+="<option selected = 'selected' value='"+result[i].unitsId+"'>"+result[i].units+"</option>";
+                       }
                         v+="<option value='"+result[i].unitsId+"'>"+result[i].units+"</option>";
                     }
                     $("#unt").append(v);
@@ -45,71 +53,81 @@
             })
         })
     </script>
-
     <script type="text/javascript">
-        function finadd() {
-            $.ajax({
-                url: "findadd",
-                data: $("#findadd-form").serialize(),
-                type:"post",
-                dataType:"json",
-                success : function(result) {
-                    if (result.equals(1)) {
-                        window.location.href = "/names";
-                    } else {
-                        alert("添加失败，请重试")
-                        window.location.href = "losing.html";
-                    }
+        function update() {
+        $.ajax({
+            url:"upayy",
+            data:$("#findadd-form").serialize(),
+            type:"post",
+            dataType:"json",
+            success:function (result) {
+                if (result == 1) {
+                    alert(1)
+                    window.location.href = "names";
+                } else {
+                    alert("添加失败，请重试")
+                    window.location.href = "losing.html";
                 }
-            })
+            }
+        })
         }
     </script>
+
 </head>
 <body>
-    <h2 align="center">药品品目添加</h2>
+    <h2 align="center">药品品目修改</h2>
 <form id="findadd-form">
-<table align="center">
+<table align="center" th:each="up : ${uptefind}">
     <tr>
         <td>
-            <input name="drugItemNo"/>药品品目号
+            <input type="text" th:value="${up.drugId}" name="drugId">
+            ID</td>
+    </tr>
+    <tr >
+        <td >
+            <input name="drugItemNo" th:value="${up.drugItemNo}" />药品品目号
         </td>
     </tr>
     <tr>
         <td>
-            <input name="genericDrug"/>通用名
+            <input name="genericDrug" th:value="${up.genericDrug}" />通用名
         </td>
     </tr>
     <tr>
         <td>
-            <input name="dosageForm"/>剂型</td>
+            <input name="dosageForm" th:value="${up.dosageForm}" />剂型</td>
     </tr>
     <tr>
         <td>
-            <input name="specification"/>规格</td>
+            <input name="specification" th:value="${up.specification}" />规格</td>
     </tr>
     <tr>
         <td>
-            <select name="units" id="unt"></select>单位</td>
+            <select name="units" id="unt" ></select>单位
+            <input type="hidden" id="untid"  th:value="${up.units1.units}">
+        </td>
+
     </tr>
     <tr>
         <td>
-            <input name="conversionFactor"/>转换系数</td>
+            <input name="conversionFactor" th:value="${up.conversionFactor}" />转换系数</td>
     </tr>
     <tr>
         <td>
             <select name="dcId" id="seldrugid"></select>药品类别
+            <input type="hidden" id="serugid"  th:value="${up.drugCategory.drugType}">
         </td>
     </tr>
     <tr>
         <td>
-            <select name="descripId">
+            <select name="descripId" th:value="${up.descripId}" >
                 <option value="0">正常</option>
                 <option value="1">非正常</option>
             </select>交易状态
         </td>
     </tr>
     <tr>
-        <td><button class="btn btn-success" onclick="finadd()">添加</button>
+        <td><button class="btn btn-success" onclick="update()">修改</button>
         <input type="reset" class="btn btn-danger"></td>
     </tr>
 </table>

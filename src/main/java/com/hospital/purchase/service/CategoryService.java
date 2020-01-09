@@ -1,8 +1,6 @@
 package com.hospital.purchase.service;
 
-import com.hospital.purchase.domain.DrugCategory;
-import com.hospital.purchase.domain.DrugInformationSheet;
-import com.hospital.purchase.domain.Enterprise;
+import com.hospital.purchase.domain.*;
 import org.apache.poi.hslf.record.DummyPositionSensitiveRecordWithChildren;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public interface CategoryService {
      */
     List<DrugInformationSheet> findall ();
     /**
-     *添加药品品目
+     *添加药品信息
      * @return
      */
     int xxadd(DrugInformationSheet children);
@@ -43,5 +41,40 @@ public interface CategoryService {
      * @return
      */
     List<Enterprise> scqy();
+    /**
+     *质量层次
+     * @return
+     */
+    List<QualityLevel> quali();
+
+    /**
+     *修改查询
+     * @return
+     */
+    DrugInformationSheet uptefind(Integer id);
+
+    /**
+     * 单位
+     * @return
+     */
+    List<Units> unfind();
+    /**
+     * 修改
+     * @return
+     */
+    int upayy(DrugInformationSheet children);
+
+    /**
+     * 模糊查询药品品目
+     * @return
+     */
+    List<DrugInformationSheet> mhfind(DrugInformationSheet children);
+
+    /**
+     * 删除药品品目
+     * @return
+     */
+    int delfind(int ids);
+
 
 }
