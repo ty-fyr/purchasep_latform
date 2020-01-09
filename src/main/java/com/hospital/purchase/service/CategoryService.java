@@ -1,3 +1,4 @@
+
 package com.hospital.purchase.service;
 
 import com.hospital.purchase.domain.*;
@@ -9,11 +10,14 @@ import java.util.List;
  * @author shkstart
  * @create YEAR−YEAR−{MONTH}-30 18:10
  */
+
 public interface CategoryService {
-    /**
+
+/**
      * 药品品目查询
      * @return
      */
+
     List<DrugInformationSheet> findall ();
     /**
      *添加药品信息
@@ -21,19 +25,25 @@ public interface CategoryService {
      */
     int xxadd(DrugInformationSheet children);
 
-    /**
+
+/**
      * 药品类型查询
      * @return
      */
+
     List<DrugCategory> seldrugc();
-    /**
+
+/**
      *添加药品品目
      * @return
      */
+
     int findadd(DrugInformationSheet children);
-    /**
+
+/**
      * 查询药品信息
      */
+
     List<DrugInformationSheet> finxx();
 
     /**
@@ -78,3 +88,4 @@ public interface CategoryService {
 
 
 }
+

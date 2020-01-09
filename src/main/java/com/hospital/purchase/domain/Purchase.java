@@ -1,13 +1,13 @@
 package com.hospital.purchase.domain;
 
 import com.hospital.purchase.utils.DateUtils;
+import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
 
+
 public class Purchase {
-    //主键id
-    private Integer purId;
     //采购单Id
     private Integer piId;
     // 药品id
@@ -46,12 +46,16 @@ public class Purchase {
     private Integer supplierId;
     //交易id
     private Integer tiId;
-
-    private TransactionInfo transaction;
-
-    //医院名称
+    //库存id
+    private Integer repertoryId;
+    //库存
+    private Repertory repertory;
+    //医院对象
     private Hospital hospital;
+    //交易对象
     private TransactionInfo transactionInfo;
+    //供货商
+    private Supplier supplier;
     //医院名称
     private String hospital_name;
 
@@ -62,22 +66,51 @@ public class Purchase {
     private String assessorTimeStr;//审核采购时间字符串
     private String descripIdStr;//采购单状态字符串
 
-
-
-    public TransactionInfo getTransaction() {
-        return transaction;
+    public void transfer() {
+        if (Objects.nonNull(this.getStartTime())) {
+            this.setStartTimeStr(DateUtils.dateFormat(this.getStartTime(), "yyyy-MM-dd"));
+        }
+        if (this.getOverTime() != null) {
+            this.setOverTimeStr(DateUtils.dateFormat(this.getOverTime(), "yyyy-MM-dd"));
+        }
+        if (this.getActivateTime() != null) {
+            this.setActivateTimeStr(DateUtils.dateFormat(this.getActivateTime(), "yyyy-MM-dd"));
+        }
+        if (this.getSubmitTime() != null) {
+            this.setSubmitTimeStr(DateUtils.dateFormat(this.getSubmitTime(), "yyyy-MM-dd"));
+        }
+        if (this.getAssessorTime() != null) {
+            this.setAssessorTimeStr(DateUtils.dateFormat(this.getAssessorTime(), "yyyy-MM-dd"));
+        }
+        if (Objects.equals(this.getDescripId(),0)) {
+            this.setDescripIdStr("已入库");
+        } else if (Objects.equals(this.getDescripId(),1)) {
+            this.setDescripIdStr("未入库");
+        }
     }
 
-    public void setTransaction(TransactionInfo transaction) {
-        this.transaction = transaction;
+    public Integer getRepertoryId() {
+        return repertoryId;
     }
 
-    public Integer getPurId() {
-        return purId;
+    public void setRepertoryId(Integer repertoryId) {
+        this.repertoryId = repertoryId;
     }
 
-    public void setPurId(Integer purId) {
-        this.purId = purId;
+    public Repertory getRepertory() {
+        return repertory;
+    }
+
+    public void setRepertory(Repertory repertory) {
+        this.repertory = repertory;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     public Integer getPiId() {
@@ -303,29 +336,4 @@ public class Purchase {
     public void setDescripIdStr(String descripIdStr) {
         this.descripIdStr = descripIdStr;
     }
-
-    public void transfer() {
-        if (Objects.nonNull(this.getStartTime())) {
-            this.setStartTimeStr(DateUtils.dateFormat(this.getStartTime(), "yyyy-MM-dd"));
-        }
-        if (this.getOverTime() != null) {
-            this.setOverTimeStr(DateUtils.dateFormat(this.getOverTime(), "yyyy-MM-dd"));
-        }
-        if (this.getActivateTime() != null) {
-            this.setActivateTimeStr(DateUtils.dateFormat(this.getActivateTime(), "yyyy-MM-dd"));
-        }
-        if (this.getSubmitTime() != null) {
-            this.setSubmitTimeStr(DateUtils.dateFormat(this.getSubmitTime(), "yyyy-MM-dd"));
-        }
-        if (this.getAssessorTime() != null) {
-            this.setAssessorTimeStr(DateUtils.dateFormat(this.getAssessorTime(), "yyyy-MM-dd"));
-        }
-        if (Objects.equals(this.getDescripId(),0)) {
-            this.setDescripIdStr("已入库");
-        } else if (Objects.equals(this.getDescripId(),1)) {
-            this.setDescripIdStr("未入库");
-        }
-    }
-
-
 }

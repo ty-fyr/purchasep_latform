@@ -15,10 +15,9 @@ public class TransactionInfo {
     private Long deliveryAmount;
     //退货量
     private Integer returnNumber;
-    //退货金额
-    private Integer returnAmount;
-    //结算量
 
+    private Long returnAmount;
+    //结算量
     private Integer settlementNumber;
     //结算金额
     private Long settlementAmount;
@@ -27,12 +26,11 @@ public class TransactionInfo {
     //isdel
     private Integer isdel;
 
-
-    public Integer getReturnAmount() {
+    public Long getReturnAmount() {
         return returnAmount;
     }
 
-    public void setReturnAmount(Integer returnAmount) {
+    public void setReturnAmount(Long returnAmount) {
         this.returnAmount = returnAmount;
     }
 

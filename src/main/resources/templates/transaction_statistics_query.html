@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>按采购单查询</title>
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
     <style>
         .button{
             background-color: #1aa5fb;
@@ -24,13 +24,13 @@
             </tr>
             <tr>
                 <td>
-                    <span style="font-size: 16px; color: #6495ed; ">采购单编号:</span>
+                    <span style="font-size: 16px; color: #6495ed; " >采购单编号:</span>
                 </td>
-                <td><input></td>
+                <td><input id="cgNumber"></td>
                 <td >
-                    <span style="font-size: 16px; color: #6495ed; ">采购单名称:</span>
+                    <span style="font-size: 16px; color: #6495ed; " >采购单名称:</span>
                 </td>
-                <td><input></td>
+                <td><input id="cgName"></td>
             </tr>
             <tr>
                 <td >
@@ -39,12 +39,14 @@
                 <td>
                     <select>
                         <option value="-1">请选择</option>
+                        <option value="-1">已入库</option>
+                        <option value="-1">未入库</option>
                     </select>
                 </td>
                 <td >
                     <span style="font-size: 16px; color: #6495ed; ">采购医院:</span>
                 </td>
-                <td><input/></td>
+                <td><input id="hospitalName"/></td>
             </tr>
             <tr>
                 <td >
@@ -121,7 +123,7 @@
 
         </table>
         &nbsp;
-        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button" onclick="purchasefind()">查询</button>&nbsp;<button class="button">导出</button>
 
     <!--<form type="">
 
@@ -146,50 +148,44 @@
             <th class="w3">采购单编号</th>
             <th class="w4">采购单名称</th>
             <th class="w5">采购状态</th>
-            <th class="w6">采购时间</th>
             <th class="w7">开始采购时间</th>
             <th class="w8">结束采购时间</th>
             <th class="w9">建单时间</th>
             <th class="w10">提交时间</th>
+            <th class="w13">审核时间</th>
             <th class="w11">采购量</th>
             <th class="w12">采购金额</th>
-            <th class="w13">入库量</th>
+     <!--       <th class="w13">入库量</th>
             <th class="w14">入库金额</th>
             <th class="w15">退货量</th>
             <th class="w16">退货金额</th>
             <th class="w17">结算量</th>
-            <th class="w18">结算金额</th>
+            <th class="w18">结算金额</th>-->
         </tr>
 
         </thead>
-        <tr>
-            <td class="xuhao">1</td>
-            <td class="cg-hospital">崔苗镇无涯村卫生室</td>
-            <td class="cgd-number">1</td>
-            <td class="cgd-name">崔苗镇无涯村卫生室采购单</td>
-            <td class="cg-status">已入库</td>
-            <td class="kscg-time">2019-12-31</td>
-            <td class="jscag-time">2020-1-3</td>
-            <td class="creat-time">2020-1-2</td>
-            <td class="sub-time">2020-1-2</td>
-            <td class="sh-time">2020-1-3</td>
-            <td class="cg-amount">60</td>
-            <td class="cg-money">120</td>
-            <td class="rk-amount">60</td>
+        <tr th:each="pu:${purchases}">
+            <td class="xuhao" th:text="${pu.piId}"></td>
+            <td class="cg-hospital" th:text="${pu.hospital?.hospitalName}"></td>
+            <td class="cgd-number" th:text="${pu.purchaseNumber}">1</td>
+            <td class="cgd-name" th:text="${pu.purchaseName}"></td>
+            <td class="cg-status" th:text="${pu.descripIdStr}">已入库</td>
+            <td class="kscg-time" th:text="${pu.startTimeStr}"></td>
+            <td class="jscag-time" th:text="${pu.overTimeStr}"></td>
+            <td class="creat-time" th:text="${pu.activateTimeStr}"></td>
+            <td class="sub-time" th:text="${pu.submitTimeStr}">2020-1-2</td>
+            <td class="sh-time" th:text="${pu.assessorTimeStr}">2020-1-3</td>
+            <td class="cg-amount" th:text="${pu.transactionInfo.orderQuantity}">60</td>
+            <td class="cg-money" th:text="${pu.transactionInfo.orderAmount}">120</td>
+<!--            <td class="rk-amount">60</td>
             <td class="rk-money">120</td>
             <td class="th-amount">0</td>
             <td class="th-money">0</td>
             <td class="js-amount">60</td>
-            <td class="js-money">120</td>
+            <td class="js-money">120</td>-->
         </tr>
         <tr>
             <th class="w19">合计:</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -205,5 +201,14 @@
 
     </table>
 </div>
+<script>
+    function purchasefind() {
+        //alert(111)
+        var hospitalName = $("#hospitalName").val();
+        var purchaseNumber = $("#cgNumber").val();
+        var purchaseName = $("#cgName").val();
+        window.location.href="SearchPurchaseQuery?hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;
+    }
+</script>
 </body>
 </html>
