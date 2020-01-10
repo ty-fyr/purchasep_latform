@@ -3,6 +3,7 @@ package com.hospital.purchase.domain;
 import java.util.Date;
 
 public class Enterprise {
+
     private Integer enterpriseId;
 
     private String enterpriseName;
@@ -10,6 +11,7 @@ public class Enterprise {
     private String businessLicense;
 
     private Date registrationTime;
+
 
     public Integer getEnterpriseId() {
         return enterpriseId;

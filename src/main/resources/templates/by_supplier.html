@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>药品目录管理</title>
@@ -18,19 +18,20 @@
             height: 20px;
         }
     </style>
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div class="biankuang">
     <center>
         <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
             <tr>
-                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">|按供货商查询</th>
+                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">|按供货商查询</th>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">供货商:</td>
                 <td>
-                    <select class="select">
-                        <option value="-1">请选择</option>
+                    <select id="supplier" class="select">
+                        <option value="-1">全部</option>
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">统计时间:</td>
@@ -41,6 +42,8 @@
                 <td>
                     <select class="select">
                         <option value="-1">请选择</option>
+                        <option value="0">已入库</option>
+                        <option value="1">未入库</option>
                     </select>
                 </td>
                 <td bgcolor="#eff7ff"></td>
@@ -48,9 +51,72 @@
 
         </table>
         &nbsp;
-        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button" onclick="searchSupplier()">查询</button>&nbsp;<button class="button">导出</button>
+    </center>
+    <center>
+        <table  border="1" cellspacing="0"  style="table-layout:fixed" class="table1 table-bordered" >
+            <tr>
+                <td>序号</td>
+                <td>供货商</td>
+                <td>采购状态</td>
+                <td>订货量</td>
+                <td>订货金额</td>
+                <td>送货量</td>
+                <td>送货金额</td>
+                <td>退货量</td>
+                <td>退货金额</td>
+                <td>结算量</td>
+                <td>结算金额</td>
+                <td>交易药品</td>
+            </tr>
+
+            <tr th:each="s : ${supplier}">
+                <td th:text="${s.supplier.supplierId}"></td>
+                <td th:text="${s.supplier.supplierName}"></td>
+                <td th:text="${s.descripId}"></td>
+                <td th:text="${s.transactionInfo.orderQuantity}"></td>
+                <td th:text="${s.transactionInfo.orderAmount}"></td>
+                <td th:text="${s.transactionInfo.deliveryVolume}"></td>
+                <td th:text="${s.transactionInfo.deliveryAmount}"></td>
+                <td th:text="${s.transactionInfo.returnNumber}"></td>
+                <td th:text="${s.transactionInfo.returnAmount}"></td>
+                <td th:text="${s.transactionInfo.settlementNumber}"></td>
+                <td th:text="${s.transactionInfo.settlementAmount}"></td>
+                <td><button><a href="">查询</a> </button></td>
+            </tr>
+
+        </table>
     </center>
 
 </div>
+
+<script type="text/javascript">
+    //加载供货商
+    $(function () {
+        var supp = $("#supplier").val();
+        $.ajax({
+            url:"querySupplier",
+            dataType:"json",
+            type:"post",
+            success:function (result) {
+                $('#supplier').empty();
+                var v = '<option value="-1">请选择</option>';
+                for (var i=0;i<result.length;i++){
+                    if (result[i].supplierId == supp) {
+                        v +=' <option selected="selected"  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                    } else {
+                        v +=' <option  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                    }
+                }
+                $("#supplier").append(v);
+            }
+        })
+    });
+
+    function searchSupplier() {
+        var supplierName = $("#supplierName").val();
+        window.location.href="SuppMHCX?supplierName="+supplierName;
+    }
+</script>
 </body>
 </html>

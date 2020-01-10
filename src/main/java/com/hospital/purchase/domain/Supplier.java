@@ -1,6 +1,7 @@
 package com.hospital.purchase.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Supplier {
     private Integer supplierId;
@@ -12,6 +13,69 @@ public class Supplier {
     private String businessLicense;
 
     private Date registrationTime;
+
+    private Integer druginId;
+
+    //库存
+    private Repertory repertory;
+    //医院对象
+    private Hospital hospital;
+    //交易对象
+    private TransactionInfo transactionInfo;
+    //供货商对象
+    private Purchase purchase;
+    //药品信息对象
+    private DrugInformationSheet drugInformationSheet;
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
+
+    public Repertory getRepertory() {
+        return repertory;
+    }
+
+    public void setRepertory(Repertory repertory) {
+        this.repertory = repertory;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    public TransactionInfo getTransactionInfo() {
+        return transactionInfo;
+    }
+
+    public void setTransactionInfo(TransactionInfo transactionInfo) {
+        this.transactionInfo = transactionInfo;
+    }
+
+
+    public DrugInformationSheet getDrugInformationSheet() {
+        return drugInformationSheet;
+    }
+
+    public void setDrugInformationSheet(DrugInformationSheet drugInformationSheet) {
+        this.drugInformationSheet = drugInformationSheet;
+    }
+
+    public Integer getDruginId() {
+        return druginId;
+    }
+
+    public void setDruginId(Integer druginId) {
+        this.druginId = druginId;
+    }
+
 
     public Integer getSupplierId() {
         return supplierId;

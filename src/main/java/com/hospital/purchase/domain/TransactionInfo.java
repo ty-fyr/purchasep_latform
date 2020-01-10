@@ -26,6 +26,10 @@ public class TransactionInfo {
     //isdel
     private Integer isdel;
 
+
+
+
+
     public Long getReturnAmount() {
         return returnAmount;
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>药品目录管理</title>
@@ -24,7 +24,7 @@
     <center>
         <table class="table" border="1" cellspacing="0"  style="table-layout:fixed">
             <tr>
-                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/箭头.png" width="18" height="18">|按采购医院查询</th>
+                <th  colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">|按采购医院查询</th>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">采购医院名称:</td>
@@ -47,6 +47,40 @@
         </table>
         &nbsp;
         <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+    </center>
+    <center>
+        <table  border="1" cellspacing="0"  style="table-layout:fixed" class="table1 table-bordered" >
+            <tr>
+                <td>序号</td>
+                <td>采购医院名称</td>
+                <td>采购状态</td>
+                <td>采购量</td>
+                <td>采购金额</td>
+                <td>入库量</td>
+                <td>入库金额</td>
+                <td>退货量</td>
+                <td>退货金额</td>
+                <td>结算量</td>
+                <td>结算金额</td>
+                <td>交易药品</td>
+            </tr>
+
+            <tr th:each="h : ${hospital}">
+                <td th:text="${h.hospital.hospitalId}"></td>
+                <td th:text="${h.hospital.hospitalName}"></td>
+                <td th:text="${h.descripId}"></td>
+                <td th:text="${h.transactionInfo.orderQuantity}"></td>
+                <td th:text="${h.transactionInfo.orderAmount}"></td>
+                <td th:text="${h.repertory.receipt}"></td>
+                <td th:text="${h.repertory.receiptMoney}"></td>
+                <td th:text="${h.transactionInfo.returnNumber}"></td>
+                <td th:text="${h.transactionInfo.returnAmount}"></td>
+                <td th:text="${h.transactionInfo.settlementNumber}"></td>
+                <td th:text="${h.transactionInfo.settlementAmount}"></td>
+                <td><button><a href="">查询</a> </button></td>
+            </tr>
+
+        </table>
     </center>
 
 </div>

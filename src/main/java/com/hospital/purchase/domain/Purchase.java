@@ -48,14 +48,21 @@ public class Purchase {
     private Integer tiId;
     //库存id
     private Integer repertoryId;
+
     //库存
     private Repertory repertory;
     //医院对象
     private Hospital hospital;
     //交易对象
     private TransactionInfo transactionInfo;
-    //供货商
+    //供货商对象
     private Supplier supplier;
+    //药品信息对象
+    private DrugInformationSheet drugInformationSheet;
+    //生产企业对象
+    private Enterprise enterprise;
+
+
     //医院名称
     private String hospital_name;
 
@@ -89,6 +96,21 @@ public class Purchase {
         }
     }
 
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public DrugInformationSheet getDrugInformationSheet() {
+        return drugInformationSheet;
+    }
+
+    public void setDrugInformationSheet(DrugInformationSheet drugInformationSheet) {
+        this.drugInformationSheet = drugInformationSheet;
+    }
     public Integer getRepertoryId() {
         return repertoryId;
     }

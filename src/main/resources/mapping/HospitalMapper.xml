@@ -10,11 +10,11 @@
     <result column="registration_time" jdbcType="DATE" property="registrationTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    hospital_id, hospital_name, Hospital_number, Registered_address, business_licence, 
+    hospital_id, hospital_name, Hospital_number, Registered_address, business_licence,
     registration_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from hospital
     where hospital_id = #{hospitalId,jdbcType=INTEGER}
@@ -24,10 +24,10 @@
     where hospital_id = #{hospitalId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hospital.purchase.domain.Hospital">
-    insert into hospital (hospital_id, hospital_name, Hospital_number, 
+    insert into hospital (hospital_id, hospital_name, Hospital_number,
       Registered_address, business_licence, registration_time
       )
-    values (#{hospitalId,jdbcType=INTEGER}, #{hospitalName,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=VARCHAR}, 
+    values (#{hospitalId,jdbcType=INTEGER}, #{hospitalName,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=VARCHAR},
       #{registeredAddress,jdbcType=VARCHAR}, #{businessLicence,jdbcType=VARCHAR}, #{registrationTime,jdbcType=DATE}
       )
   </insert>

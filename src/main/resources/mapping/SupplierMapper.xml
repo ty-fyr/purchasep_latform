@@ -7,6 +7,90 @@
     <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress" />
     <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
     <result column="Registration_time" jdbcType="DATE" property="registrationTime" />
+    <association property="transactionInfo" javaType="com.hospital.purchase.domain.TransactionInfo">
+      <id column="ti_id" jdbcType="INTEGER" property="tiId"/>
+      <result column="supply_status" jdbcType="INTEGER" property="supplyStatus"/>
+      <result column="order_quantity" jdbcType="INTEGER" property="orderQuantity"/>
+      <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
+      <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume"/>
+      <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount"/>
+      <result column="return_number" jdbcType="INTEGER" property="returnNumber"/>
+      <result column="return_amount" jdbcType="DECIMAL" property="returnAmount"/>
+      <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber"/>
+      <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount"/>
+      <result column="pi_id" jdbcType="INTEGER" property="piId"/>
+      <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+    </association>
+    <association property="hospital" javaType="com.hospital.purchase.domain.Hospital">
+      <id column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
+      <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
+      <result column="Hospital_number" jdbcType="VARCHAR" property="hospitalNumber"/>
+      <result column="Registered_address" jdbcType="VARCHAR" property="registeredAddress"/>
+      <result column="business_licence" jdbcType="VARCHAR" property="businessLicence"/>
+      <result column="registration_time" jdbcType="DATE" property="registrationTime"/>
+    </association>
+    <association property="purchase" javaType="com.hospital.purchase.domain.Purchase">
+      <id column="pur_id" jdbcType="INTEGER" property="purId"/>
+      <result column="pi_id" jdbcType="VARCHAR" property="piId"/>
+      <result column="drug_id" jdbcType="INTEGER" property="drugId"/>
+      <result column="result" jdbcType="INTEGER" property="result"/>
+      <result column="opinion" jdbcType="VARCHAR" property="opinion"/>
+      <result column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
+      <result column="Purchase_number" jdbcType="INTEGER" property="purchaseNumber"/>
+      <result column="Purchase_name" jdbcType="VARCHAR" property="purchaseName"/>
+      <result column="start_time" jdbcType="DATE" property="startTime"/>
+      <result column="over_time" jdbcType="DATE" property="overTime"/>
+      <result column="activate_time" jdbcType="DATE" property="activateTime"/>
+      <result column="submit_time" jdbcType="DATE" property="submitTime"/>
+      <result column="assessor_time" jdbcType="DATE" property="assessorTime"/>
+      <result column="descrip_id" jdbcType="INTEGER" property="descripId"/>
+      <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+      <result column="auditor" jdbcType="VARCHAR" property="auditor"/>
+      <result column="contacts" jdbcType="VARCHAR" property="contacts"/>
+      <result column="contactsph" jdbcType="VARCHAR" property="contactsph"/>
+      <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+      <result column="ti_id" jdbcType="INTEGER" property="tiId"/>
+      <result column="repertory_id" jdbcType="INTEGER" property="repertoryId"/>
+    </association>
+    <association property="repertory" javaType="com.hospital.purchase.domain.Repertory">
+      <id column="repertory_id" jdbcType="INTEGER" property="repertoryId" />
+      <result column="receipt" jdbcType="VARCHAR" property="receipt" />
+      <result column="receipt_money" jdbcType="DECIMAL" property="receiptMoney" />
+      <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+      <result column="invoice_number" jdbcType="INTEGER" property="invoiceNumber" />
+      <result column="Start_time" jdbcType="DATE" property="startTime" />
+      <result column="endoplasmic_reticulum" jdbcType="DATE" property="endoplasmicReticulum" />
+    </association>
+    <association property="drugInformationSheet" javaType="com.hospital.purchase.domain.DrugInformationSheet">
+      <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+      <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
+      <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
+      <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
+      <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
+      <result column="specification" jdbcType="VARCHAR" property="specification" />
+      <result column="units" jdbcType="VARCHAR" property="units" />
+      <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
+      <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+      <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+      <result column="the_price" jdbcType="REAL" property="thePrice" />
+      <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
+      <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
+      <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
+      <result column="packaging" jdbcType="VARCHAR" property="packaging" />
+      <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
+      <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
+      <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
+      <result column="level_id" jdbcType="INTEGER" property="levelId" />
+      <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
+      <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
+      <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
+      <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
+      <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+      <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="isdel" jdbcType="INTEGER" property="isdel" />
+      <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     supplier_id, Supplier_name, "Registered address", business_license, Registration_time
@@ -14,4 +98,29 @@
   <select id="findSupplier" resultMap="BaseResultMap">
     SELECT * FROM supplier
   </select>
+
+  <select id="" resultMap="BaseResultMap">
+    SELECT
+    s.`supplier_id`,
+    s.`Supplier_name`,
+    p.`descrip_id`,
+    t.`order_quantity`,
+    t.`order_amount`,
+    t.`delivery_volume`,
+    t.`delivery_amount`,
+    t.`return_number`,
+    t.`return_amount`,
+    t.`settlement_number`,
+    t.`settlement_amount`
+    FROM
+    `purchase` p
+    LEFT JOIN `supplier` s
+    ON p.`supplier_id` = s.`supplier_id`
+    LEFT JOIN transaction_info t
+    ON p.pi_id = t.pi_id
+    <if test="supplierName != null " >
+      AND Supplier_name LIKE CONCAT('%',#{supplierName},'%')
+    </if>
+  </select>
+
 </mapper>

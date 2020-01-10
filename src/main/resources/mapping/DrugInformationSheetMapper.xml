@@ -509,4 +509,6 @@ SET drug_id = #{drugId},
 WHERE
 	(drug_id = #{id});
   </update>
+
+
 </mapper>

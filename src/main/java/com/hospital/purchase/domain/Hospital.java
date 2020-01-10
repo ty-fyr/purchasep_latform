@@ -15,6 +15,7 @@ public class Hospital {
 
     private Date registrationTime;
 
+
     public Integer getHospitalId() {
         return hospitalId;
     }
