@@ -60,14 +60,14 @@
             <td>交易药品信息</td>
         </tr>
 
-        <tr th:each="pur:${purchaseList}">
-            <td class="xuhao" th:text="${pur.piId}">1</td>
-            <td class="supplier" th:text="${pur.hospital?.hospitalName}">崔苗镇崔苗村卫生室</td>
-            <td class="cg-status" th:text="${pur.descripIdStr}">已入库</td>
-            <td class="dh-amount" th:text="${pur.transactionInfo.orderQuantity}">70</td>
-            <td class="dh-money" th:text="${pur.transactionInfo.orderAmount}">41.9</td>
-            <td class="sh-amount" th:text="${pur.repertory.receipt}">70</td>
-            <td class="sh-money" th:text="${pur.repertory.receiptMoney}"></td>
+        <tr >
+            <td class="xuhao">1</td>
+            <td class="supplier">崔苗镇崔苗村卫生室</td>
+            <td class="cg-status">已入库</td>
+            <td class="dh-amount">70</td>
+            <td class="dh-money">41.9</td>
+            <td class="sh-amount">70</td>
+            <td class="sh-money"></td>
             <td ></td>
             <td ></td>
             <td></td>

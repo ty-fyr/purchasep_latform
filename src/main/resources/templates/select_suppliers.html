@@ -75,7 +75,7 @@
             <tr>
                 <th colspan="15">
                     <input type="checkbox" onclick="checkall()"/>全选
-                    <button type="button" onclick="updateBatch()" class="btn btn-primary">确认选择供货</button>
+                    <button type="button" class="btn btn-primary">确认选择供货</button>
                 </th>
             </tr>
             <tr>
@@ -99,7 +99,7 @@
         <tbody>
             <tr th:each="drugInformationSheet:${drugInformationSheets}">
                 <td th:text="${drugInformationSheet.drugId}"></td>
-                <td><input type="checkbox" th:name="one" th:value="${drugInformationSheet.drugId}"/></td>
+                <td><input type="checkbox" th:name="one"/></td>
                 <td th:text="${drugInformationSheet.drugSerialNumber}"></td>
                 <td th:text="${drugInformationSheet.genericDrug}"></td>
                 <td th:text="${drugInformationSheet.dosageForm}"></td>
@@ -124,17 +124,6 @@
 </body>
 
 <script type="text/javascript">
-    function updateBatch() {
-        var arr=document.getElementsByName('one');
-        var ids=[];
-        for (var i= 0;i<arr.length;i++){
-            if(arr[i].checked){
-                ids.push(arr[i].value);
-            }
-        }
-        location.href="/updateBatch?ids="+ids.join();
-    }
-    
     function checkall(){
         var checks=document.getElementsByName("one");
         for(var i=0;i<checks.length;i++){

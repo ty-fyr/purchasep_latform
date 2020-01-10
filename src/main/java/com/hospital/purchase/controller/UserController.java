@@ -36,11 +36,8 @@ public class UserController {
 //            model.addAttribute("msg","账号密码出错");
 //            return "index";
 
+    }
 
 
-    }
-    @RequestMapping("/all")
-    public String all(){
-        return "purchase_order";
-    }
+
 }

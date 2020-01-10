@@ -12,10 +12,95 @@
   <sql id="Base_Column_List">
     supply_id, Review_results, supplier_id, drug_id, Drug_transaction_status, isdel
   </sql>
-  <update id="updateBatch" parameterType="Integer">
-    UPDATE supplier_management SET Drug_transaction_status=0 WHERE drug_id=#{drugId}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier_management
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier_management
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.purchase.domain.SupplierManagement">
+    insert into supplier_management (supply_id, Review_results, supplier_id, 
+      drug_id, Drug_transaction_status, isdel
+      )
+    values (#{supplyId,jdbcType=INTEGER}, #{reviewResults,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
+      #{drugId,jdbcType=INTEGER}, #{drugTransactionStatus,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.purchase.domain.SupplierManagement">
+    insert into supplier_management
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="reviewResults != null">
+        Review_results,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="drugTransactionStatus != null">
+        Drug_transaction_status,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewResults != null">
+        #{reviewResults,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="drugTransactionStatus != null">
+        #{drugTransactionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.purchase.domain.SupplierManagement">
+    update supplier_management
+    <set>
+      <if test="reviewResults != null">
+        Review_results = #{reviewResults,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="drugId != null">
+        drug_id = #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="drugTransactionStatus != null">
+        Drug_transaction_status = #{drugTransactionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where supply_id = #{supplyId,jdbcType=INTEGER}
   </update>
-  <update id="updaBatch" parameterType="Integer">
-    UPDATE supplier_management SET Drug_transaction_status=1 WHERE drug_id=#{drugId}
+  <update id="updateByPrimaryKey" parameterType="com.hospital.purchase.domain.SupplierManagement">
+    update supplier_management
+    set Review_results = #{reviewResults,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      drug_id = #{drugId,jdbcType=INTEGER},
+      Drug_transaction_status = #{drugTransactionStatus,jdbcType=INTEGER},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where supply_id = #{supplyId,jdbcType=INTEGER}
   </update>
 </mapper>

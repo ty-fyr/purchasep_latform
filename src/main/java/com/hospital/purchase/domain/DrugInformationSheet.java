@@ -91,34 +91,14 @@ public class DrugInformationSheet {
 
     private Supplier supplier;
 
-    private String approvalNumberDateStr;
+    private String descripIdStr;
 
-    private String drugInspectionReportStr;
-
-    private Purchase purchase;
-
-    public Purchase getPurchase() {
-        return purchase;
+    public String getDescripIdStr() {
+        return descripIdStr;
     }
 
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
-    }
-
-    public String getApprovalNumberDateStr() {
-        return approvalNumberDateStr;
-    }
-
-    public void setApprovalNumberDateStr(String approvalNumberDateStr) {
-        this.approvalNumberDateStr = approvalNumberDateStr;
-    }
-
-    public String getDrugInspectionReportStr() {
-        return drugInspectionReportStr;
-    }
-
-    public void setDrugInspectionReportStr(String drugInspectionReportStr) {
-        this.drugInspectionReportStr = drugInspectionReportStr;
+    public void setDescripIdStr(String descripIdStr) {
+        this.descripIdStr = descripIdStr;
     }
 
     public Supplier getSupplier() {

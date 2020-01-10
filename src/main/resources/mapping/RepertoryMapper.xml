@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.Repertory">
     <id column="repertory_id" jdbcType="INTEGER" property="repertoryId" />
     <result column="receipt" jdbcType="VARCHAR" property="receipt" />
-    <result column="receipt_money" jdbcType="DECIMAL" property="receiptMoney" />
+    <result column="receipt_money" jdbcType="INTEGER" property="receiptMoney" />
     <result column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="invoice_number" jdbcType="INTEGER" property="invoiceNumber" />
     <result column="Start_time" jdbcType="DATE" property="startTime" />

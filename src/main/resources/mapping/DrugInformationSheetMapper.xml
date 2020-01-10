@@ -389,8 +389,8 @@ WHERE dsi.proxy_id=0 AND dsi.isdel=0
       dsi.specification LIKE concat('%',#{specification},'%')
     </if>
     <if test="units!=null and units!=''" >
-    AND
-    dsi.units =#{units}
+      AND
+      dsi.units =#{units}
     </if>
     <if test="conversionFactor!=null and conversionFactor!=''" >
       AND
@@ -509,6 +509,4 @@ SET drug_id = #{drugId},
 WHERE
 	(drug_id = #{id});
   </update>
-
-
 </mapper>

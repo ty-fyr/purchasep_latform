@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>供货审核</title>
+    <style>
+        .button{
+            width: 50px;
+            height: 30px;
+            background-color: #1aa5fb;
+        }
+        .table{
+            width: 800px;
+            border-color: #eff7ff;
+        }
+        .select{
+            width: 174px;
+            height: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="../static/js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/plugins/sui/sui.min.js"></script>
+    <script type="text/javascript" src="../static/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+    <script src="../static/js/pages/jquery.slideunlock.js"></script>
+    <script src="../static/js/jquery1.11.3-jquery.min.js"></script>
+    <script src="../static/js/IM-index.js"></script>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}">
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<form action="" id="form2" method="get">
+  <table id="tab1" border="1" width="1500" align="center">
+        <tr style="background-color: #39a9ea;"> <th colspan="5"><img src="../static/img/jiantou.png">供货商药品审核</th></tr>
+        <tr>
+            <td>药品流水号:</td>
+            <td><input type="text" id="i1" placeholder="请输入药品流水号" name="drugSerialNumber"></td>
+            <td>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</td>
+            <td><input type="text" id="i2" placeholder="请输入通用名" name="genericDrug"></td>
+        </tr>
+        <tr>
+            <td>剂&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</td>
+            <td><input type="text" id="i3" placeholder="请输入剂型" name="dosageForm"></td>
+            <td>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格:</td>
+            <td><input type="text" id="i4" placeholder="请输入规格" name="specification"></td>
+        </tr>
+        <tr>
+            <td>单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位:</td>
+            <td><input type="text" id="i5" placeholder="请输入单位" name="units"></td>
+            <td>转换&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系数:</td>
+            <td><input type="text" id="i6" placeholder="请输入转换系数" name="conversionFactor"></td>
+        </tr>
+        <tr>
+            <td>生产&nbsp;&nbsp;&nbsp;&nbsp;企业:</td>
+            <td><input type="text" id="i7" placeholder="请输入生产企业" name="enterpriseName"></td>
+            <td>商&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</td>
+            <td><input type="text" id="i8" placeholder="请输入商品名" name="tradeName"></td>
+        </tr>
+        <tr>
+            <td>价格&nbsp;&nbsp;&nbsp;&nbsp;范围:</td>
+            <td><select name="latestRetailPrice" id="price" class="month">
+                <option value="">20~50</option>
+                <option value="">30~60</option>
+                <option value="">40~70</option>
+                <option value="">50~100</option>
+            </select></td>
+            <td>质量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;层次:</td>
+            <td><select th:name="levelType" id="ceng" class="level">
+                <option value="">请选择</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>药品&nbsp;&nbsp;&nbsp;&nbsp;类别:</td>
+            <td><select th:name="drugType" id="bie" class="ory">
+                <option value="">请选择</option>
+            </select></td>
+            <td>药品交易状态:</td>
+            <td><select th:name="descripId" >
+                <option value="0">正常</option> <option value="1">暂停交易</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>供&nbsp;&nbsp;&nbsp;&nbsp;应&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+            <td><select th:name="supplierName" id="shang" class="ory">
+                <option value="">请选择</option>
+            </select></td>
+            <td>审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态:</td>
+            <td><select th:name="Review_results" id="tai" class="ent">
+                <option value="">请选择</option>
+            </select></td>
+        </tr>
+</table>
+    <div style="text-align:center">
+        <input type="submit" id="sou" value="查询"/>
+    </div>
+<table id="tab2" border="1" width="1500" align="center">
+    <thead>
+     <tr style="background-color: #9acfea;"> <th colspan="5"><input type="submit" value="提交审核结果" /></th></tr>
+     <tr>
+         <td colspan="0">序号</td>
+         <td colspan="0"><input name="SampleId" type="checkbox" id="checkbox1">选择</td>
+         <td colspan="0">审核结果</td>
+         <td colspan="0">供货商</td>
+         <td colspan="0">药品流水号</td>
+         <td colspan="0">通用名</td>
+         <td colspan="0">剂型</td>
+         <td colspan="0">规格</td>
+         <td colspan="0">单位</td>
+         <td colspan="0">转换系数</td>
+         <td colspan="0">生产企业</td>
+         <td colspan="0">商品名称</td>
+         <td colspan="0">中标价</td>
+         <td colspan="0">质量层次</td>
+         <td colspan="0">药品类别</td>
+         <td colspan="0">药品交易状态</td>
+         <td colspan="0">详细</td>
+     </tr>
+    </thead>
+    <tbody>
+    <tr th:each="l:${list}">
+        <td  th:text="${l.drugId}"></td>
+        <td colspan="0"><input name="SampleId" type="checkbox" id="checkbox2"></td>
+        <td colspan="0"><select th:switch="${l.supplierManagement.drugTransactionStatus}">
+            <option th:case="0">审核通过</option>
+            <option th:case="1">审核不通过</option>
+            <option th:case="*">其他</option>
+        </select></td>
+        <td colspan="1" th:text="${l.supplier.supplierName}"></td>
+        <td colspan="0" th:text="${l.drugSerialNumber}"></td>
+        <td colspan="0" th:text="${l.genericDrug}"></td>
+        <td colspan="0" th:text="${l.dosageForm}"></td>
+        <td colspan="0" th:text="${l.specification}"></td>
+        <td colspan="0" th:text="${l.units1.units}"></td>
+        <td colspan="0" th:text="${l.conversionFactor}"></td>
+        <td colspan="0" th:text="${l.enterprise.enterpriseName}"></td>
+        <td colspan="0" th:text="${l.tradeName}"></td>
+        <td colspan="0" th:text="${l.thePrice}"></td>
+        <td colspan="0" th:text="${l.qualityLevel.levelType}"></td>
+        <td colspan="0" th:text="${l.drugCategory.drugType}"></td>
+        <td colspan="0" th:text="${l.descripIdStr}"></td>
+        <td colspan="0"><button type="button">查看</button></td>
+    </tr>
+    </tbody>
+ </table>
+</form>
+</body>
+</html>

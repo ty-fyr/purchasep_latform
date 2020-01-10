@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface DrugInformationSheetMapper {
-  /**
+    /**
      * 药品品目查询
      * @return
      */
@@ -29,7 +29,7 @@ public interface DrugInformationSheetMapper {
     int findadd(DrugInformationSheet children);
 
     /**
-     *添加药品信息
+     *添加药品品目
      * @return
      */
     int xxadd(DrugInformationSheet children);

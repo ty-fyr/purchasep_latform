@@ -13,16 +13,6 @@ public class SupplierManagement {
 
     private Integer isdel;
 
-    private Supplier supplier;
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
     public Integer getSupplyId() {
         return supplyId;
     }

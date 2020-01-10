@@ -14,10 +14,4 @@ public interface SupplierManagementMapper {
     int updateByPrimaryKeySelective(SupplierManagement record);
 
     int updateByPrimaryKey(SupplierManagement record);
-
-    //批量提供供货
-    void updateBatch(Integer drugId);
-
-    //批量取消供货
-    void updaBatch(Integer drugId);
 }

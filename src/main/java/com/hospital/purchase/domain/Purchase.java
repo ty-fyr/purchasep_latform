@@ -1,7 +1,7 @@
 package com.hospital.purchase.domain;
 
 import com.hospital.purchase.utils.DateUtils;
-
+import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -48,7 +48,6 @@ public class Purchase {
     private Integer tiId;
     //库存id
     private Integer repertoryId;
-
     //库存
     private Repertory repertory;
     //医院对象
@@ -65,6 +64,16 @@ public class Purchase {
 
     //医院名称
     private String hospital_name;
+
+    private String resultStr;
+
+    public String getResultStr() {
+        return resultStr;
+    }
+
+    public void setResultStr(String resultStr) {
+        this.resultStr = resultStr;
+    }
 
     private String startTimeStr;//开始采购时间字符串
     private String overTimeStr;//结束采购时间字符串

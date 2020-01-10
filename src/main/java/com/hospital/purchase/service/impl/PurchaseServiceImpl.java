@@ -1,10 +1,8 @@
 package com.hospital.purchase.service.impl;
 
 import com.hospital.purchase.domain.Purchase;
-import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SearchDTO;
 import com.hospital.purchase.mapper.PurchaseMapper;
-import com.hospital.purchase.mapper.SupplierMapper;
 import com.hospital.purchase.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +12,9 @@ import java.util.Map;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
-
     @Autowired
     private PurchaseMapper purchaseMapper;
 
-    @Autowired
-    private SupplierMapper supplierMapper;
     /**
      *  查询所有
      *
@@ -31,56 +26,58 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseList.forEach(Purchase::transfer);
         return purchaseList;
     }
-
-    /**
-     * 按采购单查询
-     * @param searchDto
-     * @return List<Purchase> 采购单集合
-     */
+    //
+//按采购单查询
     @Override
     public List<Purchase> selectBySearchBean(SearchDTO searchDto) {
-        List<Purchase> purchaseList = purchaseMapper.selectBySearchBean(searchDto);
-        purchaseList.forEach(Purchase::transfer);
-        return purchaseList;
+        return purchaseMapper.selectBySearchBean(searchDto);
     }
 
-    /**
-     * 查询全部供货商信息
-     * @return 供货商信息
+    /*
+     * 采购表查询
+     *
      */
-    @Override
-    public List<Purchase> selectAllSupplier() {
-        List<Purchase> purchaseList = purchaseMapper.selectAllSupplier();
-        purchaseList.forEach(Purchase::transfer);
-        return purchaseList;
-    }
-
-    @Override
-    public List<Supplier> findSupplier() {
-        return supplierMapper.findSupplier();
-    }
-
-    /**
-     * 按供货商搜索
-     * @param searchDTO
-     * @return 供货商
-     */
-    @Override
-    public List<Purchase> selectBySupplier(SearchDTO searchDTO) {
-        List<Purchase> purchaseList = purchaseMapper.selectBySupplier(searchDTO);
-        purchaseList.forEach(Purchase::transfer);
-        return purchaseList;
-    }
-
-    @Override
-    public List<Purchase> selectAllHospital() {
-        List<Purchase> purchaseList = purchaseMapper.selectAllHospital();
-        purchaseList.forEach(Purchase::transfer);
-        return purchaseList;
-    }
-
     @Override
     public List<Purchase> seleLike(Map<String, Object> map) {
-        return purchaseMapper.seleLike(map);
+        List<Purchase> list = purchaseMapper.seleLike(map);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getResult().equals(0)){
+                list.get(i).setResultStr("审核通过");
+            }else {
+                list.get(i).setResultStr("未通过");
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 采购表查询全部
+     *
+     */
+    @Override
+    public List<Purchase> findAll() {
+        List<Purchase> list2 = purchaseMapper.findAll();
+        for (int j = 0; j < list2.size(); j++) {
+//            if (list2.get(j).getResult().equals(0)){
+//                list2.get(j).setResultStr("审核通过");
+//            }else {
+//                list2.get(j).setResultStr("未通过");
+//            }
+        }
+        return list2;
+    }
+
+    @Override
+    public int update(Integer piId, Purchase purchase) {
+        return purchaseMapper.update(piId,purchase);
+    }
+
+
+    public PurchaseMapper getPurchaseMapper() {
+        return purchaseMapper;
+    }
+
+    public void setPurchaseMapper(PurchaseMapper purchaseMapper) {
+        this.purchaseMapper = purchaseMapper;
     }
 }
