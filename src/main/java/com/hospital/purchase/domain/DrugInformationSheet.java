@@ -65,16 +65,16 @@ public class DrugInformationSheet {
 
     private QualityLevel qualityLevel;
 
-    private QualityLevel  qunel;
+    private QualityLevel  qual;
 
     private DrugCategory drugry;
 
-    public QualityLevel getQunel() {
-        return qunel;
+    public QualityLevel getQual() {
+        return qual;
     }
 
-    public void setQunel(QualityLevel qunel) {
-        this.qunel = qunel;
+    public void setQual(QualityLevel qual) {
+        this.qual = qual;
     }
 
     public DrugCategory getDrugry() {

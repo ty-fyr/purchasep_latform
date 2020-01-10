@@ -91,7 +91,9 @@
       </form>
 
     </center>
-    <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;<button class="btn btn-link">导入</button> <button class="btn btn-link">导出</button>
+    <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;
+    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">导出</button>
+    <button class="btn btn-link"><a th:href="@{'exceldc'}">导出</a></button>
     <table class="table table-bordered" >
     <tr>
         <td>药品品目号</td>
@@ -106,7 +108,6 @@
         <td>修改</td>
         <td>删除</td>
     </tr><!--th:text="${find.descripId}"-->
-
        <tr th:each="find : ${findall}">
            <td th:text="${find.drugItemNo}"></td>
            <td th:text="${find.genericDrug}"></td>
@@ -128,5 +129,33 @@
        </tr>
     </table>
 </div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped"  width="800px">
+                    <tr>
+                            <form action="exceldr"  method="post" enctype="multipart/form-data" id="excelForm">
+                            <table>
+                                <tr>
+                                        <input type="file" id="file" name="file" accept=".xlsx"/>
+                                </tr>
+                            </table>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="上传">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

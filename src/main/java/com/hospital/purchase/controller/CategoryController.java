@@ -3,17 +3,26 @@ package com.hospital.purchase.controller;
 import com.alibaba.fastjson.JSON;
 import com.hospital.purchase.domain.*;
 import com.hospital.purchase.service.CategoryService;
+import com.hospital.purchase.utils.ExcelUtil;
+import com.hospital.purchase.utils.ExcelUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -232,10 +241,94 @@ public class CategoryController {
         return "redirect:names";
     }
 
+    /**
+     * 导出
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("exceldc")
     public String exceldc(HttpServletRequest request,HttpServletResponse response){
         String dc="";
-        return null;
+        List<DrugInformationSheet> dcfinayy = categoryService.dcfinayy();
+        String[] title = { "药品品目号", "通用名", "剂型", "规格", "单位", "转换系数", "药品类别", "交易状态"};
+
+        String fileName = "dcfinayy" + System.currentTimeMillis() + ".xlsx";
+        String sheetName = "药品品目";
+        List<Units> findun = categoryService.findun();
+        List<DrugCategory> fincat = categoryService.fincat();
+        String[][] content = new String[dcfinayy.size()][];
+        for (int i=0;i<dcfinayy.size();i++){
+            content[i] = new String[title.length];
+            DrugInformationSheet sheet = dcfinayy.get(i);
+            content[i][0] =sheet.getDrugItemNo()+"";
+            content[i][1] =sheet.getGenericDrug()+"";
+            content[i][2] =sheet.getDosageForm()+"";
+            content[i][3] =sheet.getSpecification()+"";
+            for (Units unit :findun){
+              if(sheet.getUnits().equals(unit.getUnitsId())){
+                  content[i][4] =unit.getUnits();
+              }
+            }
+            content[i][5] =sheet.getConversionFactor()+"";
+            for(DrugCategory drugry : fincat){
+                if(sheet.getDcId().equals(drugry.getDcId())){
+                    content[i][6] =drugry.getDrugType();
+                }
+            }
+            if(sheet.getDescripId()==0){
+                content[i][7] ="正常";
+            }else {
+                content[i][7] ="暂停交易";
+            }
+        }
+        HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook(sheetName, title, content,
+                null);
+        // 响应到客户端
+        try {
+            this.setResponseHeader(response, fileName);
+            OutputStream os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+            os.close();
+            dc = "SUCCESS";
+        } catch (Exception e) {
+            e.printStackTrace();
+            dc = "ERROR";
+        }
+        return "成功";
+    }
+    // 发送响应流方法
+    public void setResponseHeader(HttpServletResponse response, String fileName) {
+        try {
+            try {
+                fileName = new String(fileName.getBytes(), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment;filename="
+                    + fileName);
+            response.addHeader("Pargam", "no-cache");
+            response.addHeader("Cache-Control", "no-cache");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
+    @RequestMapping("exceldr")
+    public String exceldr(@RequestParam("file") MultipartFile file, HttpServletRequest request, Model model) throws IOException {
+        String path = request.getServletContext().getRealPath("/upload");
+        System.err.println(path);
+        // 导入文件名
+        String name = file.getOriginalFilename();
+        System.out.println(name);
+        // 路径+文件名称
+        path = path +"/"+name;
+        File file2 = new File(path);
+        System.out.println(path);
+        file.transferTo(new File(path));
+        System.err.println(name);
+            return "成功";
+    }
 }

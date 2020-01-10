@@ -48,7 +48,7 @@
       <result column="business_license" property="businessLicense"/>
       <result column="registration_time" property="registrationTime"/>
     </association>
-    <association property="qunel" javaType="com.hospital.purchase.domain.QualityLevel">
+    <association property="qual" javaType="com.hospital.purchase.domain.QualityLevel">
       <id column="qlevelId" property="levelId"/>
       <result column="level_type" property="levelType"/>
     </association>
@@ -59,7 +59,6 @@
       <result column="state" property="state"/>
     </association>
   </resultMap>
-
 
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
     <id column="dc_id" jdbcType="INTEGER" property="dcId" />
@@ -152,6 +151,12 @@
     <result column="units" jdbcType="VARCHAR" property="units" />
     <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
   </resultMap>
+  <resultMap id="druggor" type="com.hospital.purchase.domain.DrugCategory">
+    <id column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+
 
   <sql id="Base_Column_List">
     drug_id, drug_serial_number, drug_item_no, generic_drug, dosage_form, specification,
@@ -296,6 +301,46 @@
     description=#{description}
     WHERE drug_id=#{drugId}
   </update>
+  <select id="uptefind" resultMap="DrugInformationSheet">
+
+		SELECT
+		dsi.drug_id,
+		dsi.drug_item_no,
+		dsi.generic_drug,
+		dsi.dosage_form,
+		dsi.specification,
+		ui.units,
+		dsi.conversion_factor,
+		dc.drug_type,
+		dsi.descrip_id
+	FROM
+		drug_information_sheet dsi
+	LEFT JOIN units ui ON dsi.units = ui.units_id
+	LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+	WHERE dsi.proxy_id=0 AND dsi.drug_id=1;
+	  </select>
+  <select id="dcfinayy" resultMap="DrugInformationSheet">
+SELECT
+	dsi.drug_item_no,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	dsi.units,
+	dsi.conversion_factor,
+	dsi.dc_id,
+	dsi.descrip_id
+FROM
+	drug_information_sheet dsi
+WHERE
+	dsi.proxy_id = 0
+ AND dsi.isdel=0;
+  </select>
+  <select id="findun" resultMap="Uni">
+    SELECT * from units;
+  </select>
+  <select id="fincat" resultMap="druggor">
+    SELECT * from drug_category;
+  </select>
   <select id="findall" resultMap="DrugInformationSheet">
    SELECT
     dsi.drug_id,
@@ -343,8 +388,10 @@ WHERE dsi.proxy_id=0 AND dsi.isdel=0
       AND
       dsi.specification LIKE concat('%',#{specification},'%')
     </if>
+    <if test="units!=null and units!=''" >
     AND
     dsi.units =#{units}
+    </if>
     <if test="conversionFactor!=null and conversionFactor!=''" >
       AND
       dsi.conversion_factor LIKE concat('%',#{conversionFactor},'%')

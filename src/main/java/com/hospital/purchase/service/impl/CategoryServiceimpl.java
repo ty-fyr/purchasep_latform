@@ -81,5 +81,20 @@ class CategoryServiceimpl implements  CategoryService{
         return drugInformationSheetMapper.delfind(ids);
     }
 
+    @Override
+    public List<DrugInformationSheet> dcfinayy() {
+        return drugInformationSheetMapper.dcfinayy();
+    }
+
+    @Override
+    public List<Units> findun() {
+        return drugInformationSheetMapper.findun();
+    }
+
+    @Override
+    public List<DrugCategory> fincat() {
+        return drugInformationSheetMapper.fincat();
+    }
+
 
 }

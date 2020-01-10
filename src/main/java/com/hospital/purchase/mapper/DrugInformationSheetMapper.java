@@ -82,6 +82,14 @@ public interface DrugInformationSheetMapper {
      */
     int delfind(int ids);
 
+    /**
+     * 导出
+     * @return
+     */
+    List<DrugInformationSheet> dcfinayy();
+    List<Units> findun();
+    List<DrugCategory> fincat();
+
     //查询全部药品信息
     List<DrugInformationSheet> selecetDrugInformationSheet();
     //查询全部药品信息
@@ -95,6 +103,7 @@ public interface DrugInformationSheetMapper {
 
     //修改药品维护信息
     void updateInfo(SelectDto selectDto);
+
 }
 
 

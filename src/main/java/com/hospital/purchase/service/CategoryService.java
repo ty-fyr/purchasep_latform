@@ -86,6 +86,14 @@ public interface CategoryService {
      */
     int delfind(int ids);
 
+    /**
+     * 导出
+     * @return
+     */
+    List<DrugInformationSheet> dcfinayy();
+    List<Units> findun();
+    List<DrugCategory> fincat();
+
 
 }
 
