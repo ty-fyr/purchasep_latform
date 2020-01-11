@@ -19,6 +19,9 @@ public interface PurchaseService {
           *
           */
    List<Purchase> seleLike(Map<String,Object> map);
+
+
+
     /**
      * 采购表查询全部
      *

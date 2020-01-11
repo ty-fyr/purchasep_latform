@@ -6,10 +6,6 @@ import java.util.List;
 public class Supplier {
     private Integer supplierId;
 
-    private Integer druginId;
-
-
-
     private String supplierName;
 
     private String registeredAddress;
@@ -17,6 +13,16 @@ public class Supplier {
     private String businessLicense;
 
     private Date registrationTime;
+
+    private Integer druginId;
+
+    public Integer getDruginId() {
+        return druginId;
+    }
+
+    public void setDruginId(Integer druginId) {
+        this.druginId = druginId;
+    }
 
 
     //库存

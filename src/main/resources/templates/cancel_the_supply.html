@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--suppress ALL-->
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
     <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <meta charset="UTF-8">
-    <title>商品管理</title>
+    <title>取消供货</title>
 
 </head>
 <body>
@@ -61,8 +62,8 @@
             <td>
                 <select th:id="descripId">
                     <option th:value="-1">请选择</option>
-                    <option th:value="0">正常</option>
-                    <option th:value="1">暂停交易</option>
+                    <option th:value="0" th:if="${selectDto?.descripId=='0'?'selected':''}" >正常</option>
+                    <option th:value="1" th:if="${selectDto?.descripId=='1'?'selected':''}" >暂停交易</option>
                 </select>
             </td>
         </tr>
@@ -72,49 +73,49 @@
 <center>
     <table  border="1" cellspacing="0">
         <thead>
-            <tr>
-                <th colspan="15">
-                    <input type="checkbox" onclick="checkall()"/>全选
-                    <button type="button" onclick="updateBatch()" class="btn btn-primary">确认选择供货</button>
-                </th>
-            </tr>
-            <tr>
-                <th>序号</th>
-                <th>选择供货</th>
-                <th>药品流水号</th>
-                <th>通用名</th>
-                <th>剂型</th>
-                <th>规格</th>
-                <th>单位</th>
-                <th>转换系数</th>
-                <th>生产企业</th>
-                <th>商品名称</th>
-                <th>中标价</th>
-                <th>质量层次</th>
-                <th>药品类别</th>
-                <th>药品交易状态</th>
-                <th>详细</th>
-            </tr>
+        <tr>
+            <th colspan="15">
+                <input type="checkbox" onclick="checkall()"/>全选
+                <button type="button" onclick="updaBatch()" class="btn btn-primary">取消选择供货</button>
+            </th>
+        </tr>
+        <tr>
+            <th>序号</th>
+            <th>选择供货</th>
+            <th>药品流水号</th>
+            <th>通用名</th>
+            <th>剂型</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>转换系数</th>
+            <th>生产企业</th>
+            <th>商品名称</th>
+            <th>中标价</th>
+            <th>质量层次</th>
+            <th>药品类别</th>
+            <th>药品交易状态</th>
+            <th>详细</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="drugInformationSheet:${drugInformationSheets}">
-                <td th:text="${drugInformationSheet.drugId}"></td>
-                <td><input type="checkbox" th:name="one" th:value="${drugInformationSheet.drugId}"/></td>
-                <td th:text="${drugInformationSheet.drugSerialNumber}"></td>
-                <td th:text="${drugInformationSheet.genericDrug}"></td>
-                <td th:text="${drugInformationSheet.dosageForm}"></td>
-                <td th:text="${drugInformationSheet.specification}"></td>
-                <td th:text="${drugInformationSheet.units1.units}"></td>
-                <td th:text="${drugInformationSheet.conversionFactor}"></td>
-                <td th:text="${drugInformationSheet.enterprise.enterpriseName}"></td>
-                <td th:text="${drugInformationSheet.tradeName}"></td>
-                <td th:text="${drugInformationSheet.thePrice}"></td>
-                <td th:text="${drugInformationSheet.qualityLevel.levelType}"></td>
-                <td th:text="${drugInformationSheet.drugCategory.drugType}"></td>
-                <td th:if="${drugInformationSheet.descripId==0}" th:text="正常"></td>
-                <td th:if="${drugInformationSheet.descripId==1}" th:text="暂停交易"></td>
-                <td><a>查看</a></td>
-            </tr>
+        <tr th:each="drugInformationSheet:${drugInformationSheets}">
+            <td th:text="${drugInformationSheet.drugId}"></td>
+            <td><input type="checkbox" th:name="one" th:value="${drugInformationSheet.drugId}"/></td>
+            <td th:text="${drugInformationSheet.drugSerialNumber}"></td>
+            <td th:text="${drugInformationSheet.genericDrug}"></td>
+            <td th:text="${drugInformationSheet.dosageForm}"></td>
+            <td th:text="${drugInformationSheet.specification}"></td>
+            <td th:text="${drugInformationSheet.units1.units}"></td>
+            <td th:text="${drugInformationSheet.conversionFactor}"></td>
+            <td th:text="${drugInformationSheet.enterprise.enterpriseName}"></td>
+            <td th:text="${drugInformationSheet.tradeName}"></td>
+            <td th:text="${drugInformationSheet.thePrice}"></td>
+            <td th:text="${drugInformationSheet.qualityLevel.levelType}"></td>
+            <td th:text="${drugInformationSheet.drugCategory.drugType}"></td>
+            <td th:if="${drugInformationSheet.descripId==0}" th:text="正常"></td>
+            <td th:if="${drugInformationSheet.descripId==1}" th:text="暂停交易"></td>
+            <td><a>查看</a></td>
+        </tr>
         </tbody>
         <tr>
             <th colspan="15">分页</th>
@@ -124,7 +125,8 @@
 </body>
 
 <script type="text/javascript">
-    function updateBatch() {
+    //批量取消供货
+    function updaBatch() {
         var arr=document.getElementsByName('one');
         var ids=[];
         for (var i= 0;i<arr.length;i++){
@@ -132,16 +134,17 @@
                 ids.push(arr[i].value);
             }
         }
-        location.href="/updateBatch?ids="+ids.join();
+        location.href="/updaBatch?ids="+ids.join();
     }
-    
+
+    //全选
     function checkall(){
         var checks=document.getElementsByName("one");
         for(var i=0;i<checks.length;i++){
             checks[i].checked=true;
         }
     }
-    
+
     //动态查询
     function conditionQuery() {
         var drugSerialNumber = $("#drugSerialNumber").val();
@@ -158,7 +161,7 @@
         var dcId = $("#dcId").val();
         var descripId = $("#descripId").val();
 
-        window.location.href="/findSerchBean?drugSerialNumber="
+        window.location.href="/findSerchBean1?drugSerialNumber="
             +drugSerialNumber+"&genericDrug="+genericDrug+"&dosageForm="+
             dosageForm+"&specification="+specification+"&units="+units+
             "&conversionFactor="+conversionFactor+"&enterpriseId="+
@@ -177,9 +180,9 @@
             success:function (cc) {
                 for(var i=0;i<cc.length;i++){
                     if(a==cc[i].levelId){
-                        $("#leveId").append("<option selected th:value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                        $("#leveId").append("<option selected value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
                     }else {
-                        $("#leveId").append("<option th:value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                        $("#leveId").append("<option value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
                     }
                 }
             }
@@ -196,9 +199,9 @@
             success:function (cc) {
                 for(var i=0;i<cc.length;i++){
                     if(a==cc[i].dcId){
-                        $("#dcId").append("<option selected th:value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
+                        $("#dcId").append("<option selected value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
                     }else {
-                        $("#dcId").append("<option th:value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
+                        $("#dcId").append("<option value='"+cc[i].dcId+"'>"+cc[i].drugType+"</option>")
                     }
                 }
             }

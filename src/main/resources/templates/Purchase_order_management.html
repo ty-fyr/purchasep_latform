@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>采购单管理</title>
+</head>
+<body>
+
+<center>
+    <table border="1" cellspacing="0" style="table-layout:fixed" width="888px">
+        <tr>
+            <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="17" height="17">|采购单处理</th>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购单编号:</td>
+            <td><input th:id="PurchaseNumber" th:value="${selectDto?.PurchaseNumber}"/></td>
+            <td bgcolor="#b0c4de">采购单名称:</td>
+            <td><input th:id="PurchaseName" th:value="${selectDto?.PurchaseName}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购状态:</td>
+            <td>
+                <select th:id="descripId">
+                    <option th:value="-1">未确认送货</option>
+                    <option th:value="${selectDto?.descripId}" selected></option>
+                </select>
+            </td>
+            <td bgcolor="#b0c4de">采购医院:</td>
+            <td><input th:id="hospitalName" th:value="${selectDto?.hospitalName}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购时间:</td>
+            <td>
+                <input type="date" th:id="startTime" th:value="${selectDto?.startTime}" style="width:150px"/>至
+                <input type="date" th:id="overTime"  th:value="${selectDto?.overTime}" style="width:150px"/>
+            </td>
+            <td bgcolor="#b0c4de">药品流水号:</td>
+            <td><input th:id="drugSerialNumber" th:value="${selectDto?.drugSerialNumber}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">通用名:</td>
+            <td>
+                <input th:id="genericDrug" th:value="${selectDto?.genericDrug}"/>
+                <button >拼音首字母搜索</button>
+            </td>
+            <td bgcolor="#b0c4de">剂型:</td>
+            <td><input th:id="dosageForm" th:value="${selectDto?.dosageForm}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">规格:</td>
+            <td><input th:id="specification" th:value="${selectDto?.specification}"/></td>
+            <td bgcolor="#b0c4de">单位:</td>
+            <td><input th:id="units" th:value="${selectDto?.units}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">转换系数:</td>
+            <td><input th:id="conversionFactor" th:value="${selectDto?.conversionFactor}"/></td>
+            <td bgcolor="#b0c4de">生产企业: </td>
+            <td><input th:id="enterpriseName" th:value="${selectDto?.enterpriseName}"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">商品名:</td>
+            <td><input th:id="tradeName" th:value="${selectDto?.tradeName}"/></td>
+            <td bgcolor="#b0c4de">药品类别: </td>
+            <td>
+                <select th:id="dcId">
+                    <option th:value="-1">请选择</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button type="button" onclick="conditionQuery1()" class="btn btn-primary">查询</button>
+    <button type="button" onclick="derive1()" class="btn btn-primary">导出</button>
+    </table>
+    <table  border="1" cellspacing="0">
+        <thead>
+        <tr>
+            <th colspan="21">
+                <input type="checkbox" onclick="checkall()"/>全选
+                <input type="checkbox" onclick="invertall()"/>反选
+                <button type="button" onclick="updateBatch()" class="btn btn-primary">选择发货</button>
+                <button type="button" onclick="updateBatch()" class="btn btn-primary">导入发货清单</button>
+                <button type="button" onclick="updateBatch()" class="btn btn-primary">无法供货</button>
+            </th>
+        </tr>
+        <tr>
+            <th>序号</th>
+            <th>选择</th>
+            <th>采购单编号</th>
+            <th>采购单名称</th>
+            <th>采购医院</th>
+            <th>开始采购时间</th>
+            <th>结束采购时间</th>
+            <th>流水号</th>
+            <th>通用名</th>
+            <th>商品名</th>
+            <th>剂型</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>转换系数</th>
+            <th>生产企业</th>
+            <th>中标价</th>
+            <th>交易价</th>
+            <th>采购量</th>
+            <th>采购总金额</th>
+            <th>供货企业</th>
+            <th>采购状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="purchases:${purchases}">
+            <td th:text="${purchases.drugId}"></td>
+            <td ><input type="checkbox" th:name="one" th:value="${purchases.drugId}"/></td>
+            <td th:text="${purchases.PurchaseNumber}"></td>
+            <td th:text="${purchases.PurchaseName}"></td>
+            <td th:text="${purchases.hospital?.hospitalName}"></td>
+            <td th:text="${purchases.startTimeStr}"></td>
+            <td th:text="${purchases.overTimeStr}"></td>
+            <td th:text="${purchases.drugInformationSheet?.drugSerialNumber}"></td>
+            <td th:text="${purchases.drugInformationSheet?.genericDrug}"></td>
+            <td th:text="${purchases.drugInformationSheet?.tradeName}"></td>
+            <td th:text="${purchases.drugInformationSheet?.dosageForm}"></td>
+            <td th:text="${purchases.drugInformationSheet?.specification}"></td>
+            <td th:text="${purchases.drugInformationSheet?.units1?.units}"></td>
+            <td th:text="${purchases.drugInformationSheet?.conversionFactor}"></td>
+            <td th:text="${purchases.drugInformationSheet?.enterprise?.enterpriseName}"></td>
+            <td th:text="${purchases.drugInformationSheet?.thePrice}"></td>
+            <td th:text="${purchases.drugInformationSheet?.thePrice}"></td>
+            <td th:text="${purchases.transactionInfo?.orderQuantity}"></td>
+            <td th:text="${purchases.transactionInfo?.orderAmount}"></td>
+            <td th:text="${purchases.supplier?.SupplierName}"></td>
+            <td th:if="${purchases.descripId==0}" th:text="已入库"></td>
+            <td th:if="${purchases.descripId==1}" th:text="未入库"></td>
+        </tr>
+        </tbody>
+    </table>
+</center>
+
+</body>
+<script type="text/javascript">
+    //全选
+    function checkall(){
+        var checks=document.getElementsByName("one");
+        for(var i=0;i<checks.length;i++){
+            checks[i].checked=true;
+        }
+    }
+    //反选
+    function invertall(){
+        var checks1=document.getElementsByName("one");
+        for(var i=0;i<checks1.length;i++){
+            if(check[i].checked==true){
+                check[i].checked=false;
+            }else{
+                check[i].checked=true;
+            }
+        }
+
+    }
+
+    //导出
+    function derive1() {
+        window.location.href="/poiOut1"
+    }
+    //动态查询
+    function conditionQuery1() {
+        var PurchaseNumber = $("#PurchaseNumber").val();
+        var PurchaseName = $("#PurchaseName").val();
+        var descripId = $("#descripId").val();
+        var hospitalName = $("#hospitalName").val();
+        var startTime = $("#startTime").val();
+        var overTime = $("#overTime").val();
+        var drugSerialNumber = $("#drugSerialNumber").val();
+        var genericDrug = $("#genericDrug").val();
+        var dosageForm = $("#dosageForm").val();
+        var specification = $("#specification").val();
+        var units = $("#units").val();
+        var conversionFactor = $("#conversionFactor").val();
+        var enterpriseName = $("#enterpriseName").val();
+        var tradeName = $("#tradeName").val();
+        var dcId = $("#dcId").val();
+
+        window.location.href="/findSerchBean3?PurchaseNumber="
+            +PurchaseNumber+"&PurchaseName="+PurchaseName+"&descripId="+
+            descripId+"&hospitalName="+hospitalName+"&startTime="+startTime+
+            "&overTime="+overTime+"&drugSerialNumber="+
+            drugSerialNumber+"&genericDrug="+genericDrug+"&dosageForm="+dosageForm+
+            "&specification="+specification+"&units="+units+"&conversionFactor="+conversionFactor+
+            "&enterpriseName="+enterpriseName+"&tradeName="+tradeName+"&dcId="+dcId;
+    }
+</script>
+</html>

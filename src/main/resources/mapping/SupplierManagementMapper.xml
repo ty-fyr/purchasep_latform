@@ -13,7 +13,7 @@
     supply_id, Review_results, supplier_id, drug_id, Drug_transaction_status, isdel
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from supplier_management
     where supply_id = #{supplyId,jdbcType=INTEGER}
@@ -23,10 +23,10 @@
     where supply_id = #{supplyId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hospital.purchase.domain.SupplierManagement">
-    insert into supplier_management (supply_id, Review_results, supplier_id, 
+    insert into supplier_management (supply_id, Review_results, supplier_id,
       drug_id, Drug_transaction_status, isdel
       )
-    values (#{supplyId,jdbcType=INTEGER}, #{reviewResults,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
+    values (#{supplyId,jdbcType=INTEGER}, #{reviewResults,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER},
       #{drugId,jdbcType=INTEGER}, #{drugTransactionStatus,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}
       )
   </insert>
@@ -103,4 +103,11 @@
       isdel = #{isdel,jdbcType=INTEGER}
     where supply_id = #{supplyId,jdbcType=INTEGER}
   </update>
+  <update id="updateBatch" parameterType="Integer">
+    UPDATE supplier_management SET Drug_transaction_status=0 WHERE drug_id=#{drugId}
+  </update>
+  <update id="updaBatch" parameterType="Integer">
+    UPDATE supplier_management SET Drug_transaction_status=1 WHERE drug_id=#{drugId}
+  </update>
+
 </mapper>

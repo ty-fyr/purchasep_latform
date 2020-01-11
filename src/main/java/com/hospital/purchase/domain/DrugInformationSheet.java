@@ -65,31 +65,17 @@ public class DrugInformationSheet {
 
     private QualityLevel qualityLevel;
 
-    private QualityLevel  qual;
-
-    private DrugCategory drugry;
-
-    public QualityLevel getQual() {
-        return qual;
-    }
-
-    public void setQual(QualityLevel qual) {
-        this.qual = qual;
-    }
-
-    public DrugCategory getDrugry() {
-        return drugry;
-    }
-
-    public void setDrugry(DrugCategory drugry) {
-        this.drugry = drugry;
-    }
-
     private DrugCategory drugCategory;
 
     private SupplierManagement supplierManagement;
 
     private Supplier supplier;
+
+    private String approvalNumberDateStr;
+
+    private String drugInspectionReportStr;
+
+    private Purchase purchase;
 
     private String descripIdStr;
 
@@ -99,6 +85,30 @@ public class DrugInformationSheet {
 
     public void setDescripIdStr(String descripIdStr) {
         this.descripIdStr = descripIdStr;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
+
+    public String getApprovalNumberDateStr() {
+        return approvalNumberDateStr;
+    }
+
+    public void setApprovalNumberDateStr(String approvalNumberDateStr) {
+        this.approvalNumberDateStr = approvalNumberDateStr;
+    }
+
+    public String getDrugInspectionReportStr() {
+        return drugInspectionReportStr;
+    }
+
+    public void setDrugInspectionReportStr(String drugInspectionReportStr) {
+        this.drugInspectionReportStr = drugInspectionReportStr;
     }
 
     public Supplier getSupplier() {

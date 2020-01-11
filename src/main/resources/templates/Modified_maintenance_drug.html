@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>修改药品维护信息</title>
+</head>
+<body>
+    <center>
+    <form id="for">
+        <table border="1" cellspacing="0">
+            <tr hidden>
+                <td hidden>
+                    <input th:name="drugId" th:value="${drugInformationSheet.drugId}" hidden/>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">流水号:</td>
+                <td><input  th:value="${drugInformationSheet.drugSerialNumber}" readonly/></td>
+                <td bgcolor="#b0c4de"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">通用名:</td>
+                <td><input th:value="${drugInformationSheet.genericDrug}" readonly/></td>
+                <td bgcolor="#b0c4de">剂型:</td>
+                <td><input th:value="${drugInformationSheet.dosageForm}" readonly/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">规格:</td>
+                <td><input th:value="${drugInformationSheet.specification}" readonly/></td>
+                <td bgcolor="#b0c4de">单位:</td>
+                <td><input th:value="${drugInformationSheet.units}" readonly/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">转换系数:</td>
+                <td><input th:value="${drugInformationSheet.conversionFactor}" readonly/></td>
+                <td bgcolor="#b0c4de">生产企业名称:</td>
+                <td><input th:value="${drugInformationSheet.enterprise?.enterpriseName}" readonly/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">商品名:</td>
+                <td><input name="tradeName" th:value="${drugInformationSheet.tradeName}" /></td>
+                <td bgcolor="#b0c4de">中标价格:</td>
+                <td><input th:value="${drugInformationSheet.thePrice}" readonly/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">批准文号:</td>
+                <td><input name="approvalNumber" th:value="${drugInformationSheet.approvalNumber}"/></td>
+                <td bgcolor="#b0c4de">批准文号有效期:</td>
+                <td><input name="approvalNumberDateStr" th:value="${drugInformationSheet.approvalNumberDateStr}"/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">是否进口药:</td>
+                <td>
+                    <input th:type="radio"  th:name="whetherImport" th:text="是" th:checked="${drugInformationSheet.whetherImport==0}" th:value="0"/>
+                    <input th:type="radio"  th:name="whetherImport" th:text="否" th:checked="${drugInformationSheet.whetherImport==1}" th:value="1"/>
+                </td>
+                <td bgcolor="#b0c4de">包装材质:</td>
+                <td><input name="packaging" th:value="${drugInformationSheet.packaging}"/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">包装单位:</td>
+                <td><input name="packingUnit" th:value="${drugInformationSheet.packingUnit}"/></td>
+                <td bgcolor="#b0c4de">最新零售价:</td>
+                <td><input name="latestRetailPrice" th:value="${drugInformationSheet.latestRetailPrice}"/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">零售价出处:</td>
+                <td><input name="SourcePrice" th:value="${drugInformationSheet.SourcePrice}"/></td>
+                <td bgcolor="#b0c4de">质量层次:</td>
+                <td>
+                    <select th:id="leveId" th:name="leveId">
+                        <option th:value="${drugInformationSheet.levelId}" hidden
+                                >
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">质量层次说明:</td>
+                <td><input th:name="qualityHierarchy" th:value="${drugInformationSheet.qualityHierarchy}"/></td>
+                <td bgcolor="#b0c4de">有无药品检验报告:</td>
+                <td>
+                    <input th:type="radio" th:name="inspectionReport" th:text="有" th:value="0" th:checked="${drugInformationSheet.inspectionReport==0}"/>
+                    <input th:type="radio" th:name="inspectionReport" th:text="无" th:value="1" th:checked="${drugInformationSheet.inspectionReport==1}"/>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">药品检验报告编号:</td>
+                <td><input th:name="drugInspection"  id="drugInspection" th:value="${drugInformationSheet.drugInspection}"/></td>
+                <td bgcolor="#b0c4de">药品检验报告有效期:</td>
+                <td><input th:name="drugInspectionReportStr" th:value="${drugInformationSheet.drugInspectionReportStr}"/></td>
+            </tr>
+            <tr>
+                <td bgcolor="#b0c4de">产品说明:</td>
+                <td colspan="3">
+                    <textarea th:name="description"  th:text="${drugInformationSheet.description}">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
+        <button onclick="submitInfo()">提交</button>
+        <button onclick="closeInfo()">关闭</button>
+    </form>
+    </center>
+</body>
+
+<script type="text/javascript">
+    //修改维护信息
+    function submitInfo() {
+       /* var drugId = $("#drugId").val();
+        var drugSerialNumber = $("#drugSerialNumber").val();
+        var genericDrug = $("#genericDrug").val();
+        var dosageForm = $("#dosageForm").val();
+        var specification = $("#specification").val();
+        var units = $("#units").val();
+        var conversionFactor = $("#conversionFactor").val();
+        var enterpriseId = $("#enterpriseId").val();
+        var tradeName = $("#tradeName").val();
+        var thePrice = $("#thePrice").val();
+        var approvalNumber = $("#approvalNumber").val();
+        var approvalNumberDateStr = $("#approvalNumberDateStr").val();
+        var whetherImport = $("input[name='whetherImport']:checked").val();
+        var packaging = $("#packaging").val();
+        var packingUnit = $("#packingUnit").val();
+        var latestRetailPrice = $("#latestRetailPrice").val();
+        var SourcePrice = $("#SourcePrice").val();
+        var leveId = $("#leveId").val();
+        var qualityHierarchy = $("#qualityHierarchy").val();
+        var inspectionReport = $("input[name='inspectionReport']:checked").val();
+        var drugInspection = $("#drugInspection").val();
+        var drugInspectionReportStr = $("#drugInspectionReportStr").val();
+        var description = $("#description").val();*/
+
+       /* window.location.href="/purchasep_latform/info?drugId="+drugId+"&drugSerialNumber="
+            +drugSerialNumber+"&genericDrug="+genericDrug+"&dosageForm="+
+            dosageForm+"&specification="+specification+"&units="+units+
+            "&conversionFactor="+conversionFactor+"&enterpriseId="+
+            enterpriseId+"&tradeName="+tradeName+"&thePrice="+thePrice+
+            "&approvalNumber="+approvalNumber+"&approvalNumberDateStr="+approvalNumberDateStr
+            +"&whetherImport="+whetherImport+"&packaging="+packaging+"&packingUnit="+packingUnit
+            +"&latestRetailPrice="+latestRetailPrice+"&SourcePrice="+SourcePrice+"&leveId="
+            +leveId+"&qualityHierarchy="+qualityHierarchy+"&inspectionReport="+inspectionReport
+            +"&drugInspection="+drugInspection+"&drugInspectionReportStr="+
+            drugInspectionReportStr+"&description="+description;*/
+        $.ajax({
+            url:"info",
+            type:"POST",
+            data:$("#for").serialize(),
+            dataType:"json",
+            success:function (data) {
+                alert(1212)
+                location.href="commodityInformationMaintenance"
+            }
+        })
+    }
+    //页面加载质量层次
+    $(function () {
+        var a = $("#leveId").val();
+        $.ajax({
+            type:"POST",
+            url:"findQualityLevel",
+            dataType:"json",
+            success:function (cc) {
+                for(var i=0;i<cc.length;i++){
+                    if(a==cc[i].levelId){
+                        $("#leveId").append("<option selected value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                    }else {
+                        $("#leveId").append("<option value='"+cc[i].levelId+"'>"+cc[i].levelType+"</option>")
+                    }
+                }
+            }
+        })
+    })
+</script>
+</html>

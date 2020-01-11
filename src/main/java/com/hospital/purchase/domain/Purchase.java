@@ -105,13 +105,7 @@ public class Purchase {
         }
     }
 
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
 
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
-    }
 
     public DrugInformationSheet getDrugInformationSheet() {
         return drugInformationSheet;
@@ -120,6 +114,15 @@ public class Purchase {
     public void setDrugInformationSheet(DrugInformationSheet drugInformationSheet) {
         this.drugInformationSheet = drugInformationSheet;
     }
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+
     public Integer getRepertoryId() {
         return repertoryId;
     }

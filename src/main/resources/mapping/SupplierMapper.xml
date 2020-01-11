@@ -8,6 +8,7 @@
     <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress" />
     <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
     <result column="Registration_time" jdbcType="DATE" property="registrationTime" />
+    <result column="drugin_id" jdbcType="INTEGER" property="druginId" />
     <association property="transactionInfo" javaType="com.hospital.purchase.domain.TransactionInfo">
       <id column="ti_id" jdbcType="INTEGER" property="tiId"/>
       <result column="supply_status" jdbcType="INTEGER" property="supplyStatus"/>

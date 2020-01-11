@@ -1,8 +1,10 @@
 package com.hospital.purchase.mapper;
 
+import com.hospital.purchase.domain.DrugInformationSheet;
 import com.hospital.purchase.domain.Purchase;
 import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SearchDTO;
+import com.hospital.purchase.domain.dto.SelectDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -49,6 +51,12 @@ public interface PurchaseMapper {
     * 采购表查询
     * */
     List<Purchase> seleLike(Map<String,Object> map);
+
+    //查询采购单
+    List<Purchase> PurchaseOrderManagement();
+
+    //条件查询
+    List<Purchase> findSerchBean3(SelectDto selectDto);
 
     /**
      * 采购表查询全部
