@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>添加</title>
+    <title>修改</title>
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../static/plugins/adminLTE/css/skins/_all-skins.min.css">
@@ -80,8 +80,8 @@
 <table align="center" th:each="up : ${uptefind}">
     <tr>
         <td>
-            <input type="text" th:value="${up.drugId}" name="drugId">
-            ID</td>
+            <input type="hidden" th:value="${up.drugId}" name="drugId">
+            </td>
     </tr>
     <tr >
         <td >
@@ -120,9 +120,9 @@
     </tr>
     <tr>
         <td>
-            <select name="descripId" th:value="${up.descripId}" >
-                <option value="0">正常</option>
-                <option value="1">非正常</option>
+            <select name="descripId" th:id="${up.descripId}" >
+                <option th:value="0">正常</option>
+                <option th:value="1">非正常</option>
             </select>交易状态
         </td>
     </tr>

@@ -49,13 +49,13 @@
     <script type="text/javascript">
         function finadd() {
             $.ajax({
-                url: "findadd",
-                data: $("#findadd-form").serialize(),
+                url:"findadd",
+                data:$("#findadd-form").serialize(),
                 type:"post",
                 dataType:"json",
-                success : function(result) {
-                    if (result.equals(1)) {
-                        window.location.href = "/names";
+                success:function (result) {
+                    if (result == 1) {
+                        window.location.href = "names";
                     } else {
                         alert("添加失败，请重试")
                         window.location.href = "losing.html";

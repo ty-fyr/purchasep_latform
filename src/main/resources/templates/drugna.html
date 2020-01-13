@@ -104,7 +104,7 @@
 
         <td><button type="button" class="btn btn-default">查看</button></td>
         <td><button type="button" class="btn btn-success">修改</button></td>
-        <td><button type="button" class="btn btn-danger">删除</button></td>
+            <td><button type="button" class="btn btn-danger" ><a th:href="@{'delfind?ids='+${fin.drugId}}">删除</a></button></td>
         </tr>
     </table>
 </div>

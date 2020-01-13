@@ -105,5 +105,3 @@ public interface DrugInformationSheetMapper {
     void updateInfo(SelectDto selectDto);
 
 }
-
-

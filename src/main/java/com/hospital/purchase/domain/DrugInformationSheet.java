@@ -65,6 +65,46 @@ public class DrugInformationSheet {
 
     private QualityLevel qualityLevel;
 
+    private QualityLevel  qual;
+
+    private DrugCategory drugry;
+
+    private  String t1;
+
+    private  String t2;
+
+    public String getT1() {
+        return t1;
+    }
+
+    public void setT1(String t1) {
+        this.t1 = t1;
+    }
+
+    public String getT2() {
+        return t2;
+    }
+
+    public void setT2(String t2) {
+        this.t2 = t2;
+    }
+
+    public QualityLevel getQual() {
+        return qual;
+    }
+
+    public void setQual(QualityLevel qual) {
+        this.qual = qual;
+    }
+
+    public DrugCategory getDrugry() {
+        return drugry;
+    }
+
+    public void setDrugry(DrugCategory drugry) {
+        this.drugry = drugry;
+    }
+
     private DrugCategory drugCategory;
 
     private SupplierManagement supplierManagement;

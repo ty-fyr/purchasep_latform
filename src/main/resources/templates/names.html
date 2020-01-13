@@ -92,7 +92,7 @@
 
     </center>
     <button class="btn btn-link"><a th:href="@{'namesadd'}">添加</a></button>&nbsp;
-    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">导出</button>
+    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">导入</button>
     <button class="btn btn-link"><a th:href="@{'exceldc'}">导出</a></button>
     <table class="table table-bordered" >
     <tr>
@@ -116,7 +116,7 @@
            <td th:text="${find.units1.units}"></td>
            <td th:text="${find.conversionFactor}"></td>
           <td th:text="${find.drugCategory.drugType}"></td>
-           <td>
+          <td>
                <select th:switch="${find.descripId}">
                <option th:case="1">正常</option>
                <option th:case="0">非正常</option>
@@ -124,7 +124,7 @@
                </select>
            </td>
            <td><button type="button" class="btn btn-default">查看</button></td>
-           <td><button type="button" class="btn btn-success"><a th:href="@{'uptefind'}">修改</a></button></td>
+           <td><button type="button" class="btn btn-success"><a th:href="@{'uptefind?id='+${find.drugId}}">修改</a></button></td>
            <td><button type="button" class="btn btn-danger" ><a th:href="@{'delfind?ids='+${find.drugId}}">删除</a></button></td>
        </tr>
     </table>

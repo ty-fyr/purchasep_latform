@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,8 +47,14 @@ public class CategoryController {
         return "drugadd";
     }
 
+    /**
+     * 修改查询
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("uptefind")
-    public  String uptefind(Integer id,Model model){
+    public  String uptefind(Model model, Integer id){
         DrugInformationSheet uptefind = categoryService.uptefind(id);
         model.addAttribute("uptefind",uptefind);
         return "namesupdate";
@@ -185,15 +192,11 @@ public class CategoryController {
      */
     @RequestMapping(value = "xxadd", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public  String xxadd(DrugInformationSheet children){
-        String json=null;
-        try {
+    public  String xxadd(DrugInformationSheet children, String approvalNumberDate1, String drugInspectionReport1) throws Exception{
+            children.setT1(approvalNumberDate1);
+            children.setT2(drugInspectionReport1);
             int xxadd = categoryService.xxadd(children);
-             json = JSON.toJSONString(xxadd);
-            LOGGER.info("CategoryController-------xxadd----yes--"+json);
-        }catch (Exception e){
-            LOGGER.info("CategoryController-------xxadd----no---"+json);
-        }
+           String  json = JSON.toJSONString(xxadd);
        return json;
     }
 
@@ -206,9 +209,15 @@ public class CategoryController {
     @RequestMapping(value = "upayy", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String  upayy(DrugInformationSheet children){
-        int upayy = categoryService.upayy(children);
-        String  json = JSON.toJSONString(upayy);
-        return json ;
+        String json=null;
+        try {
+            int upayy = categoryService.upayy(children);
+            json  = JSON.toJSONString(upayy);
+            LOGGER.info("CategoryController-------upayy----yes--"+json);
+        }catch (Exception e){
+            LOGGER.info("CategoryController-------upayy----no---"+json);
+        }
+        return json;
     }
 
     /**
@@ -229,6 +238,7 @@ public class CategoryController {
         return "names";
     }
 
+    //删除
     @RequestMapping("delfind")
     public String delfind(int ids){
         int delfind=0;

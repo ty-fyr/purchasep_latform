@@ -30,6 +30,8 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="isdel" jdbcType="INTEGER" property="isdel" />
     <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+    <result column="t1" jdbcType="VARCHAR" property="t1" />
+    <result column="t2" jdbcType="VARCHAR" property="t2" />
 
     <association property="units1" javaType="com.hospital.purchase.domain.Units">
       <id column="units_id" jdbcType="INTEGER" property="unitsId" />
@@ -41,7 +43,25 @@
       <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
       <result column="state" jdbcType="VARCHAR" property="state" />
     </association>
+
+    <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
+      <id column="eenterpriseId" property="enterpriseId"/>
+      <result column="enterprise_name" property="enterpriseName"/>
+      <result column="business_license" property="businessLicense"/>
+      <result column="registration_time" property="registrationTime"/>
+    </association>
+    <association property="qual" javaType="com.hospital.purchase.domain.QualityLevel">
+      <id column="qlevelId" property="levelId"/>
+      <result column="level_type" property="levelType"/>
+    </association>
+
+    <association property="drugry" javaType="com.hospital.purchase.domain.DrugCategory">
+      <id column="drdcId" property="dcId"/>
+      <result column="drug_type" property="drugType"/>
+      <result column="state" property="state"/>
+    </association>
   </resultMap>
+
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
     <id column="dc_id" jdbcType="INTEGER" property="dcId" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
@@ -116,6 +136,30 @@
     </association>
   </resultMap>
 
+  <resultMap id="entise" type="com.hospital.purchase.domain.Enterprise">
+    <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+    <result column="registration_time" jdbcType="DATE" property="registrationTime" />
+  </resultMap>
+
+  <resultMap id="quael" type="com.hospital.purchase.domain.QualityLevel">
+    <id column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="level_type" jdbcType="VARCHAR" property="levelType" />
+  </resultMap>
+
+  <resultMap id="Uni" type="com.hospital.purchase.domain.Units">
+    <id column="units_id" jdbcType="INTEGER" property="unitsId" />
+    <result column="units" jdbcType="VARCHAR" property="units" />
+    <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
+  </resultMap>
+  <resultMap id="druggor" type="com.hospital.purchase.domain.DrugCategory">
+    <id column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+
+
   <sql id="Base_Column_List">
     drug_id, drug_serial_number, drug_item_no, generic_drug, dosage_form, specification,
     units, conversion_factor, enterprise_id, trade_name, the_price, approval_number,
@@ -125,41 +169,41 @@
   </sql>
   <select id="selecetDrugInformationSheet" resultMap="BaseResultMap">
     SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
-    e.enterprise_name,e.business_license,e.registration_time,
-    q.level_id as qlevelId,q.level_type,
-    dr.dc_id as drdcId,dr.drug_type,dr.state,
-    s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
-    ssupplierId,s.Drug_transaction_status,s.isdel,
-    su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
-    su.Registration_time,pu.result,pu.drug_id AS puDrugID
-    FROM drug_information_sheet d
-    LEFT JOIN units u ON d.units= u.units_id
-    LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
-    LEFT JOIN quality_level q ON d.level_id=q.level_id
-    LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
-    LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
-    LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
-    LEFT JOIN purchase pu ON pu.drug_id=d.drug_id
-    WHERE d.proxy_id=1 AND  s.Drug_transaction_status=1
+      e.enterprise_name,e.business_license,e.registration_time,
+      q.level_id as qlevelId,q.level_type,
+      dr.dc_id as drdcId,dr.drug_type,dr.state,
+      s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
+      ssupplierId,s.Drug_transaction_status,s.isdel,
+      su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
+      su.Registration_time,pu.result,pu.drug_id AS puDrugID
+      FROM drug_information_sheet d
+      LEFT JOIN units u ON d.units= u.units_id
+      LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
+      LEFT JOIN quality_level q ON d.level_id=q.level_id
+      LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
+      LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
+      LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
+      LEFT JOIN purchase pu ON pu.drug_id=d.drug_id
+      WHERE d.proxy_id=1 AND  s.Drug_transaction_status=1
   </select>
   <select id="selecetDrugInformationSheet1" resultMap="BaseResultMap">
     SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
-    e.enterprise_name,e.business_license,e.registration_time,
-    q.level_id as qlevelId,q.level_type,
-    dr.dc_id as drdcId,dr.drug_type,dr.state,
-    s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
-    ssupplierId,s.Drug_transaction_status,s.isdel,
-    su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
-    su.Registration_time,pu.result,pu.drug_id AS puDrugID
-    FROM drug_information_sheet d
-    LEFT JOIN units u ON d.units= u.units_id
-    LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
-    LEFT JOIN quality_level q ON d.level_id=q.level_id
-    LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
-    LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
-    LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
-    LEFT JOIN purchase pu ON pu.drug_id=d.drug_id
-    WHERE d.proxy_id=1 AND  s.Drug_transaction_status=0
+      e.enterprise_name,e.business_license,e.registration_time,
+      q.level_id as qlevelId,q.level_type,
+      dr.dc_id as drdcId,dr.drug_type,dr.state,
+      s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
+      ssupplierId,s.Drug_transaction_status,s.isdel,
+      su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
+      su.Registration_time,pu.result,pu.drug_id AS puDrugID
+      FROM drug_information_sheet d
+      LEFT JOIN units u ON d.units= u.units_id
+      LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
+      LEFT JOIN quality_level q ON d.level_id=q.level_id
+      LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
+      LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
+      LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
+      LEFT JOIN purchase pu ON pu.drug_id=d.drug_id
+      WHERE d.proxy_id=1 AND  s.Drug_transaction_status=0
   </select>
   <select id="findSerchBean" parameterType="com.hospital.purchase.domain.dto.SelectDto" resultMap="BaseResultMap">
     SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
@@ -224,22 +268,22 @@
     GROUP BY d.drug_id
   </select>
   <select id="selecetDrugInformationSheetById" parameterType="Integer" resultMap="BaseResultMap">
-    SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
-    e.enterprise_name,e.business_license,e.registration_time,
-    q.level_id as qlevelId,q.level_type,
-    dr.dc_id as drdcId,dr.drug_type,dr.state,
-    s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
-    ssupplierId,s.Drug_transaction_status,s.isdel,
-    su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
-    su.Registration_time
-    FROM drug_information_sheet d
-    LEFT JOIN units u ON d.units= u.units_id
-    LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
-    LEFT JOIN quality_level q ON d.level_id=q.level_id
-    LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
-    LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
-    LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
-    WHERE proxy_id=1 AND d.drug_id=#{drugId}
+      SELECT d.*,u.units_id,u.units AS uunits,u.units_fid,e.enterprise_id as eenterpriseId,
+      e.enterprise_name,e.business_license,e.registration_time,
+      q.level_id as qlevelId,q.level_type,
+      dr.dc_id as drdcId,dr.drug_type,dr.state,
+      s.drug_id as sdrugId,s.Review_results,s.supply_id AS ssuplyId,s.supplier_id AS
+      ssupplierId,s.Drug_transaction_status,s.isdel,
+      su.supplier_id AS suSupplier,su.Supplier_name,su.business_license,
+      su.Registration_time
+      FROM drug_information_sheet d
+      LEFT JOIN units u ON d.units= u.units_id
+      LEFT JOIN enterprise e ON d.enterprise_id =e.enterprise_id
+      LEFT JOIN quality_level q ON d.level_id=q.level_id
+      LEFT JOIN drug_category dr ON dr.dc_id=d.dc_id
+      LEFT JOIN supplier_management s ON d.drug_id=s.drug_id
+      LEFT JOIN supplier su ON s.supplier_id = su.supplier_id
+      WHERE proxy_id=1 AND d.drug_id=#{drugId}
   </select>
   <update id="updateInfo" parameterType="com.hospital.purchase.domain.dto.SelectDto">
     UPDATE drug_information_sheet SET
@@ -259,7 +303,63 @@
     description=#{description}
     WHERE drug_id=#{drugId}
   </update>
+  <select id="uptefind" resultMap="DrugInformationSheet">
+		SELECT
+		dsi.drug_id,
+		dsi.drug_item_no,
+		dsi.generic_drug,
+		dsi.dosage_form,
+		dsi.specification,
+		ui.units,
+		dsi.conversion_factor,
+		dc.drug_type,
+		dsi.descrip_id
+	FROM
+		drug_information_sheet dsi
+	LEFT JOIN units ui ON dsi.units = ui.units_id
+	LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+	WHERE dsi.proxy_id=0 AND dsi.drug_id=#{id};
+	  </select>
+  <select id="dcfinayy" resultMap="DrugInformationSheet">
+SELECT
+	dsi.drug_item_no,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	dsi.units,
+	dsi.conversion_factor,
+	dsi.dc_id,
+	dsi.descrip_id
+FROM
+	drug_information_sheet dsi
+WHERE
+	dsi.proxy_id = 0
+ AND dsi.isdel=0;
+  </select>
+  <select id="findun" resultMap="Uni">
+    SELECT * from units;
+  </select>
+  <select id="fincat" resultMap="druggor">
+    SELECT * from drug_category;
+  </select>
   <select id="findall" resultMap="DrugInformationSheet">
+   SELECT
+    dsi.drug_id,
+	dsi.drug_item_no,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	ui.units,
+	dsi.conversion_factor,
+	dc.drug_type,
+	dsi.descrip_id
+FROM
+	drug_information_sheet dsi
+LEFT JOIN units ui ON dsi.units = ui.units_id
+LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+WHERE dsi.proxy_id=0 AND dsi.isdel=0
+  </select>
+  <select id="mhfind" resultMap="DrugInformationSheet">
     SELECT
     dsi.drug_item_no,
     dsi.generic_drug,
@@ -272,11 +372,48 @@
     FROM
     drug_information_sheet dsi
     LEFT JOIN units ui ON dsi.units = ui.units_id
-    LEFT JOIN drug_category dc on dsi.dc_id=dc.dc_id;
+    LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+    WHERE   1=1
+    <if test="drugItemNo!=null and drugItemNo!=''" >
+      dsi.drug_item_no LIKE concat('%',#{drugItemNo},'%')
+    </if>
+    <if test="genericDrug!=null and genericDrug!=''" >
+      AND
+      dsi.generic_drug LIKE concat('%',#{genericDrug},'%')
+    </if>
+    <if test="dosageForm!=null and dosageForm!=''" >
+      AND
+      dsi.dosage_form LIKE concat('%',#{dosageForm},'%')
+    </if>
+    <if test="specification!=null and specification!=''" >
+      AND
+      dsi.specification LIKE concat('%',#{specification},'%')
+    </if>
+    AND
+    dsi.units =#{units}
+    <if test="conversionFactor!=null and conversionFactor!=''" >
+      AND
+      dsi.conversion_factor LIKE concat('%',#{conversionFactor},'%')
+    </if>
+    AND
+    dsi.proxy_id = 0;
   </select>
   <select id="seldrugc" resultMap="Category">
     SELECT * from drug_category;
   </select>
+  <select id="scqy" resultMap="entise">
+   SELECT * from enterprise
+  </select>
+  <select id="quali" resultMap="quael">
+    SELECT * from quality_level
+  </select>
+  <select id="unfind" resultMap="Uni">
+    SELECT * from units
+  </select>
+  <update id="delfind">
+    UPDATE drug_information_sheet SET isdel=1 WHERE drug_id = #{ids};
+  </update>
+
   <insert id="findadd">
     INSERT INTO `drug_purchase`.`drug_information_sheet` (
     `drug_id`,
@@ -330,8 +467,44 @@
     VALUES
     (
     null,#{drugSerialNumber},#{genericDrug},#{dosageForm},#{specification},#{units},#{conversionFactor},#{enterpriseId},#{tradeName},
-    #{thePrice},#{approvalNumber},#{thePrice},#{whetherImport},#{packaging},#{packingUnit},#{latestRetailPrice},#{sourcePrice},#{levelId},
-    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{drugInspectionReport},#{seldrugid},#{descripId},#{description},0,1
-    );
+    #{thePrice},#{approvalNumber},#{t1},#{whetherImport},#{packaging},#{packingUnit},#{latestRetailPrice},#{sourcePrice},#{levelId},
+    #{qualityHierarchy},#{inspectionReport},#{drugInspection},#{t2},#{dcId},#{descripId},#{description},0,1);
   </insert>
+  <select id="finxx" resultMap="DrugInformationSheet">
+    SELECT
+	dsi.drug_serial_number,
+	dsi.generic_drug,
+	dsi.dosage_form,
+	dsi.specification,
+	ui.units,
+	dsi.conversion_factor,
+	ep.enterprise_name,
+	dsi.trade_name,
+	dsi.the_price,
+	ql.level_type,
+	dc.drug_type,
+	dsi.descrip_id
+FROM
+	drug_information_sheet dsi
+LEFT JOIN units ui ON dsi.units = ui.units_id
+LEFT JOIN drug_category dc ON dsi.dc_id = dc.dc_id
+LEFT JOIN enterprise ep ON dsi.enterprise_id = ep.enterprise_id
+LEFT JOIN quality_level ql ON dsi.level_id = ql.level_id
+WHERE
+	dsi.proxy_id = 1;
+  </select>
+  <update id="upayy">
+    UPDATE drug_information_sheet
+    SET
+    drug_item_no = #{drugItemNo},
+    generic_drug = #{genericDrug},
+    dosage_form = #{dosageForm},
+    specification = #{specification},
+    units = #{units},
+    conversion_factor = #{conversionFactor},
+    dc_id = #{dcId},
+    descrip_id= #{descripId}
+    WHERE
+	drug_id = #{drugId};
+  </update>
 </mapper>
