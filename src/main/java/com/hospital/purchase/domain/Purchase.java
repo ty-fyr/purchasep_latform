@@ -65,6 +65,9 @@ public class Purchase {
     //医院名称
     private String hospital_name;
 
+    //单位
+    private Units units;
+
     private String resultStr;
 
     public String getResultStr() {
@@ -122,6 +125,15 @@ public class Purchase {
         this.enterprise = enterprise;
     }
 
+
+
+    public Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(Units units) {
+        this.units = units;
+    }
 
     public Integer getRepertoryId() {
         return repertoryId;

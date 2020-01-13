@@ -13,18 +13,7 @@ public class Supplier {
     private String businessLicense;
 
     private Date registrationTime;
-
     private Integer druginId;
-
-    public Integer getDruginId() {
-        return druginId;
-    }
-
-    public void setDruginId(Integer druginId) {
-        this.druginId = druginId;
-    }
-
-
     //库存
     private Repertory repertory;
     //医院对象
@@ -35,6 +24,13 @@ public class Supplier {
     private Purchase purchase;
     //药品信息对象
     private DrugInformationSheet drugInformationSheet;
+    public Integer getDruginId() {
+        return druginId;
+    }
+
+    public void setDruginId(Integer druginId) {
+        this.druginId = druginId;
+    }
 
     public Purchase getPurchase() {
         return purchase;
@@ -77,9 +73,6 @@ public class Supplier {
         this.drugInformationSheet = drugInformationSheet;
     }
 
-
-
-
     public Integer getSupplierId() {
         return supplierId;
     }
@@ -95,6 +88,7 @@ public class Supplier {
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName == null ? null : supplierName.trim();
     }
+
 
     public String getRegisteredAddress() {
         return registeredAddress;

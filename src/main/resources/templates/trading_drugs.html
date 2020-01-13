@@ -51,25 +51,25 @@
         </tr>
         <tr>
             <td bgcolor="#b0c4de">药品流水号:</td>
-            <td><input/></td>
+            <td><input id="ls-number"></td>
             <td bgcolor="#b0c4de">通用名:</td>
-            <td><input/></td>
+            <td><input id="ty-name"></td>
             <td bgcolor="#b0c4de">剂型:</td>
-            <td><input/></td>
+            <td><input id="jixing"></td>
         </tr>
         <tr>
             <td bgcolor="#b0c4de">规格:</td>
-            <td><input/></td>
+            <td><input id="guige"></td>
             <td bgcolor="#b0c4de">单位:</td>
-            <td><input/></td>
+            <td><input id="danwei"></td>
             <td bgcolor="#b0c4de">转换系数:</td>
             <td><input/></td>
         </tr>
         <tr>
             <td bgcolor="#b0c4de">生产企业:</td>
-            <td><input/></td>
+            <td><input id="sc-enterprise"></td>
             <td bgcolor="#b0c4de">商品名:</td>
-            <td><input/></td>
+            <td><input id="item-name"></td>
             <td bgcolor="#b0c4de">药品类别:</td>
             <td>
                 <select>
@@ -79,48 +79,48 @@
         </tr>
     </table>
     <div align="center">
-        <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+        <button class="btn btn-primary" onclick="searchDrug()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
     </div>
     <table class="table table-bordered">
         <tr>
-            <td>序号</td>
-            <td>流水号</td>
-            <td>通用名</td>
-            <td>商品名</td>
-            <td>剂型</td>
-            <td>规格</td>
-            <td>单位</td>
+            <td >序号</td>
+            <td >流水号</td>
+            <td >通用名</td>
+            <td >商品名</td>
+            <td >剂型</td>
+            <td >规格</td>
+            <td >单位</td>
             <td>转换系数</td>
-            <td>生产企业</td>
-            <td>采购量</td>
-            <td>采购金额</td>
-            <td>采购状态</td>
-            <td>入库量</td>
-            <td>入库金额</td>
+            <td >生产企业</td>
+            <td >采购量</td>
+            <td >采购金额</td>
+            <td >采购状态</td>
+            <td >入库量</td>
+            <td >入库金额</td>
             <td>退货量</td>
             <td>退货金额</td>
             <td>结算量</td>
             <td>结算金额</td>
         </tr>
-        <tr>
-            <td class="xuhao">1</td>
-            <td class="ls-hao">48190</td>
-            <td class="ty-name">0.9%氯化钠</td>
-            <td class="itme-name">0.9%氯化钠</td>
-            <td class="dosage-form">大输液</td>
-            <td class="Specifications">250ml</td>
-            <td class="Company">瓶</td>
-            <td class="zh-coefficient">1</td>
-            <td class="sc-enterprise">河南太龙药业股份有限公司</td>
-            <td class="cg-amount">20</td>
-            <td class="cg-money">17.2</td>
-            <td class="rk-status">已入库</td>
-            <td class="rk-amount">20</td>
-            <td class="rk-money">17.2</td>
-            <td class="th-amount">0</td>
-            <td class="th-money">0</td>
-            <td class="js-amount">20</td>
-            <td class="js-money">17.2</td>
+        <tr  th:each="pu:${purchaseList}">
+            <td class="xuhao"  th:text="${pu.piId}">1</td>
+            <td class="ls-hao"  th:text="${pu.drugInformationSheet?.drugSerialNumber}">48190</td>
+            <td class="ty-name" th:text="${pu.drugInformationSheet?.genericDrug}">0.9%氯化钠</td>
+            <td class="itme-name" th:text="${pu.drugInformationSheet?.tradeName}">0.9%氯化钠</td>
+            <td class="dosage-form" th:text="${pu.drugInformationSheet?.dosageForm}">大输液</td>
+            <td class="Specifications" th:text="${pu.drugInformationSheet?.specification}">250ml</td>
+            <td class="Company" th:text="${pu.drugInformationSheet?.units}">瓶</td>
+            <td class="zh-coefficient" th:text="${pu.drugInformationSheet?.conversionFactor}">1</td>
+            <td class="sc-enterprise" th:text="${pu.enterprise?.enterpriseName}">河南太龙药业股份有限公司</td>
+            <td class="cg-amount" th:text="${pu.transactionInfo?.orderQuantity}">20</td>
+            <td class="cg-money" th:text="${pu.transactionInfo?.orderAmount}">17.2</td>
+            <td class="rk-status" th:text="${pu.descripIdStr}">已入库</td>
+            <td class="rk-amount" th:text="${pu.repertory?.receipt}">20</td>
+            <td class="rk-money" th:text="${pu.repertory?.receiptMoney}">17.2</td>
+            <td class="th-amount"></td>
+            <td class="th-money"></td>
+            <td class="js-amount"></td>
+            <td class="js-money"></td>
         </tr>
         <td>合计:</td>
         <td></td>
@@ -142,5 +142,18 @@
         <td></td>
     </table>
 </div>
+<script>
+  function searchDrug() {
+      //alert(222)
+        var drugSerialNumber = $("#ls-number").val();
+        var genericDrug = $("#ty-name").val();
+        var specification = $("#guige").val();
+        var units = $("#danwei").val();
+        var tradeName =$("#item-name").val();
+        var enterpriseName =$("#sc-enterprise").val();
+
+        window.location.href="searchBuyDrug?drugSerialNumber="+drugSerialNumber+"&genericDrug="+genericDrug+"&specification="+specification+"&units="+units+"&tradeName="+tradeName+"&enterpriseName="+enterpriseName
+  }
+</script>
 </body>
 </html>

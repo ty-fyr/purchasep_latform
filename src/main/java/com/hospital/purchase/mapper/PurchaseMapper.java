@@ -1,6 +1,5 @@
 package com.hospital.purchase.mapper;
 
-import com.hospital.purchase.domain.DrugInformationSheet;
 import com.hospital.purchase.domain.Purchase;
 import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SearchDTO;
@@ -42,6 +41,8 @@ public interface PurchaseMapper {
 
     //查询全部采购医院信息
     List<Purchase> selectAllHospital();
+    //按采购医院搜索
+    List<Purchase> searchHospital(SearchDTO searchDTO);
     /*
      * 按采购单查询
      */
@@ -51,6 +52,32 @@ public interface PurchaseMapper {
     * 采购表查询
     * */
     List<Purchase> seleLike(Map<String,Object> map);
+
+    /**
+     *   按交易药品查询
+     * @return yao
+     */
+    List<Purchase> selectTradingDrugs();
+
+    /**
+     * 交易药品搜索
+     * @return
+     */
+    List<Purchase> searchBuyDrug(SearchDTO searchDTO);
+
+    /**
+     * 查询药品详情明细
+     * @return 药品采购明细
+     */
+    List<Purchase> queryDrugInfo();
+
+    /**
+     *采购药品信息搜索
+     * @param searchDTO
+     * @return yp info
+     */
+    List<Purchase> searchDrugInfo(SearchDTO searchDTO);
+
 
     //查询采购单
     List<Purchase> PurchaseOrderManagement();

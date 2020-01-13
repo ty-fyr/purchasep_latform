@@ -1,247 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.purchase.mapper.PurchaseMapper">
-  <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.Purchase">
-    <id column="pi_id" jdbcType="INTEGER" property="piId" />
-    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
-    <result column="result" jdbcType="INTEGER" property="result" />
-    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
-    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
-    <result column="Purchase_number" jdbcType="INTEGER" property="purchaseNumber" />
-    <result column="Purchase_name" jdbcType="VARCHAR" property="purchaseName" />
-    <result column="start_time" jdbcType="DATE" property="startTime" />
-    <result column="over_time" jdbcType="DATE" property="overTime" />
-    <result column="activate_time" jdbcType="DATE" property="activateTime" />
-    <result column="submit_time" jdbcType="DATE" property="submitTime" />
-    <result column="assessor_time" jdbcType="DATE" property="assessorTime" />
-    <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
-    <result column="isdel" jdbcType="INTEGER" property="isdel" />
-    <result column="auditor" jdbcType="VARCHAR" property="auditor" />
-    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
-    <result column="contactsph" jdbcType="VARCHAR" property="contactsph" />
-    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
-    <result column="ti_id" jdbcType="INTEGER" property="tiId" />
-      <association property="transactionInfo" javaType="com.hospital.purchase.domain.TransactionInfo">
-          <id column="ti_id" jdbcType="INTEGER" property="tiId"/>
-          <result column="supply_status" jdbcType="INTEGER" property="supplyStatus"/>
-          <result column="order_quantity" jdbcType="INTEGER" property="orderQuantity"/>
-          <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
-          <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume"/>
-          <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount"/>
-          <result column="return_number" jdbcType="INTEGER" property="returnNumber"/>
-          <result column="return_amount" jdbcType="DECIMAL" property="returnAmount"/>
-          <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber"/>
-          <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount"/>
-          <result column="pi_id" jdbcType="INTEGER" property="piId"/>
-          <result column="isdel" jdbcType="INTEGER" property="isdel"/>
-      </association>
-      <association property="hospital" javaType="com.hospital.purchase.domain.Hospital">
-          <id column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
-          <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
-          <result column="Hospital_number" jdbcType="VARCHAR" property="hospitalNumber"/>
-          <result column="Registered_address" jdbcType="VARCHAR" property="registeredAddress"/>
-          <result column="business_licence" jdbcType="VARCHAR" property="businessLicence"/>
-          <result column="registration_time" jdbcType="DATE" property="registrationTime"/>
-      </association>
-      <association property="supplier" javaType="com.hospital.purchase.domain.Supplier">
-          <id column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
-          <result column="Supplier_name" jdbcType="VARCHAR" property="supplierName"/>
-          <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress"/>
-          <result column="business_license" jdbcType="VARCHAR" property="businessLicense"/>
-          <result column="Registration_time" jdbcType="DATE" property="registrationTime"/>
-          <result column="drugin_id" jdbcType="INTEGER" property="druginId"/>
-      </association>
-      <association property="repertory" javaType="com.hospital.purchase.domain.Repertory">
-          <id column="repertory_id" jdbcType="INTEGER" property="repertoryId" />
-          <result column="receipt" jdbcType="VARCHAR" property="receipt" />
-          <result column="receipt_money" jdbcType="DECIMAL" property="receiptMoney" />
-          <result column="drug_id" jdbcType="INTEGER" property="drugId" />
-          <result column="invoice_number" jdbcType="INTEGER" property="invoiceNumber" />
-          <result column="Start_time" jdbcType="DATE" property="startTime" />
-          <result column="endoplasmic_reticulum" jdbcType="DATE" property="endoplasmicReticulum" />
-      </association>
-      <association property="drugInformationSheet" javaType="com.hospital.purchase.domain.DrugInformationSheet">
-          <id column="drug_id" jdbcType="INTEGER" property="drugId" />
-          <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
-          <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
-          <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
-          <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
-          <result column="specification" jdbcType="VARCHAR" property="specification" />
-          <result column="units" jdbcType="VARCHAR" property="units" />
-          <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
-          <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
-          <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
-          <result column="the_price" jdbcType="REAL" property="thePrice" />
-          <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
-          <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
-          <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
-          <result column="packaging" jdbcType="VARCHAR" property="packaging" />
-          <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
-          <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
-          <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
-          <result column="level_id" jdbcType="INTEGER" property="levelId" />
-          <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
-          <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
-          <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
-          <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
-          <result column="dc_id" jdbcType="INTEGER" property="dcId" />
-          <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
-          <result column="description" jdbcType="VARCHAR" property="description" />
-          <result column="isdel" jdbcType="INTEGER" property="isdel" />
-          <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
-      </association>
-      <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
-          <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
-          <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
-          <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
-          <result column="registration_time" jdbcType="DATE" property="registrationTime" />
-      </association>
+    <resultMap id="BaseResultMap" type="com.hospital.purchase.domain.Purchase">
+        <id column="pur_id" jdbcType="INTEGER" property="purId"/>
+        <result column="pi_id" jdbcType="VARCHAR" property="piId"/>
+        <result column="drug_id" jdbcType="INTEGER" property="drugId"/>
+        <result column="result" jdbcType="INTEGER" property="result"/>
+        <result column="opinion" jdbcType="VARCHAR" property="opinion"/>
+        <result column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
+        <result column="Purchase_number" jdbcType="INTEGER" property="purchaseNumber"/>
+        <result column="Purchase_name" jdbcType="VARCHAR" property="purchaseName"/>
+        <result column="start_time" jdbcType="DATE" property="startTime"/>
+        <result column="over_time" jdbcType="DATE" property="overTime"/>
+        <result column="activate_time" jdbcType="DATE" property="activateTime"/>
+        <result column="submit_time" jdbcType="DATE" property="submitTime"/>
+        <result column="assessor_time" jdbcType="DATE" property="assessorTime"/>
+        <result column="descrip_id" jdbcType="INTEGER" property="descripId"/>
+        <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+        <result column="auditor" jdbcType="VARCHAR" property="auditor"/>
+        <result column="contacts" jdbcType="VARCHAR" property="contacts"/>
+        <result column="contactsph" jdbcType="VARCHAR" property="contactsph"/>
+        <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+        <result column="ti_id" jdbcType="INTEGER" property="tiId"/>
+        <result column="repertory_id" jdbcType="INTEGER" property="repertoryId"/>
+        <association property="transactionInfo" javaType="com.hospital.purchase.domain.TransactionInfo">
+            <id column="ti_id" jdbcType="INTEGER" property="tiId"/>
+            <result column="supply_status" jdbcType="INTEGER" property="supplyStatus"/>
+            <result column="order_quantity" jdbcType="INTEGER" property="orderQuantity"/>
+            <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
+            <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume"/>
+            <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount"/>
+            <result column="return_number" jdbcType="INTEGER" property="returnNumber"/>
+            <result column="return_amount" jdbcType="DECIMAL" property="returnAmount"/>
+            <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber"/>
+            <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount"/>
+            <result column="pi_id" jdbcType="INTEGER" property="piId"/>
+            <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+        </association>
+        <association property="hospital" javaType="com.hospital.purchase.domain.Hospital">
+            <id column="hospital_id" jdbcType="INTEGER" property="hospitalId"/>
+            <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
+            <result column="Hospital_number" jdbcType="VARCHAR" property="hospitalNumber"/>
+            <result column="Registered_address" jdbcType="VARCHAR" property="registeredAddress"/>
+            <result column="business_licence" jdbcType="VARCHAR" property="businessLicence"/>
+            <result column="registration_time" jdbcType="DATE" property="registrationTime"/>
+        </association>
+        <association property="supplier" javaType="com.hospital.purchase.domain.Supplier">
+            <id column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+            <result column="Supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+            <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress"/>
+            <result column="business_license" jdbcType="VARCHAR" property="businessLicense"/>
+            <result column="Registration_time" jdbcType="DATE" property="registrationTime"/>
+            <result column="drugin_id" jdbcType="INTEGER" property="druginId" />
+        </association>
+        <association property="repertory" javaType="com.hospital.purchase.domain.Repertory">
+            <id column="repertory_id" jdbcType="INTEGER" property="repertoryId" />
+            <result column="receipt" jdbcType="VARCHAR" property="receipt" />
+            <result column="receipt_money" jdbcType="DECIMAL" property="receiptMoney" />
+            <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+            <result column="invoice_number" jdbcType="INTEGER" property="invoiceNumber" />
+            <result column="Start_time" jdbcType="DATE" property="startTime" />
+            <result column="endoplasmic_reticulum" jdbcType="DATE" property="endoplasmicReticulum" />
+        </association>
+        <association property="drugInformationSheet" javaType="com.hospital.purchase.domain.DrugInformationSheet">
+            <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+            <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
+            <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
+            <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
+            <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
+            <result column="specification" jdbcType="VARCHAR" property="specification" />
+            <result column="units" jdbcType="VARCHAR" property="units" />
+            <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
+            <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+            <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+            <result column="the_price" jdbcType="REAL" property="thePrice" />
+            <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
+            <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
+            <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
+            <result column="packaging" jdbcType="VARCHAR" property="packaging" />
+            <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
+            <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
+            <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
+            <result column="level_id" jdbcType="INTEGER" property="levelId" />
+            <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
+            <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
+            <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
+            <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
+            <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+            <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
+            <result column="description" jdbcType="VARCHAR" property="description" />
+            <result column="isdel" jdbcType="INTEGER" property="isdel" />
+            <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+        </association>
+        <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
+            <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+            <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+            <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+            <result column="registration_time" jdbcType="DATE" property="registrationTime" />
+        </association>
+        <association property="units" javaType="com.hospital.purchase.domain.Units">
+            <id column="units_id" jdbcType="INTEGER" property="unitsId" />
+            <result column="units" jdbcType="VARCHAR" property="units" />
+            <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
+        </association>
+    </resultMap>
 
-  </resultMap>
-
-    <!--张  按照采购单查询..-->
-    <select id="selectByPrimaryCGD" resultMap="BaseResultMap" >
-  SELECT
-  h.`hospital_name`,
-  p.Purchase_number,
-  p.Purchase_name,
-  p.descrip_id,
-  p.start_time,
-  p.over_time,
-  p.activate_time,
-  p.submit_time,
-  p.assessor_time,
-  t.order_quantity,
-  t.order_amount,
-  r.`receipt`,
-  r.`receipt_money`,
-  t.`return_number`,
-  t.`return_amount`,
-  t.settlement_number,
-  t.settlement_amount
-FROM
-  `purchase` p
-  LEFT JOIN hospital h
-    ON p.`hospital_id` = h.`hospital_id`
-  LEFT JOIN transaction_info t
-    ON p.pi_id = t.pi_id
-  LEFT JOIN `repertory` r
-    ON p.`repertory_id` = r.`repertory_id`
-  </select>
-    <!--张  按供货商查询-->
-    <select id="selectByPrimaryGHS" resultMap="BaseResultMap">
-  SELECT
-  s.`supplier_id`,
-  s.`Supplier_name`,
-  p.`descrip_id`,
-  t.`order_quantity`,
-  t.`order_amount`,
-  t.`delivery_volume`,
-  t.`delivery_amount`,
-  t.`return_number`,
-  t.`return_amount`,
-  t.`settlement_number`,
-  t.`settlement_amount`
-FROM
-`purchase` p
-  LEFT JOIN `supplier` s
-    ON p.`supplier_id` = s.`supplier_id`
-  LEFT JOIN transaction_info t
-    ON p.pi_id = t.pi_id
-  </select>
-    <!--张  按采购医院查询-->
-    <select id="selectByPrimaryYY" resultMap="BaseResultMap">
-    SELECT
-      h.`hospital_id`,
-      h.`hospital_name`,
-      p.`descrip_id`,
-      t.`order_quantity`,
-      t.`order_amount`,
-      r.`receipt`,
-      r.`receipt_money`,
-      t.`return_number`,
-      t.`return_amount`,
-      t.`settlement_number`,
-      t.`settlement_amount`
+    <!--按照采购单查询..-->
+    <select id="selectByPrimaryName" resultMap="BaseResultMap">
+SELECT
+	p.hospital_id,
+	p.Purchase_number,
+	p.Purchase_name,
+	p.descrip_id,
+	p.start_time,
+	p.over_time,
+	p.activate_time,
+	p.submit_time,
+	p.assessor_time,
+	t.order_quantity,
+	t.order_amount,
+	t.delivery_volume,
+	t.delivery_amount,
+	t.`return_number`,
+	t.settlement_number,
+	t.settlement_amount
     FROM
-      `purchase` p
-      LEFT JOIN `hospital` h
-        ON p.`hospital_id` = h.`hospital_id`
-      LEFT JOIN transaction_info t
-        ON p.pi_id = t.pi_id
-      LEFT JOIN `repertory` r
-        ON p.`repertory_id` = r.`repertory_id`
+	`purchase` p
+	LEFT JOIN transaction_info t ON p.pi_id = t.pi_id
   </select>
-    <!--张  按交易药品查询-->
-    <select id="selectByPrimaryJYYY" resultMap="BaseResultMap">
-      SELECT
-  d.drug_serial_number,
-  d.generic_drug,
-  d.trade_name,
-  d.dosage_form,
-  d.specification,
-  d.units,
-  d.conversion_factor,
-  d.level_id,
-  e.enterprise_name,
-  p.`descrip_id`,
-  t.`order_quantity`,
-  t.`order_amount`,
-  r.`receipt`,
-  r.`receipt_money`,
-  t.`return_number`,
-  t.`return_amount`,
-  t.`settlement_number`,
-  t.`settlement_amount`
-FROM
-  enterprise e
-  LEFT JOIN `drug_information_sheet` d
-    ON e.enterprise_id = d.enterprise_id
-  LEFT JOIN `purchase` p
-    ON d.drug_id = p.`drug_id`
-  LEFT JOIN transaction_info t
-    ON p.pi_id = t.pi_id
-  LEFT JOIN `repertory` r
-    ON p.`repertory_id` = r.`repertory_id`
-  </select>
-    <!--张  模糊查询-->
-    <select id="selectByPrimaryMHCX" resultMap="BaseResultMap">
+    <!--模糊查询-->
+    <select id="selectByMHCX" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
-        h.`hospital_name`,
-        p.Purchase_number,
-        p.Purchase_name,
-        p.descrip_id,
-        p.start_time,
-        p.over_time,
-        p.activate_time,
-        p.submit_time,
-        p.assessor_time,
-        t.order_quantity,
-        t.order_amount,
-        r.`receipt`,
-        r.`receipt_money`,
-        t.`return_number`,
-        t.`return_amount`,
-        t.settlement_number,
-        t.settlement_amount
+        *
         FROM
-        `purchase` p,
-        hospital h,
-        transaction_info t,
-        `repertory` r
-        WHERE p.`hospital_id` = h.`hospital_id`
-        AND p.`ti_id` = t.`ti_id`
-        AND p.`repertory_id` = r.`repertory_id`
-        <if test="purchaseNumber !=null " >
+        purchase p,
+        transaction_info t
+        <if test="purchaseNumber !=null ">
             AND Purchase_number LIKE concat('%',#{purchaseNumber},'%')
         </if>
-        <if test="purchaseName != null " >
+        <if test="purchaseName != null ">
             AND Purchase_name LIKE concat('%',#{purchaseName},'%')
         </if>
-        <if test="hospitalName != null " >
-            AND h.`hospital_name` LIKE concat('%',#{hospitalName},'%')
+        <if test="hospitalId != null ">
+            AND hospital_id LIKE concat('%',#{hospitalId},'%')
         </if>
     </select>
+
     <!--查询全部采购单信息-->
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
@@ -261,7 +165,7 @@ FROM
     LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
     LEFT JOIN transaction_info ti ON p.`pi_id`= ti.`pi_id`
     </select>
- <!--动态查询-->
+    <!--动态查询-->
     <select id="selectBySearchBean" resultMap="BaseResultMap">
         SELECT
         p.`pi_id`,
@@ -290,196 +194,43 @@ FROM
         </if>
 
     </select>
-    <select id="seleLike" resultMap="BaseResultMap">
-        select *,GROUP_CONCAT(hs.hospital_name) allToxin
-        from purchase pr,hospital hs
-        where pr.hospital_id = hs.hospital_id
-        GROUP BY pr.pi_id
-        <if test="purchaseNumber!=null and purchaseNumber!=''" >
-            and pr.Purchase_number like concat('%',#{purchaseNumber},'%')
-        </if>
-        <if test="purchaseName!=null and purchaseName!=''">
-            and pr.Purchase_name like concat('%',#{purchaseName},'%')
-        </if>
-        <if test="descripId!=null and descripId!=''">
-            and pr.descrip_id like concat('%',#{descripId},'%')
-        </if>
-        <if test="startTime!=null and startTime!=''">
-            and pr.start_time like concat('%',#{startTime},'%')
-        </if>
-        <if test="overTime!=null and overTime!=''">
-            and pr.over_time like concat('%',#{overTime},'%')
-        </if>
-        <if test="hospitalName!=null and hospitalName!=''">
-            and hs.hospital_id = #{hospitalName}
-        </if>
+    <!--查询供货商列表信息-->
+    <select id="selectAllSupplier" resultMap="BaseResultMap">
+    SELECT
+        p.pi_id,
+        s.Supplier_name,
+        p.descrip_id,
+        ti.order_quantity,
+        ti.order_amount,
+        ti.delivery_volume,
+        ti.delivery_amount,
+        ti.return_number,
+        ti.return_amount,
+        ti.settlement_number,
+        ti.settlement_amount
+    FROM purchase p
+    LEFT JOIN  transaction_info ti ON p.pi_id=ti.ti_id
+    LEFT JOIN supplier s ON p.supplier_id=s.Supplier_id
     </select>
-
-  <resultMap id="BaseResultMap1" type="com.hospital.purchase.domain.Purchase">
-    <id column="pi_id" jdbcType="INTEGER" property="piId" />
-    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
-    <result column="result" jdbcType="INTEGER" property="result" />
-    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
-    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
-    <result column="Purchase_number" jdbcType="INTEGER" property="purchaseNumber" />
-    <result column="Purchase_name" jdbcType="VARCHAR" property="purchaseName" />
-    <result column="start_time" jdbcType="DATE" property="startTime" />
-    <result column="over_time" jdbcType="DATE" property="overTime" />
-    <result column="activate_time" jdbcType="DATE" property="activateTime" />
-    <result column="submit_time" jdbcType="DATE" property="submitTime" />
-    <result column="assessor_time" jdbcType="DATE" property="assessorTime" />
-    <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
-    <result column="isdel" jdbcType="INTEGER" property="isdel" />
-    <result column="auditor" jdbcType="VARCHAR" property="auditor" />
-    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
-    <result column="contactsph" jdbcType="VARCHAR" property="contactsph" />
-    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
-    <result column="ti_id" jdbcType="INTEGER" property="tiId" />
-    <!--一对一医院-->
-    <association property="hospital" javaType="com.hospital.purchase.domain.Hospital">
-      <id column="hhospitalId" jdbcType="INTEGER" property="hospitalId"/>
-      <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
-    </association>
-    <association property="drugInformationSheet" javaType="com.hospital.purchase.domain.DrugInformationSheet">
-      <id column="drDrugId" jdbcType="INTEGER" property="drugId" />
-      <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
-      <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
-      <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
-      <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
-      <result column="specification" jdbcType="VARCHAR" property="specification" />
-      <result column="units" jdbcType="VARCHAR" property="units" />
-      <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
-      <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
-      <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
-      <result column="the_price" jdbcType="REAL" property="thePrice" />
-      <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
-      <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
-      <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
-      <result column="packaging" jdbcType="VARCHAR" property="packaging" />
-      <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
-      <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
-      <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
-      <result column="level_id" jdbcType="INTEGER" property="levelId" />
-      <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
-      <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
-      <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
-      <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
-      <result column="dc_id" jdbcType="INTEGER" property="dcId" />
-      <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
-      <result column="description" jdbcType="VARCHAR" property="description" />
-      <result column="isdel" jdbcType="INTEGER" property="isdel" />
-      <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
-      <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
-          <id column="eenterpriseId" property="enterpriseId"/>
-          <result column="enterprise_name" property="enterpriseName"/>
-          <result column="business_license" property="businessLicense"/>
-          <result column="registration_time" property="registrationTime"/>
-      </association>
-      <association property="units1" javaType="com.hospital.purchase.domain.Units">
-        <id column="unitsId" property="unitsId"/>
-        <result column="uunits" property="units"/>
-        <result column="unitsFid" property="unitsFid"/>
-      </association>
-    </association>
-    <association property="transactionInfo" javaType="com.hospital.purchase.domain.TransactionInfo">
-      <id column="ti_id" jdbcType="INTEGER" property="tiId" />
-      <result column="supply_status" jdbcType="INTEGER" property="supplyStatus" />
-      <result column="order_quantity" jdbcType="INTEGER" property="orderQuantity" />
-      <result column="order_amount" jdbcType="DECIMAL" property="orderAmount" />
-      <result column="delivery_volume" jdbcType="INTEGER" property="deliveryVolume" />
-      <result column="delivery_amount" jdbcType="DECIMAL" property="deliveryAmount" />
-      <result column="return_number" jdbcType="INTEGER" property="returnNumber" />
-      <result column="return_amount" jdbcType="INTEGER" property="returnAmount" />
-      <result column="settlement_number" jdbcType="INTEGER" property="settlementNumber" />
-      <result column="settlement_amount" jdbcType="DECIMAL" property="settlementAmount" />
-      <result column="pi_id" jdbcType="INTEGER" property="piId" />
-      <result column="isdel" jdbcType="INTEGER" property="isdel" />
-    </association>
-    <association property="supplier" javaType="com.hospital.purchase.domain.Supplier">
-      <id column="supplier_id" jdbcType="INTEGER" property="supplierId" />
-      <result column="Supplier_name" jdbcType="VARCHAR" property="supplierName" />
-      <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress" />
-      <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
-      <result column="Registration_time" jdbcType="DATE" property="registrationTime" />
-      <result column="drugin_id" jdbcType="INTEGER" property="druginId" />
-    </association>
-  </resultMap>
-  <!--查询全部采购单信息-->
-  <select id="PurchaseOrderManagement" resultMap="BaseResultMap1">
-    SELECT P.*,h.hospital_id AS hhospitalId,h.hospital_name,
-    dr.drug_id As drDrugId,dr.drug_serial_number,dr.generic_drug,dr.trade_name,
-    dr.dosage_form,dr.specification,dr.units,dr.conversion_factor,dr.the_price,
-    e.enterprise_id as eenterpriseId,e.enterprise_name,e.business_license,e.registration_time,
-    t.order_quantity,t.order_amount,s.Supplier_name,u.units_id,u.units AS uunits,u.units_fid
+    <select id="selectBySupplier" resultMap="BaseResultMap">
+            SELECT
+        p.pi_id,
+        s.Supplier_name,
+        p.descrip_id,
+        ti.order_quantity,
+        ti.order_amount,
+        ti.delivery_volume,
+        ti.delivery_amount,
+        ti.return_number,
+        ti.return_amount,
+        ti.settlement_number,
+        ti.settlement_amount
     FROM purchase p
-    LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
-    LEFT JOIN drug_information_sheet dr ON p.drug_id = dr.drug_id
-    LEFT JOIN enterprise e ON e.enterprise_id = dr.enterprise_id
-    LEFT JOIN transaction_info t ON t.pi_id=p.pi_id
-    LEFT JOIN supplier s ON s.drugin_id = dr.drug_id
-    LEFT JOIN units u ON dr.units= u.units_id
-  </select>
-  <!--动态查询-->
-  <select id="findSerchBean3" parameterType="com.hospital.purchase.domain.dto.SelectDto" resultMap="BaseResultMap1">
-    SELECT P.*,h.hospital_id AS hhospitalId,h.hospital_name,
-    dr.drug_id As drDrugId,dr.drug_serial_number,dr.generic_drug,dr.trade_name,
-    dr.dosage_form,dr.specification,dr.units,dr.conversion_factor,dr.the_price,
-    e.enterprise_id as eenterpriseId,e.enterprise_name,e.business_license,e.registration_time,
-    t.order_quantity,t.order_amount,s.Supplier_name,u.units_id,u.units AS uunits,u.units_fid
-    FROM purchase p
-    LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
-    LEFT JOIN drug_information_sheet dr ON p.drug_id = dr.drug_id
-    LEFT JOIN enterprise e ON e.enterprise_id = dr.enterprise_id
-    LEFT JOIN transaction_info t ON t.pi_id=p.pi_id
-    LEFT JOIN supplier s ON s.drugin_id = dr.drug_id
-    LEFT JOIN units u ON dr.units= u.units_id
-    WHERE 1=1
-    <if test="PurchaseNumber!=null and PurchaseNumber!=''">
-      AND p.Purchase_number=#{PurchaseNumber}
-    </if>
-    <if test="PurchaseName!=null and PurchaseName!=''">
-      AND p.Purchase_name=#{PurchaseName}
-    </if>
-    <if test="descripId!=null and descripId!=''">
-      AND p.descrip_id=#{descripId}
-    </if>
-    <if test="hospitalName!=null and hospitalName!=''">
-      AND h.hospital_name=#{hospitalName}
-    </if>
-    <if test="startTime!=null and startTime!=''">
-      AND p.start_time=#{startTime}
-    </if>
-    <if test="overTime!=null and overTime!=''">
-      AND p.over_time=#{overTime}
-    </if>
-    <if test="drugSerialNumber!=null and drugSerialNumber!=''">
-      AND dr.drug_serial_number=#{drugSerialNumber}
-    </if>
-    <if test="genericDrug!=null and genericDrug!=''">
-      AND dr.generic_drug=#{genericDrug}
-    </if>
-    <if test="dosageForm!=null and dosageForm!=''">
-      AND dr.dosage_form=#{dosageForm}
-    </if>
-    <if test="specification!=null and specification!=''">
-      AND dr.specification=#{specification}
-    </if>
-    <if test="units!=null and units!=''">
-      AND dr.units=#{units}
-    </if>
-    <if test="conversionFactor!=null and conversionFactor!=''">
-      AND dr.conversion_factor=#{conversionFactor}
-    </if>
-    <if test="enterpriseId!=null and enterpriseId!=''">
-      AND dr.enterprise_id=#{enterpriseId}
-    </if>
-    <if test="tradeName!=null and tradeName!=''">
-      AND dr.trade_name=#{tradeName}
-    </if>
-    <if test="dcId!=null and dcId!='' and dcId!='-1'">
-      AND dr.dc_id=#{dcId}
-    </if>
-  </select>
+    LEFT JOIN  transaction_info ti ON p.pi_id=ti.ti_id
+    LEFT JOIN supplier s ON p.supplier_id=s.Supplier_id
+    WHERE s.supplier_id = #{supplierId};
+    </select>
+    <!--按医院查询-->
     <select id="selectAllHospital" resultMap="BaseResultMap">
     SELECT
         p.pi_id,
@@ -497,15 +248,187 @@ FROM
     LEFT JOIN  transaction_info ti ON p.pi_id=ti.ti_id
     LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
     LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
-</select>
-  <select id="findAll" resultMap="BaseResultMap">
-    select *
-    from purchase pr,hospital hs
-    where pr.hospital_id = hs.hospital_id
-  </select>
 
-  <!--采购单审核 提交审核结果  审核意见-->
- <update id="update" parameterType="com.hospital.purchase.domain.Purchase">
-   update purchase set  result = 0,opinion = #{opinion} where pi_id = #{piId}
- </update>
+    </select>
+    <!--按采购医院名称搜索-->
+    <select id="searchHospital" resultMap="BaseResultMap">
+        SELECT
+        p.pi_id,
+        h.`hospital_name`,
+        p.descrip_id,
+        r.`receipt`,
+        r.`receipt_money`,
+        ti.order_quantity,
+        ti.order_amount,
+        ti.return_number,
+        ti.return_amount,
+        ti.settlement_number,
+        ti.settlement_amount
+        FROM purchase p
+        LEFT JOIN  transaction_info ti ON p.pi_id=ti.ti_id
+        LEFT JOIN hospital h ON p.`hospital_id`=h.`hospital_id`
+        LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
+        where 1=1
+        <if test="hospitalName !=null and hospitalName!=''">
+            and h.hospital_name like concat('%',#{hospitalName},'%')
+        </if>
+    </select>
+    <!--交易药品查询-->
+    <select id="selectTradingDrugs" resultMap="BaseResultMap">
+        SELECT
+            p.`pi_id`,
+            p.`descrip_id`,
+            dis.`drug_serial_number`,
+            dis.`generic_drug`,
+            dis.`trade_name`,
+            dis.`dosage_form`,
+            dis.`specification`,
+            u.`units`,
+            dis.`conversion_factor`,
+            e.`enterprise_name`,
+            ti.`order_quantity`,
+            ti.`order_amount`,
+            r.`receipt`,
+            r.`receipt_money`
+        FROM purchase p
+        LEFT JOIN drug_information_sheet dis ON p.drug_id= dis.`drug_id`
+        LEFT JOIN units u ON dis.`units` = u.`units_id`
+        LEFT JOIN enterprise e ON e.`enterprise_id`= dis.`enterprise_id`
+        LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
+        LEFT JOIN transaction_info ti ON ti.`pi_id`= p.`pi_id`
+    </select>
+    <!--交易药品搜索-->
+    <select id="searchBuyDrug" resultMap="BaseResultMap">
+        SELECT
+        p.`pi_id`,
+        p.`descrip_id`,
+        dis.`drug_serial_number`,
+        dis.`generic_drug`,
+        dis.`trade_name`,
+        dis.`dosage_form`,
+        dis.`specification`,
+        u.`units`,
+        dis.`conversion_factor`,
+        e.`enterprise_name`,
+        ti.`order_quantity`,
+        ti.`order_amount`,
+        r.`receipt`,
+        r.`receipt_money`
+        FROM purchase p
+        LEFT JOIN drug_information_sheet dis ON p.drug_id= dis.`drug_id`
+        LEFT JOIN units u ON dis.`units` = u.`units_id`
+        LEFT JOIN enterprise e ON e.`enterprise_id`= dis.`enterprise_id`
+        LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
+        LEFT JOIN transaction_info ti ON ti.`pi_id`= p.`pi_id`
+        where 1=1
+        <if test="drugSerialNumber !=null and drugSerialNumber!=''">
+            and dis.drug_serial_number like concat('%',#{drugSerialNumber},'%')
+        </if>
+        <if test="genericDrug !=null and genericDrug!=''">
+            and dis.generic_drug like concat('%',#{genericDrug},'%')
+        </if>
+        <if test="specification !=null and specification!=''">
+            and dis.specification like concat('%',#{specification},'%')
+        </if>
+        <if test="units !=null and units!=''">
+            and dis.units like concat('%',#{units},'%')
+        </if>
+        <if test="tradeName !=null and tradeName!=''">
+            and dis.trade_name like concat('%',#{tradeName},'%')
+        </if>
+        <if test="enterpriseName !=null and enterpriseName!=''">
+            and e.enterprise_name like concat('%',#{enterpriseName},'%')
+        </if>
+    </select>
+    <!--查询所有采购单的采购药品信息-->
+    <select id="queryDrugInfo" resultMap="BaseResultMap">
+        SELECT
+            p.`pi_id`,
+            h.`hospital_name`,
+            p.`Purchase_number`,
+            p.`Purchase_name`,
+            p.`start_time`,
+            p.`over_time`,
+            p.`descrip_id`,
+            dis.`generic_drug`,
+            dis.`trade_name`,
+            dis.`dosage_form`,
+            dis.`specification`,
+            u.`units`,
+            dis.`conversion_factor`,
+            e.`enterprise_name`,
+            dis.`the_price`,
+            ti.`order_quantity`,
+            ti.`order_amount`,
+            s.`Supplier_name`
+        FROM purchase p
+        LEFT JOIN drug_information_sheet dis ON p.`drug_id`= dis.`drug_id`
+        LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
+        LEFT JOIN hospital h ON p.`hospital_id`= h.`hospital_id`
+        LEFT JOIN transaction_info ti ON ti.`pi_id`= p.`pi_id`
+        LEFT JOIN units u ON dis.`units` = u.`units_id`
+        LEFT JOIN enterprise e ON e.`enterprise_id`= dis.`enterprise_id`
+        LEFT JOIN supplier s ON s.`drugin_id`= dis.`drug_id`
+    </select>
+    <!--采购药品信息搜索-->
+    <select id="searchDrugInfo" resultMap="BaseResultMap">
+        SELECT
+        p.`pi_id`,
+        h.`hospital_name`,
+        p.`Purchase_number`,
+        p.`Purchase_name`,
+        p.`start_time`,
+        p.`over_time`,
+        p.`descrip_id`,
+        dis.`generic_drug`,
+        dis.`trade_name`,
+        dis.`dosage_form`,
+        dis.`specification`,
+        u.`units`,
+        dis.`conversion_factor`,
+        e.`enterprise_name`,
+        dis.`the_price`,
+        ti.`order_quantity`,
+        ti.`order_amount`,
+        s.`Supplier_name`
+        FROM purchase p
+        LEFT JOIN drug_information_sheet dis ON p.`drug_id`= dis.`drug_id`
+        LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
+        LEFT JOIN hospital h ON p.`hospital_id`= h.`hospital_id`
+        LEFT JOIN transaction_info ti ON ti.`pi_id`= p.`pi_id`
+        LEFT JOIN units u ON dis.`units` = u.`units_id`
+        LEFT JOIN enterprise e ON e.`enterprise_id`= dis.`enterprise_id`
+        LEFT JOIN supplier s ON s.`drugin_id`= dis.`drug_id`
+        where 1=1
+        <if test="purchaseNumber != null">
+            and p.Purchase_number like concat('%',#{purchaseNumber},'%')
+        </if>
+        <if test="purchaseName != null and purchaseName!=''">
+            and p.Purchase_name like concat('%',#{purchaseName},'%')
+        </if>
+        <if test="hospitalName !=null and hospitalName!=''">
+            and h.hospital_name like concat('%',#{hospitalName},'%')
+        </if>
+        <if test="supplierId !=null">
+            and s.supplier_id = #{supplierId}
+        </if>
+        <if test="drugSerialNumber !=null and drugSerialNumber!=''">
+            and dis.drug_serial_number like concat('%',#{drugSerialNumber},'%')
+        </if>
+        <if test="genericDrug !=null">
+            and dis.generic_drug like concat('%',#{genericDrug},'%')
+        </if>
+        <if test="specification !=null">
+            and dis.specification like concat('%',#{specification},'%')
+        </if>
+        <if test="units !=null">
+            and dis.units like concat('%',#{units},'%')
+        </if>
+        <if test="tradeName !=null">
+            and dis.trade_name like concat('%',#{tradeName},'%')
+        </if>
+        <if test="enterpriseName !=null">
+            and e.enterprise_name like concat('%',#{enterpriseName},'%')
+        </if>
+    </select>
 </mapper>

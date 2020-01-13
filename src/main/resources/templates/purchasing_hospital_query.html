@@ -15,6 +15,7 @@
         }
     </style>
     <link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div class="biankuang">
@@ -25,7 +26,7 @@
         </tr>
         <tr>
             <td bgcolor="#b0c4de" color="red">采购医院名称:</td>
-            <td><input></td>
+            <td><input id="hospital"></td>
             <td bgcolor="#b0c4de">统计时间:</td>
             <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
         </tr>
@@ -41,7 +42,7 @@
 
     </table>
     <div align="center">
-    <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+        <button class="btn btn-primary" onclick="searchHospitalName()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
     </div>
 
     <table class="table table-bordered">
@@ -60,20 +61,20 @@
             <td>交易药品信息</td>
         </tr>
 
-        <tr >
-            <td class="xuhao">1</td>
-            <td class="supplier">崔苗镇崔苗村卫生室</td>
-            <td class="cg-status">已入库</td>
-            <td class="dh-amount">70</td>
-            <td class="dh-money">41.9</td>
-            <td class="sh-amount">70</td>
-            <td class="sh-money"></td>
+        <tr th:each="pur:${purchaseList}">
+            <td class="xuhao" th:text="${pur.piId}">1</td>
+            <td class="supplier" th:text="${pur.hospital?.hospitalName}">崔苗镇崔苗村卫生室</td>
+            <td class="cg-status" th:text="${pur.descripIdStr}">已入库</td>
+            <td class="dh-amount" th:text="${pur.transactionInfo.orderQuantity}">70</td>
+            <td class="dh-money" th:text="${pur.transactionInfo.orderAmount}">41.9</td>
+            <td class="sh-amount" th:text="${pur.repertory.receipt}">70</td>
+            <td class="sh-money" th:text="${pur.repertory.receiptMoney}"></td>
             <td ></td>
             <td ></td>
             <td></td>
             <td></td>
             <td>
-                <button type="button" class="btn btn-warning"><a href="#">查询</a></button>
+                <button type="button" class="btn btn-warning" >查询</button>
             </td>
         </tr>
 
@@ -91,5 +92,12 @@
         <td></td>
     </table>
 </div>
+<script>
+    function searchHospitalName() {
+        //alert(11);
+        var hospitalName = $("#hospital").val();
+        window.location.href="searchHospital?hospitalName="+ hospitalName;
+    }
+</script>
 </body>
 </html>

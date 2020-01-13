@@ -27,7 +27,7 @@
         <tr>
             <td bgcolor="#b0c4de" color="red">供货商:</td>
             <td>
-                <select>
+                <select id="supplier" name="supplierName">
                     <option value="-1">全部</option>
                 </select>
             </td>
@@ -39,6 +39,8 @@
             <td>
                 <select>
                     <option value="-1">全部</option>
+                    <option value="-1">已入库</option>
+                    <option value="-1">未入库</option>
                 </select>
             </td>
 
@@ -46,18 +48,18 @@
 
     </table>
     <div align="center">
-    <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+    <button class="btn btn-primary" onclick="searchSupplier()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
     </div>
 
     <table class="table table-bordered">
-        <tr>
+        <tr >
             <td>序号</td>
-            <td>供应商</td>
+            <td >供应商</td>
             <td>采购状态</td>
-            <td>订货量</td>
-            <td>订货金额</td>
-            <td>送货量</td>
-            <td>送货金额</td>
+            <td >订货量</td>
+            <td >订货金额</td>
+            <td >送货量</td>
+            <td >送货金额</td>
             <td>退货量</td>
             <td>退货金额</td>
             <td>结算量</td>
@@ -65,14 +67,14 @@
             <td>交易药品信息</td>
         </tr>
 
-        <tr >
-            <td class="xuhao">1</td>
-            <td class="supplier">河南九州通医药有限公司</td>
-            <td class="cg-status">已入库</td>
-            <td class="dh-amount">70</td>
-            <td class="dh-money">41.9</td>
-            <td class="sh-amount">70</td>
-            <td class="sh-money"></td>
+        <tr th:each="pur:${purchaseList}">
+            <td class="xuhao"  th:text="${pur.piId}">1</td>
+            <td class="supplier" th:text="${pur.supplier?.supplierName}">河南九州通医药有限公司</td>
+            <td class="cg-status"  th:text="${pur.descripIdStr}">已入库</td>
+            <td class="dh-amount" th:text="${pur.transactionInfo.orderQuantity}">70</td>
+            <td class="dh-money" th:text="${pur.transactionInfo.orderAmount}">41.9</td>
+            <td class="sh-amount" th:text="${pur.transactionInfo.deliveryVolume}">70</td>
+            <td class="sh-money" th:text="${pur.transactionInfo.deliveryAmount}">70</td>
             <td ></td>
             <td ></td>
             <td></td>
@@ -95,6 +97,37 @@
         <td></td>
         <td></td>
     </table>
+    
+    <script>
+        //加载供货商
+        $(function () {
+           // alert(111)
+            var supp = $("#supplier").val();
+            $.ajax({
+                url:"querySupplier",
+                dataType:"json",
+                type:"post",
+                success:function (result) {
+                    $('#supplier').empty();
+                    var v = '<option value="-1">请选择</option>';
+                    for (var i=0;i<result.length;i++){
+                        if (result[i].supplierId == supp) {
+                            v +=' <option selected="selected"  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                        } else {
+                            v +=' <option  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                        }
+                    }
+                    $("#supplier").append(v);
+                }
+            })
+        });
+
+        function searchSupplier() {
+            alert(11);
+            var supplierId = $("#supplier").val();
+            window.location.href="searchSupplier?supplierId="+supplierId;
+        }
+    </script>
 </div>
 </body>
 </html>

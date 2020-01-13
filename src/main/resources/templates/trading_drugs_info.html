@@ -28,9 +28,9 @@
         </div>
         <tr>
             <td bgcolor="#b0c4de" color="red">采购单编号:</td>
-            <td><input/></td>
+            <td><input id="cgNumber"></td>
             <td bgcolor="#b0c4de">采购单名称:</td>
-            <td><input/></td>
+            <td><input id="cgName"></td>
             <td bgcolor="#b0c4de">采购状态:</td>
             <td>
                 <select>
@@ -40,10 +40,10 @@
         </tr>
         <tr>
             <td bgcolor="#b0c4de">采购医院:</td>
-            <td><input/></td>
+            <td><input id="hospitalName"></td>
             <td bgcolor="#b0c4de">供货商:</td>
             <td>
-                <select>
+                <select id="supplier">
                     <option value="-1">全部</option>
                 </select>
             </td>
@@ -52,23 +52,23 @@
         </tr>
         <tr>
             <td bgcolor="#b0c4de">药品流水号:</td>
-            <td><input/></td>
+            <td><input id="ls-number"></td>
             <td bgcolor="#b0c4de">通用名:</td>
-            <td><input/></td>
+            <td><input id="ty-name"></td>
             <td bgcolor="#b0c4de">剂型:</td>
             <td><input/></td>
         </tr>
         <tr>
             <td bgcolor="#b0c4de">规格:</td>
-            <td><input/></td>
+            <td><input id="guige"></td>
             <td bgcolor="#b0c4de">单位:</td>
-            <td><input/></td>
+            <td><input id="danwei"></td>
             <td bgcolor="#b0c4de">转换系数:</td>
             <td><input/></td>
         </tr>
         <tr>
             <td bgcolor="#b0c4de">生产企业:</td>
-            <td><input/></td>
+            <td><input id="sc-name"></td>
             <td bgcolor="#b0c4de">商品名:</td>
             <td><input/></td>
             <td bgcolor="#b0c4de">药品类别:</td>
@@ -80,12 +80,17 @@
         </tr>
     </table>
     <div align="center">
-        <button class="btn btn-primary">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+        <button class="btn btn-primary" onclick="searchDrugInfo()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
     </div>
     <table class="table table-bordered">
         <tr>
             <td>序号</td>
-            <td>流水号</td>
+            <td>采购医院</td>
+            <td>采购单编号</td>
+            <td>采购单名称</td>
+            <td>开始采购时间</td>
+            <td>结束采购时间</td>
+            <td>采购状态</td>
             <td>通用名</td>
             <td>商品名</td>
             <td>剂型</td>
@@ -93,35 +98,32 @@
             <td>单位</td>
             <td>转换系数</td>
             <td>生产企业</td>
+            <td>中标价</td>
+            <td>交易价</td>
             <td>采购量</td>
-            <td>采购金额</td>
-            <td>采购状态</td>
-            <td>入库量</td>
-            <td>入库金额</td>
-            <td>退货量</td>
-            <td>退货金额</td>
-            <td>结算量</td>
-            <td>结算金额</td>
+            <td>采购总金额</td>
+            <td>供货企业</td>
         </tr>
-        <tr>
-            <td class="xuhao">1</td>
-            <td class="ls-hao">48190</td>
-            <td class="ty-name">0.9%氯化钠</td>
-            <td class="itme-name">0.9%氯化钠</td>
-            <td class="dosage-form">大输液</td>
-            <td class="Specifications">250ml</td>
-            <td class="Company">瓶</td>
-            <td class="zh-coefficient">1</td>
-            <td class="sc-enterprise">河南太龙药业股份有限公司</td>
-            <td class="cg-amount">20</td>
-            <td class="cg-money">17.2</td>
-            <td class="rk-status">已入库</td>
-            <td class="rk-amount">20</td>
-            <td class="rk-money">17.2</td>
-            <td class="th-amount">0</td>
-            <td class="th-money">0</td>
-            <td class="js-amount">20</td>
-            <td class="js-money">17.2</td>
+        <tr th:each="pu:${purchaseList}">
+            <td class="xuhao" th:text="${pu.piId}">1</td>
+            <td class="cg-hospital" th:text="${pu.hospital?.hospitalName}"></td>
+            <td class="cgd-number" th:text="${pu.purchaseNumber}"></td>
+            <td class="cgd-name" th:text="${pu.purchaseName}"></td>
+            <td class="kscg-time" th:text="${pu.startTimeStr}"></td>
+            <td class="jscg-tim"  th:text="${pu.overTimeStr}"></td>
+            <td class="cg-status" th:text="${pu.descripIdStr}"></td>
+            <td class="t-name" th:text="${pu.drugInformationSheet?.genericDrug}"></td>
+            <td class="goods-name" th:text="${pu.drugInformationSheet.tradeName}"></td>
+            <td class="jx" th:text="${pu.drugInformationSheet?.dosageForm}"></td>
+            <td class="gg" th:text="${pu.drugInformationSheet?.specification}"></td>
+            <td class="dw" th:text="${pu.drugInformationSheet?.units}"></td>
+            <td class="zh-shu" th:text="${pu.drugInformationSheet?.conversionFactor}"></td>
+            <td class="sc-qiye" th:text="${pu.enterprise?.enterpriseName}"></td>
+            <td class="zb-jia" th:text="${pu.drugInformationSheet?.thePrice}"></td><!--th:each="${pu.drugInformationSheet?.thePrice}"-->
+            <td class="jiaoyi-jia" th:text="${pu.drugInformationSheet?.thePrice}"></td><!--th:each="${pu.drugInformationSheet?.thePrice}"-->
+            <td class="cg-amount" th:text="${pu.transactionInfo?.orderQuantity}"></td>
+            <td class="cgsum-money" th:text="${pu.transactionInfo?.orderAmount}"></td>
+            <td class="gh-qiye" th:text="${pu.supplier?.supplierName}"></td>
         </tr>
         <td>合计:</td>
         <td></td>
@@ -141,7 +143,48 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        <td></td>
     </table>
 </div>
+<script>
+    //加载供货商
+    $(function () {
+       // alert(111)
+        var supp = $("#supplier").val();
+        $.ajax({
+            url:"querySupplier",
+            dataType:"json",
+            type:"post",
+            success:function (result) {
+                $('#supplier').empty();
+                var v = '<option value="-1">请选择</option>';
+                for (var i=0;i<result.length;i++){
+                    if (result[i].supplierId == supp) {
+                        v +=' <option selected="selected"  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                    } else {
+                        v +=' <option  value="' + result[i].supplierId + '">' + result[i].supplierName + '</option>'
+                    }
+                }
+                $("#supplier").append(v);
+            }
+        })
+    });
+
+    function searchDrugInfo() {
+        alert(11);
+        var hospitalName = $("#hospitalName").val();
+        var purchaseNumber = $("#cgNumber").val();
+        var purchaseName = $("#cgName").val();
+        var supplierId = $("#supplier").val();
+        var drugSerialNumber = $("#ls-number").val();
+        var genericDrug = $("#ty-name").val();
+        var specification = $("#guige").val();
+        var units = $("#danwei").val();
+        var tradeName =$("#item-name").val();
+        var enterpriseName =$("#sc-name").val();
+        window.location.href="searchDrugInfo?supplierId="+supplierId+"&drugSerialNumber="+drugSerialNumber+"&genericDrug="+genericDrug+"&specification="+specification+"&units="+units+"&tradeName="+tradeName+"&enterpriseName="+enterpriseName+"&hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;;
+    }
+</script>
 </body>
 </html>
