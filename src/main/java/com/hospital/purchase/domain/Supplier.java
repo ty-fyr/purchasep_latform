@@ -6,6 +6,10 @@ import java.util.List;
 public class Supplier {
     private Integer supplierId;
 
+    private Integer druginId;
+
+
+
     private String supplierName;
 
     private String registeredAddress;
@@ -13,7 +17,7 @@ public class Supplier {
     private String businessLicense;
 
     private Date registrationTime;
-    private Integer druginId;
+
     //库存
     private Repertory repertory;
     //医院对象
@@ -73,6 +77,9 @@ public class Supplier {
         this.drugInformationSheet = drugInformationSheet;
     }
 
+
+
+
     public Integer getSupplierId() {
         return supplierId;
     }
@@ -88,7 +95,6 @@ public class Supplier {
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName == null ? null : supplierName.trim();
     }
-
 
     public String getRegisteredAddress() {
         return registeredAddress;

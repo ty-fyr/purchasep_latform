@@ -73,14 +73,27 @@ public class PurchaseController {
         return "purchase_order";
     }
 
+    @ResponseBody
     @RequestMapping("updeta")
-    public String update( Integer[] piId, Purchase purchase, String[] result,String[] opinion){
+    public String update(@RequestParam("piId") Integer[] piId,@RequestParam("result") Integer[] result,@RequestParam("opinion") String[] opinion){
+        String message = "";
+        Purchase purchase = new Purchase();
+        try {
+            for (int i=0;i<piId.length;i++){
+                    purchase.setResult(result[i]);
+                    purchase.setOpinion(opinion[i]);
+                    purchase.setPiId(piId[i]);
+                    purchaseService.update(purchase);
+                LOGGER.info("PurchaseController---------updeta------我也不想这样难过");
+            }
+            message = "SUCCESS";
+            return message;
 
-        for (int i = 0; i < piId.length; i++) {
-            purchase.setResult(Integer.valueOf(result[i]));
-            purchase.setOpinion(opinion[i]);
-            purchaseService.update(piId[i],purchase);
+        }catch (Exception e){
+            message = "ERROR";
+            LOGGER.info("PurchaseController---------updeta------我也不想这样蹉跎");
+            return message;
+
         }
-        return "purchase_order";
     }
 }

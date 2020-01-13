@@ -22,7 +22,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     private SupplierMapper supplierMapper;
 
     /**
-     * 查询所有
+     *  查询所有
      *
      * @return
      */
@@ -95,6 +95,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     /**
      * 采购表查询全部
+     *
      */
     @Override
     public List<Purchase> findAll() {
@@ -110,8 +111,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int update(Integer piId, Purchase purchase) {
-        return purchaseMapper.update(piId, purchase);
+    public int update(Purchase purchase) {
+        return purchaseMapper.update(purchase);
     }
 
     /**
@@ -182,6 +183,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         List<Purchase> purchaseList = purchaseMapper.searchDrugInfo(searchDTO);
         purchaseList.forEach(Purchase::transfer);
         return purchaseList;
+    }
+
+    public PurchaseMapper getPurchaseMapper() {
+        return purchaseMapper;
     }
 
     public void setPurchaseMapper(PurchaseMapper purchaseMapper) {

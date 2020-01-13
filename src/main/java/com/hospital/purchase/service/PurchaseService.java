@@ -66,5 +66,5 @@ public interface PurchaseService {
     /**
      * 采购表提交审核结果
      */
-    int update(@Param("piId") Integer piId, @Param("purchase") Purchase purchase);
+    int update(Purchase purchase);
 }
