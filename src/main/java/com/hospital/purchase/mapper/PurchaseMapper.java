@@ -1,8 +1,10 @@
 package com.hospital.purchase.mapper;
 
+import com.hospital.purchase.domain.Hospital;
 import com.hospital.purchase.domain.Purchase;
 import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SearchDTO;
+import com.hospital.purchase.utils.Page;
 import com.hospital.purchase.domain.dto.SelectDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,9 +23,20 @@ public interface PurchaseMapper {
     //张  按医院查询
     List<Purchase> selectByPrimaryYY();
     //张  按交易药品查询
-    List<Purchase> selectByPrimaryJYYY();
+    List<Purchase> selectByPrimaryJYYP();
+    //张  查询药品交易明细
+    List<Purchase> selectByPrimaryJYMX();
     //张 模糊查询
     List<Purchase> selectByPrimaryMHCX (SearchDTO searchDTO);
+    //张  供货商模糊查询
+    List<Purchase> selectSupplierMHCX(SearchDTO searchDTO);
+    //张  按医院模糊查询
+    List<Purchase> selectHospitalMHCX(SearchDTO searchDTO);
+
+
+
+
+
 
 
 

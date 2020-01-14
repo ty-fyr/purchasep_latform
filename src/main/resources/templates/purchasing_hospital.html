@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品目录管理</title>
+    <title>按采购医院查询</title>
     <style>
         .button{
             width: 50px;
@@ -14,10 +14,11 @@
             border-color: #eff7ff;
         }
         .select{
-            width: 174px;
+            width: 175px;
             height: 20px;
         }
     </style>
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div class="biankuang">
@@ -29,7 +30,7 @@
             <tr>
                 <td bgcolor="#eff7ff">采购医院名称:</td>
                 <td>
-                  <input>
+                  <input id="hospitalName"/>
                 </td>
                 <td bgcolor="#eff7ff">统计时间:</td>
                 <td><input type="text" style="width:74px; height: 15px"/>至<input type="text" style="width:74px; height: 15px"/></td>
@@ -46,7 +47,7 @@
 
         </table>
         &nbsp;
-        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button" onclick="hospitalMHCX()">查询</button>&nbsp;<button class="button" onclick="DC()">导出</button>
     </center>
     <center>
         <table  border="1" cellspacing="0"  style="table-layout:fixed" class="table1 table-bordered" >
@@ -84,5 +85,16 @@
     </center>
 
 </div>
+<script type="text/javascript">
+    //模糊查询
+    function hospitalMHCX() {
+        var hospitalName = $("#hospitalName").val();
+        window.location.href="HospitalMHCX?hospitalName="+hospitalName;
+    }
+    //导出
+    function DC() {
+        window.location.href="/export2"
+    }
+</script>
 </body>
 </html>

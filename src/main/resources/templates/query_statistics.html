@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品目录管理</title>
+    <title>按采购单查询</title>
     <style>
         .button{
             margin-top:10px;
@@ -16,7 +16,7 @@
             border-color: #eff7ff;
         }
         .select{
-            width: 160px;
+            width: 175px;
             height: 20px;
         }
         .table1{
@@ -66,7 +66,7 @@
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">统计时间:</td>
-                <td><input type="text" style="width:67px; height: 15px"/>至<input type="text" style="width:67px; height: 15px"/></td>
+                <td><input type="text" style="width:72px; height: 15px"/>至<input type="text" style="width:72px; height: 15px"/></td>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">药品流水号:</td>
@@ -135,7 +135,7 @@
             <td>采购金额</td>
             <td>入库量</td>
             <td>入库金额</td>
-            <td>退回量</td>
+            <td>退货量</td>
             <td>退货金额</td>
             <td>结算量</td>
             <td>结算金额</td>
@@ -174,7 +174,7 @@
         var hospitalName = $("#hospitalName").val();
         var purchaseNumber = $("#purchaseNumber").val();
         var purchaseName = $("#purchaseName").val();
-        window.location.href="MHCX?hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;
+        window.location.href="PurchaseMHCX?hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;
     }
 </script>
 </body>

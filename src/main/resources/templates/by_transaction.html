@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品目录管理</title>
+    <title>按交易药品查询</title>
     <style>
         .button{
             width: 50px;
@@ -14,10 +14,11 @@
             border-color: #eff7ff;
         }
         .select{
-            width: 174px;
+            width: 175px;
             height: 20px;
         }
     </style>
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div class="biankuang">
@@ -28,9 +29,9 @@
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">采购单编号:</td>
-                <td><input/></td>
+                <td><input id="purchaseNumber"/></td>
                 <td bgcolor="#eff7ff" >采购单名称:</td>
-                <td><input/></td>
+                <td><input id="purchaseName" /></td>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">采购单状态:</td>
@@ -40,7 +41,7 @@
                     </select>
                 </td>
                 <td bgcolor="#eff7ff">采购医院:</td>
-                <td><input/></td>
+                <td><input id="hospitalName"/></td>
             </tr>
             <tr>
                 <td bgcolor="#eff7ff">供货商:</td>
@@ -93,7 +94,7 @@
 
         </table>
         &nbsp;
-        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button" onclick="MHCX()">查询</button>&nbsp;<button class="button" onclick="DC()">导出</button>
     </center>
 
     <center>
@@ -119,28 +120,43 @@
                 <td>结算量</td>
                 <td>结算金额</td>
             </tr>
-            <tr th:each="d : ${drugInformationSheet}">
-                <td th:text="${d.drugInformationSheet.drugSerialNumber}"></td>
-                <td th:text="${d.drugInformationSheet.tradeName}"></td>
-                <td th:text="${d.drugInformationSheet.dosageForm}"></td>
-                <td th:text="${d.drugInformationSheet.specification}"></td>
-                <td th:text="${d.drugInformationSheet.units}"></td>
-                <td th:text="${d.drugInformationSheet.conversionFactor}"></td>
-                <td th:text="${d.drugInformationSheet.levelId}"></td>
-                <td th:text="${d.enterprise.enterpriseName}"></td>
-                <td th:text="${d.transactionInfo.orderQuantity}"></td>
-                <td th:text="${d.transactionInfo.orderAmount}"></td>
+            <tr th:each="d : ${drug}">
+                <td th:text="${d.drugInformationSheet?.drugSerialNumber}"></td>
+                <td th:text="${d.drugInformationSheet?.genericDrug}"></td>
+                <td th:text="${d.drugInformationSheet?.tradeName}"></td>
+                <td th:text="${d.drugInformationSheet?.dosageForm}"></td>
+                <td th:text="${d.drugInformationSheet?.specification}"></td>
+                <td th:text="${d.drugInformationSheet?.units}"></td>
+                <td th:text="${d.drugInformationSheet?.conversionFactor}"></td>
+                <td th:text="${d.drugInformationSheet?.levelId}"></td>
+                <td th:text="${d.enterprise?.enterpriseName}"></td>
+                <td th:text="${d.transactionInfo?.orderQuantity}"></td>
+                <td th:text="${d.transactionInfo?.orderAmount}"></td>
                 <td th:text="${d.descripId}"></td>
-                <td th:text="${d.transactionInfo.deliveryVolume}"></td>
-                <td th:text="${d.transactionInfo.deliveryAmount}"></td>
-                <td th:text="${d.transactionInfo.returnNumber}"></td>
-                <td th:text="${d.transactionInfo.returnAmount}"></td>
-                <td th:text="${d.transactionInfo.settlementNumber}"></td>
-                <td th:text="${d.transactionInfo.settlementAmount}"></td>
+                <td th:text="${d.repertory?.receipt}"></td>
+                <td th:text="${d.repertory?.receiptMoney}"></td>
+                <td th:text="${d.transactionInfo?.returnNumber}"></td>
+                <td th:text="${d.transactionInfo?.returnAmount}"></td>
+                <td th:text="${d.transactionInfo?.settlementNumber}"></td>
+                <td th:text="${d.transactionInfo?.settlementAmount}"></td>
             </tr>
 
         </table>
     </center>
 </div>
+<script type="text/javascript">
+    //模糊查询
+    function MHCX() {
+        var hospitalName = $("#hospitalName").val();
+        var purchaseNumber = $("#purchaseNumber").val();
+        var purchaseName = $("#purchaseName").val();
+        window.location.href="PurchaseMHCX?hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;
+    }
+
+    //导出
+    function DC() {
+        window.location.href="/export3"
+    }
+</script>
 </body>
 </html>

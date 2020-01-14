@@ -63,4 +63,16 @@ public class Hospital {
     public void setRegistrationTime(Date registrationTime) {
         this.registrationTime = registrationTime;
     }
+
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "hospitalId=" + hospitalId +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", hospitalNumber='" + hospitalNumber + '\'' +
+                ", registeredAddress='" + registeredAddress + '\'' +
+                ", businessLicence='" + businessLicence + '\'' +
+                ", registrationTime=" + registrationTime +
+                '}';
+    }
 }

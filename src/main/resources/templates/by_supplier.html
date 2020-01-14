@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品目录管理</title>
+    <title>按供货商查询</title>
     <style>
         .button{
             width: 50px;
@@ -14,7 +14,11 @@
             border-color: #eff7ff;
         }
         .select{
-            width: 174px;
+            width: 175px;
+            height: 20px;
+        }
+        #supplier{
+            width: 175px;
             height: 20px;
         }
     </style>
@@ -30,7 +34,7 @@
             <tr>
                 <td bgcolor="#eff7ff">供货商:</td>
                 <td>
-                    <select id="supplier" class="select">
+                    <select id="supplier" class="supplierName">
                         <option value="-1">全部</option>
                     </select>
                 </td>
@@ -51,7 +55,7 @@
 
         </table>
         &nbsp;
-        <button class="button" onclick="searchSupplier()">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button" onclick="searchSupplier()">查询</button>&nbsp;<button class="button" onclick="DC()">导出</button>
     </center>
     <center>
         <table  border="1" cellspacing="0"  style="table-layout:fixed" class="table1 table-bordered" >
@@ -114,8 +118,14 @@
     });
 
     function searchSupplier() {
-        var supplierName = $("#supplierName").val();
-        window.location.href="SuppMHCX?supplierName="+supplierName;
+
+        var supplierId = $("#supplier").val();
+        window.location.href="SuppMHCX?supplierId="+supplierId;
+
+    }
+    //导出
+    function DC() {
+        window.location.href="/exporti"
     }
 </script>
 </body>

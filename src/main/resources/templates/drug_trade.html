@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品目录管理</title>
+    <title>查询药品交易明细</title>
     <style>
         .button{
             width: 50px;
@@ -18,6 +18,7 @@
             height: 20px;
         }
     </style>
+    <script src="../static/js/plugins/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div class="biankuang">
@@ -93,9 +94,77 @@
 
         </table>
         &nbsp;
-        <button class="button">查询</button>&nbsp;<button class="button">导出</button>
+        <button class="button">查询</button>&nbsp;<button class="button" onclick="DC()">导出</button>
     </center>
+    <center>
+        <table  border="1" cellspacing="0"  style="table-layout:fixed" class="table1 table-bordered" >
+            <tr>
+                <td>序号</td>
+                <td>采购医院</td>
+                <td>采购单编号</td>
+                <td>采购单名称</td>
+                <td>开始采购时间</td>
+                <td>结束采购时间</td>
+                <td>流水号</td>
+                <td>通用名</td>
+                <td>商品名</td>
+                <td>剂型</td>
+                <td>规格</td>
+                <td>单位</td>
+                <td>转换系数</td>
+                <td>质量层次</td>
+                <td>生产企业</td>
+                <td>中标价</td>
+                <td>交易价</td>
+                <td>采购量</td>
+                <td>采购金额</td>
+                <td>采购状态</td>
+                <td>入库量</td>
+                <td>入库金额</td>
+                <td>退货量</td>
+                <td>退货金额</td>
+                <td>结算量</td>
+                <td>结算金额</td>
+            </tr>
 
+            <tr th:each="j : ${jymx}">
+                <td th:text="${j.piId}"></td>
+                <td th:text="${j.hospital.hospitalName}"></td>
+                <td th:text="${j.purchaseNumber}"></td>
+                <td th:text="${j.purchaseName}"></td>
+                <td th:text="${#dates.format(j.startTime, 'yyyy-MM-dd')}"> </td>
+                <td th:text="${#dates.format(j.overTime, 'yyyy-MM-dd')}"> </td>
+                <td th:text="${j.drugInformationSheet.drugSerialNumber}"></td>
+                <td th:text="${j.drugInformationSheet.genericDrug}"></td>
+                <td th:text="${j.drugInformationSheet.tradeName}"></td>
+                <td th:text="${j.drugInformationSheet.dosageForm}"></td>
+                <td th:text="${j.drugInformationSheet.specification}"></td>
+                <td th:text="${j.drugInformationSheet.units}"></td>
+                <td th:text="${j.drugInformationSheet.conversionFactor}"></td>
+                <td th:text="${j.drugInformationSheet.levelId}"></td>
+                <td th:text="${j.enterprise.enterpriseName}"></td>
+                <td th:text="${j.drugInformationSheet.thePrice}"></td>
+                <td th:text="${j.drugInformationSheet.thePrice}"></td>
+                <td th:text="${j.transactionInfo.orderQuantity}"></td>
+                <td th:text="${j.transactionInfo.orderAmount}"></td>
+                <td th:text="${j.descripId}"></td>
+                <td th:text="${j.repertory.receipt}"></td>
+                <td th:text="${j.repertory.receiptMoney}"></td>
+                <td th:text="${j.transactionInfo.returnNumber}"></td>
+                <td th:text="${j.transactionInfo.returnAmount}"></td>
+                <td th:text="${j.transactionInfo.settlementNumber}"></td>
+                <td th:text="${j.transactionInfo.settlementAmount}"></td>
+            </tr>
+
+        </table>
+    </center>
 </div>
+<script type="text/javascript">
+    //导出
+    function DC() {
+        window.location.href="/export4"
+    }
+
+</script>
 </body>
 </html>
