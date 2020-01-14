@@ -15,7 +15,7 @@ public class TransactionInfo {
     private Long deliveryAmount;
     //退货量
     private Integer returnNumber;
-
+    //退货金额
     private Long returnAmount;
     //结算量
     private Integer settlementNumber;

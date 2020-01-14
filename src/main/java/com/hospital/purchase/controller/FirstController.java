@@ -4,6 +4,8 @@ import com.hospital.purchase.domain.Purchase;
 import com.hospital.purchase.domain.Supplier;
 import com.hospital.purchase.domain.dto.SearchDTO;
 import com.hospital.purchase.service.PurchaseService;
+import com.hospital.purchase.utils.FileUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 
 /**
@@ -48,6 +54,32 @@ public class FirstController {
             }
         return modelAndView;
     }
+
+    /**
+     * 导出采购单查询结果
+     * @param response
+     *
+     */
+    @RequestMapping("/outputPurchase")
+    @ResponseBody
+    public void outputPurchase(HttpServletResponse response) {
+        List<Purchase> purchaseList = purchaseService.selectAll();
+        AtomicInteger index = new AtomicInteger();
+        String head = "序号,采购医院,采购单编号,采购单名称,采购状态,开始采购时间,结束采购时间,建单时间,提交时间,审核时间,采购量,采购金额";
+        String body = purchaseList
+                .stream()
+                .map(item -> item.formatToOutputCsv(index.incrementAndGet()))
+                .collect(Collectors.joining("\n"));
+        long orderQuantity = purchaseList.stream().mapToLong(item -> item.getTransactionInfo().getOrderQuantity()).sum();
+        double orderAmount = purchaseList.stream().mapToDouble(item -> item.getTransactionInfo().getOrderAmount()).sum();
+        String foot = String.format(",合计,,,,,,,,,%d,%.2f", orderQuantity, orderAmount);
+        StringJoiner fileContentJoiner = new StringJoiner("\n").add(head);
+        if (StringUtils.isNotEmpty(body)) {
+            fileContentJoiner.add(body);
+        }
+        String fileContent = fileContentJoiner.add(foot).toString();
+        FileUtil.outputCsvFile(response, "采购单信息.csv", fileContent);
+    }
     //采购单搜索
     @RequestMapping("/SearchPurchaseQuery")
     public ModelAndView SearchPurchaseQuery(SearchDTO searchDTO, ModelAndView modelAndView){
@@ -81,6 +113,33 @@ public class FirstController {
         modelAndView.setViewName("supplier_query");
         return modelAndView;
     }
+    /**
+     * 导出供货商查询结果
+     * @param response
+     * @param searchDTO
+     */
+    @RequestMapping("/outputSupplier")
+    @ResponseBody
+    public void outputSupplier(HttpServletResponse response, SearchDTO searchDTO) {
+        List<Purchase> purchaseList = purchaseService.selectAllSupplier();
+        AtomicInteger index = new AtomicInteger();
+        String head ="序号,供应商,采购状态,订货量,订货金额,送货量,送货金额";
+        String body = purchaseList
+                .stream()
+                .map(item -> item.format2OutputCsv(index.incrementAndGet()))
+                .collect(Collectors.joining("\n"));
+        long orderQuantity = purchaseList.stream().mapToLong(item -> item.getTransactionInfo().getOrderQuantity()).sum();
+        double orderAmount = purchaseList.stream().mapToDouble(item -> item.getTransactionInfo().getOrderAmount()).sum();
+        long deliveryVolume = purchaseList.stream().mapToLong(item -> item.getTransactionInfo().getDeliveryVolume()).sum();
+        double deliveryAmount = purchaseList.stream().mapToDouble(item -> item.getTransactionInfo().getDeliveryAmount()).sum();
+        String foot = String.format(",合计,,%d,%.2f,%d,%.2f", orderQuantity, orderAmount, deliveryVolume, deliveryAmount);
+        StringJoiner fileContentJoiner = new StringJoiner("\n").add(head);
+        if (StringUtils.isNotEmpty(body)) {
+            fileContentJoiner.add(body);
+        }
+        String fileContent = fileContentJoiner.add(foot).toString();
+        FileUtil.outputCsvFile(response, "供货商.csv", fileContent);
+    }
     //跳转到采购医院查询
     @RequestMapping("/buyHospitalQuery")
     public String buyHospitalQuery(ModelMap map) {
@@ -89,6 +148,33 @@ public class FirstController {
         return "purchasing_hospital_query";
     }
 
+    /**
+     * 导出医院查询结果
+     * @param response
+     *
+     */
+    @RequestMapping("/outputHospital")
+    @ResponseBody
+    public void outputHospital(HttpServletResponse response) {
+        List<Purchase> purchaseList = purchaseService.selectAllHospital();
+        AtomicInteger index = new AtomicInteger();
+        String head = "序号,采购医院,采购状态,采购量,采购金额,入库量,入库金额";
+        String body = purchaseList
+                .stream()
+                .map(item -> item.formatAndOutputCsv(index.incrementAndGet()))
+                .collect(Collectors.joining("\n"));
+        long orderQuantity = purchaseList.stream().mapToLong(item -> item.getTransactionInfo().getOrderQuantity()).sum();
+        double orderAmount = purchaseList.stream().mapToDouble(item -> item.getTransactionInfo().getOrderAmount()).sum();
+        long receipt = purchaseList.stream().mapToLong(item -> Integer.valueOf(item.getRepertory().getReceipt())).sum();
+        double receiptMoney = purchaseList.stream().mapToDouble(item -> item.getRepertory().getReceiptMoney()).sum();
+        String foot = String.format(",合计,,%d,%.2f,%d,%.2f", orderQuantity, orderAmount,receipt,receiptMoney);
+        StringJoiner fileContentJoiner = new StringJoiner("\n").add(head);
+        if (StringUtils.isNotEmpty(body)) {
+            fileContentJoiner.add(body);
+        }
+        String fileContent = fileContentJoiner.add(foot).toString();
+        FileUtil.outputCsvFile(response, "采购医院.csv", fileContent);
+    }
     //按采购医院搜索
     @RequestMapping("/searchHospital")
     public ModelAndView searchHospital(ModelAndView modelAndView,SearchDTO searchDTO) {

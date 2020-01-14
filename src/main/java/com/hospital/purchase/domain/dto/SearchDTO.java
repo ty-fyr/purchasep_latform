@@ -50,6 +50,41 @@ public class SearchDTO {
     //生产企业
     private String enterpriseName;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("SearchDTO{");
+        sb.append("purchaseNumber=").append(purchaseNumber);
+        sb.append(", purchaseName='").append(purchaseName).append('\'');
+        sb.append(", hospitalName='").append(hospitalName).append('\'');
+        sb.append(", startTime=").append(startTime);
+        sb.append(", overTime=").append(overTime);
+        sb.append(", activateTime=").append(activateTime);
+        sb.append(", submitTime=").append(submitTime);
+        sb.append(", assessorTime=").append(assessorTime);
+        sb.append(", descripId=").append(descripId);
+        sb.append(", startTimeStr='").append(startTimeStr).append('\'');
+        sb.append(", overTimeStr='").append(overTimeStr).append('\'');
+        sb.append(", activateTimeStr='").append(activateTimeStr).append('\'');
+        sb.append(", submitTimeStr='").append(submitTimeStr).append('\'');
+        sb.append(", assessorTimeStr='").append(assessorTimeStr).append('\'');
+        sb.append(", descripIdStr='").append(descripIdStr).append('\'');
+        sb.append(", supplierId=").append(supplierId);
+        sb.append(", supplierName='").append(supplierName).append('\'');
+        sb.append(", orderQuantity=").append(orderQuantity);
+        sb.append(", orderAmount=").append(orderAmount);
+        sb.append(", deliveryVolume=").append(deliveryVolume);
+        sb.append(", deliveryAmount=").append(deliveryAmount);
+        sb.append(", drugSerialNumber=").append(drugSerialNumber);
+        sb.append(", genericDrug='").append(genericDrug).append('\'');
+        sb.append(", specification='").append(specification).append('\'');
+        sb.append(", units='").append(units).append('\'');
+        sb.append(", tradeName='").append(tradeName).append('\'');
+        sb.append(", enterpriseName='").append(enterpriseName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+
     public Integer getDrugSerialNumber() {
         return drugSerialNumber;
     }
@@ -240,16 +275,6 @@ public class SearchDTO {
 
     public void setDescripIdStr(String descripIdStr) {
         this.descripIdStr = descripIdStr;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("SearchDTO{");
-        sb.append("purchaseNumber=").append(purchaseNumber);
-        sb.append(", purchaseName='").append(purchaseName).append('\'');
-        sb.append(", hospitalName='").append(hospitalName).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 
     public Integer getPurchaseNumber() {

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>按供货商查询</title>
+    <title>退货单维护</title>
     <style>
         .button {
             background-color: #1aa5fb;
@@ -22,33 +22,83 @@
 
     <table class="table" border="1" cellspacing="0" style="table-layout:fixed">
         <tr>
-            <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">按供货商查询</th>
+            <th colspan="4" bgcolor="#f0ffff"><img src="../static/img/jiantou.png" width="18" height="18">退货单维护</th>
         </tr>
         <tr>
-            <td bgcolor="#b0c4de" color="red">供货商:</td>
-            <td>
-                <select id="supplier" name="supplierName">
-                    <option value="-1">请选择</option>
-                </select>
-            </td>
-            <td bgcolor="#b0c4de">统计时间:</td>
-            <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
-        </tr>
-        <tr>
+            <td bgcolor="#b0c4de" color="red">采购单编号:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">采购单名称:</td>
+            <td><input/></td>
             <td bgcolor="#b0c4de">采购状态:</td>
             <td>
                 <select>
                     <option value="-1">全部</option>
-                    <option value="0">已入库</option>
-                    <option value="1">未入库</option>
                 </select>
             </td>
-
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">开始采购时间:</td>
+            <td><input id="start-time"></td>
+            <td bgcolor="#b0c4de">结束采购时间:</td>
+            <td><input id="over-time"></td>
+            <td bgcolor="#b0c4de">质量层次:</td>
+            <td>
+                <select>
+                    <option>全部</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">采购医院:</td>
+            <td><input/></td>
+            <td bgcolor="#b0c4de">供货商:</td>
+            <td>
+                <select>
+                    <option value="-1">全部</option>
+                </select>
+            </td>
+            <td bgcolor="#b0c4de">入库时间:</td>
+            <td><input type="text" style="width:65px;"/>至<input type="text" style="width:65px;"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">药品流水号:</td>
+            <td><input id="ls-number"></td>
+            <td bgcolor="#b0c4de">通用名:</td>
+            <td><input id="ty-name"></td>
+            <td bgcolor="#b0c4de">剂型:</td>
+            <td><input id="jixing"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">规格:</td>
+            <td><input id="guige"></td>
+            <td bgcolor="#b0c4de">单位:</td>
+            <td><input id="danwei"></td>
+            <td bgcolor="#b0c4de">转换系数:</td>
+            <td><input/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#b0c4de">生产企业:</td>
+            <td><input id="sc-enterprise"></td>
+            <td bgcolor="#b0c4de">商品名:</td>
+            <td><input id="item-name"></td>
+            <td bgcolor="#b0c4de">药品类别:</td>
+            <td>
+                <select>
+                    <option>全部</option>
+                </select>
+            </td>
         </tr>
 
+        <tr>
+            <td bgcolor="#b0c4de">发票号或者入库单号:</td>
+            <td><input id="rk-number"></td>
+            <td bgcolor="#b0c4de">药品批号:</td>
+            <td><input id="drug-number"></td>
+
+        </tr>
     </table>
     <div align="center">
-    <button class="btn btn-primary" onclick="searchSupplier()">查询</button>&nbsp;<button class="btn btn-primary" onclick="daoChu()">导出</button>
+        <button class="btn btn-primary" onclick="searchSupplier()">查询</button>&nbsp;<button class="btn btn-primary" onclick="daoChu()">导出</button>
     </div>
 
     <table class="table table-bordered">
@@ -97,11 +147,11 @@
         <td></td>
         <td></td>
     </table>
-    
+
     <script>
         //加载供货商
         $(function () {
-           // alert(111)
+            // alert(111)
             var supp = $("#supplier").val();
             $.ajax({
                 url:"querySupplier",
@@ -130,7 +180,7 @@
 
         function daoChu() {
             var supplierId = $("#supplier").val();
-         window.location.href="outputSupplier?supplierId="+supplierId;
+            window.location.href="outputSupplier?supplierId="+supplierId;
         }
     </script>
 </div>

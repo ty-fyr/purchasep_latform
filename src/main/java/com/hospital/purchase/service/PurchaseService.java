@@ -44,7 +44,7 @@ public interface PurchaseService {
     List<Purchase> queryDrugInfo();
 
     /**
-     *采购药品信息搜索
+     *交易药品信息搜索
      * @param searchDTO
      * @return yp info
      */

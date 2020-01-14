@@ -70,7 +70,7 @@
             <td bgcolor="#b0c4de">生产企业:</td>
             <td><input id="sc-name"></td>
             <td bgcolor="#b0c4de">商品名:</td>
-            <td><input/></td>
+            <td><input id="item-name"></td>
             <td bgcolor="#b0c4de">药品类别:</td>
             <td>
                 <select>
@@ -80,7 +80,7 @@
         </tr>
     </table>
     <div align="center">
-        <button class="btn btn-primary" onclick="searchDrugInfo()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+        <button class="btn btn-primary" onclick="searchDrugInfo()">查询</button>&nbsp;<button class="btn btn-primary" onclick="daoChuDrug()">导出</button>
     </div>
     <table class="table table-bordered">
         <tr>
@@ -90,7 +90,7 @@
             <td>采购单名称</td>
             <td>开始采购时间</td>
             <td>结束采购时间</td>
-            <td>采购状态</td>
+            <td>流水号</td>
             <td>通用名</td>
             <td>商品名</td>
             <td>剂型</td>
@@ -111,9 +111,9 @@
             <td class="cgd-name" th:text="${pu.purchaseName}"></td>
             <td class="kscg-time" th:text="${pu.startTimeStr}"></td>
             <td class="jscg-tim"  th:text="${pu.overTimeStr}"></td>
-            <td class="cg-status" th:text="${pu.descripIdStr}"></td>
+            <td class="ls-number" th:text="${pu.drugInformationSheet?.drugSerialNumber}"></td>
             <td class="t-name" th:text="${pu.drugInformationSheet?.genericDrug}"></td>
-            <td class="goods-name" th:text="${pu.drugInformationSheet.tradeName}"></td>
+            <td class="goods-name" th:text="${pu.drugInformationSheet?.tradeName}"></td>
             <td class="jx" th:text="${pu.drugInformationSheet?.dosageForm}"></td>
             <td class="gg" th:text="${pu.drugInformationSheet?.specification}"></td>
             <td class="dw" th:text="${pu.drugInformationSheet?.units}"></td>
@@ -172,7 +172,7 @@
     });
 
     function searchDrugInfo() {
-        alert(11);
+        //alert(11);
         var hospitalName = $("#hospitalName").val();
         var purchaseNumber = $("#cgNumber").val();
         var purchaseName = $("#cgName").val();
@@ -184,6 +184,9 @@
         var tradeName =$("#item-name").val();
         var enterpriseName =$("#sc-name").val();
         window.location.href="searchDrugInfo?supplierId="+supplierId+"&drugSerialNumber="+drugSerialNumber+"&genericDrug="+genericDrug+"&specification="+specification+"&units="+units+"&tradeName="+tradeName+"&enterpriseName="+enterpriseName+"&hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;;
+    }
+    function daoChuDrug() {
+        window.location.href="outputPurchase";
     }
 </script>
 </body>

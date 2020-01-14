@@ -123,7 +123,7 @@
 
     </table>
     &nbsp;
-    <button class="button" onclick="purchaseFind()">查询</button>&nbsp;<button class="button">导出</button>
+    <button class="button" onclick="purchaseFind()">查询</button>&nbsp;<button class="button" onclick="daoChuPurchase()">导出</button>
 
     <!--<form type="">
 
@@ -208,6 +208,10 @@
         var purchaseNumber = $("#cgNumber").val();
         var purchaseName = $("#cgName").val();
         window.location.href="SearchPurchaseQuery?hospitalName="+hospitalName+"&purchaseNumber="+purchaseNumber+"&purchaseName="+purchaseName;
+    }
+
+    function daoChuPurchase() {
+        window.location.href="outputPurchase";
     }
 </script>
 </body>

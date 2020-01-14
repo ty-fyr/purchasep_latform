@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 
 public class Purchase {
@@ -70,20 +71,71 @@ public class Purchase {
 
     private String resultStr;
 
-    public String getResultStr() {
-        return resultStr;
-    }
-
-    public void setResultStr(String resultStr) {
-        this.resultStr = resultStr;
-    }
-
     private String startTimeStr;//开始采购时间字符串
     private String overTimeStr;//结束采购时间字符串
     private String activateTimeStr;//建单采购时间字符串
     private String submitTimeStr;//提交采购时间字符串
     private String assessorTimeStr;//审核采购时间字符串
     private String descripIdStr;//采购单状态字符串
+
+    /**
+     * 导出供应商查询信息
+     *
+     * @param index
+     * @return
+     */
+    public String format2OutputCsv(Integer index) {
+        StringJoiner sj = new StringJoiner(",");
+        if (Objects.nonNull(index)) {
+            sj.add(index + "");
+        }
+        return sj.add(this.supplier.getSupplierName())
+                .add(this.descripIdStr)
+                .add(this.transactionInfo.getOrderQuantity() + "")
+                .add(this.transactionInfo.getOrderAmount() + "")
+                .add(this.transactionInfo.getDeliveryVolume() + "")
+                .add(this.transactionInfo.getDeliveryAmount() + "")
+                .toString();
+    }
+
+    /**
+     * 导出采购单查询信息
+     *
+     * @param index
+     * @return
+     */
+    public String formatToOutputCsv(Integer index) {
+        StringJoiner sj = new StringJoiner(",");
+        if (Objects.nonNull(index)) {
+            sj.add(index + "");
+        }
+        return sj.add(this.hospital.getHospitalName())
+                .add(this.purchaseNumber + "")
+                .add(this.purchaseName)
+                .add(this.descripIdStr)
+                .add(this.startTimeStr)
+                .add(this.overTimeStr)
+                .add(this.activateTimeStr)
+                .add(this.submitTimeStr)
+                .add(this.activateTimeStr)
+                .add(this.transactionInfo.getOrderQuantity() + "")
+                .add(this.transactionInfo.getOrderAmount() + "")
+                .toString();
+    }
+
+    public String formatAndOutputCsv(Integer index) {
+        StringJoiner sj = new StringJoiner(",");
+        if (Objects.nonNull(index)) {
+            sj.add(index + "");
+        }
+        return sj.add(this.hospital.getHospitalName())
+                .add(this.descripIdStr)
+                .add(this.transactionInfo.getOrderQuantity() + "")
+                .add(this.transactionInfo.getOrderAmount() + "")
+                .add(this.repertory.getReceipt())
+                .add(this.repertory.getReceiptMoney() + "")
+                .toString();
+    }
 
     public void transfer() {
         if (Objects.nonNull(this.getStartTime())) {
@@ -101,14 +153,62 @@ public class Purchase {
         if (this.getAssessorTime() != null) {
             this.setAssessorTimeStr(DateUtils.dateFormat(this.getAssessorTime(), "yyyy-MM-dd"));
         }
-        if (Objects.equals(this.getDescripId(),0)) {
+        if (Objects.equals(this.getDescripId(), 0)) {
             this.setDescripIdStr("已入库");
-        } else if (Objects.equals(this.getDescripId(),1)) {
+        } else if (Objects.equals(this.getDescripId(), 1)) {
             this.setDescripIdStr("未入库");
         }
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Purchase{");
+        sb.append("piId=").append(piId);
+        sb.append(", drugId=").append(drugId);
+        sb.append(", result=").append(result);
+        sb.append(", opinion='").append(opinion).append('\'');
+        sb.append(", hospitalId=").append(hospitalId);
+        sb.append(", purchaseNumber=").append(purchaseNumber);
+        sb.append(", purchaseName='").append(purchaseName).append('\'');
+        sb.append(", startTime=").append(startTime);
+        sb.append(", overTime=").append(overTime);
+        sb.append(", activateTime=").append(activateTime);
+        sb.append(", submitTime=").append(submitTime);
+        sb.append(", assessorTime=").append(assessorTime);
+        sb.append(", descripId=").append(descripId);
+        sb.append(", isdel=").append(isdel);
+        sb.append(", auditor='").append(auditor).append('\'');
+        sb.append(", contacts='").append(contacts).append('\'');
+        sb.append(", contactsph='").append(contactsph).append('\'');
+        sb.append(", supplierId=").append(supplierId);
+        sb.append(", tiId=").append(tiId);
+        sb.append(", repertoryId=").append(repertoryId);
+        sb.append(", repertory=").append(repertory);
+        sb.append(", hospital=").append(hospital);
+        sb.append(", transactionInfo=").append(transactionInfo);
+        sb.append(", supplier=").append(supplier);
+        sb.append(", drugInformationSheet=").append(drugInformationSheet);
+        sb.append(", enterprise=").append(enterprise);
+        sb.append(", hospital_name='").append(hospital_name).append('\'');
+        sb.append(", units=").append(units);
+        sb.append(", resultStr='").append(resultStr).append('\'');
+        sb.append(", startTimeStr='").append(startTimeStr).append('\'');
+        sb.append(", overTimeStr='").append(overTimeStr).append('\'');
+        sb.append(", activateTimeStr='").append(activateTimeStr).append('\'');
+        sb.append(", submitTimeStr='").append(submitTimeStr).append('\'');
+        sb.append(", assessorTimeStr='").append(assessorTimeStr).append('\'');
+        sb.append(", descripIdStr='").append(descripIdStr).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 
+    public String getResultStr() {
+        return resultStr;
+    }
+
+    public void setResultStr(String resultStr) {
+        this.resultStr = resultStr;
+    }
 
     public DrugInformationSheet getDrugInformationSheet() {
         return drugInformationSheet;
@@ -117,6 +217,7 @@ public class Purchase {
     public void setDrugInformationSheet(DrugInformationSheet drugInformationSheet) {
         this.drugInformationSheet = drugInformationSheet;
     }
+
     public Enterprise getEnterprise() {
         return enterprise;
     }
@@ -124,7 +225,6 @@ public class Purchase {
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
-
 
 
     public Units getUnits() {
@@ -382,4 +482,5 @@ public class Purchase {
     public void setDescripIdStr(String descripIdStr) {
         this.descripIdStr = descripIdStr;
     }
+
 }

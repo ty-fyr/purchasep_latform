@@ -79,7 +79,7 @@
         </tr>
     </table>
     <div align="center">
-        <button class="btn btn-primary" onclick="searchDrug()">查询</button>&nbsp;<button class="btn btn-primary">导出</button>
+        <button class="btn btn-primary" onclick="searchDrug()">查询</button>&nbsp;<button class="btn btn-primary" onclick="daoChuDrugs()">导出</button>
     </div>
     <table class="table table-bordered">
         <tr>
@@ -153,6 +153,9 @@
         var enterpriseName =$("#sc-enterprise").val();
 
         window.location.href="searchBuyDrug?drugSerialNumber="+drugSerialNumber+"&genericDrug="+genericDrug+"&specification="+specification+"&units="+units+"&tradeName="+tradeName+"&enterpriseName="+enterpriseName
+  }
+  function daoChuDrugs() {
+      window.location.href="outputSupplier";
   }
 </script>
 </body>

@@ -133,50 +133,27 @@ FROM
   LEFT JOIN `repertory` r
     ON p.`repertory_id` = r.`repertory_id`
   </select>
-    <!--按照采购单查询..-->
-    <select id="selectByPrimaryName" resultMap="BaseResultMap">
-        SELECT
-        p.hospital_id,
-        p.Purchase_number,
-        p.Purchase_name,
-        p.descrip_id,
-        p.start_time,
-        p.over_time,
-        p.activate_time,
-        p.submit_time,
-        p.assessor_time,
-        t.order_quantity,
-        t.order_amount,
-        t.delivery_volume,
-        t.delivery_amount,
-        t.`return_number`,
-        t.settlement_number,
-        t.settlement_amount
-        FROM
-        `purchase` p
-        LEFT JOIN transaction_info t ON p.pi_id = t.pi_id
-    </select>
     <!--张  按供货商查询-->
     <select id="selectByPrimaryGHS" resultMap="BaseResultMap">
-  SELECT
-  s.`supplier_id`,
-  s.`Supplier_name`,
-  p.`descrip_id`,
-  t.`order_quantity`,
-  t.`order_amount`,
-  t.`delivery_volume`,
-  t.`delivery_amount`,
-  t.`return_number`,
-  t.`return_amount`,
-  t.`settlement_number`,
-  t.`settlement_amount`
-FROM
-`purchase` p
-  LEFT JOIN `supplier` s
-    ON p.`supplier_id` = s.`supplier_id`
-  LEFT JOIN transaction_info t
-    ON p.pi_id = t.pi_id
-  </select>
+        SELECT
+        s.`supplier_id`,
+        s.`Supplier_name`,
+        p.`descrip_id`,
+        t.`order_quantity`,
+        t.`order_amount`,
+        t.`delivery_volume`,
+        t.`delivery_amount`,
+        t.`return_number`,
+        t.`return_amount`,
+        t.`settlement_number`,
+        t.`settlement_amount`
+        FROM
+        `purchase` p
+        LEFT JOIN `supplier` s
+        ON p.`supplier_id` = s.`supplier_id`
+        LEFT JOIN transaction_info t
+        ON p.pi_id = t.pi_id
+    </select>
     <!--张  按采购医院查询-->
     <select id="selectByPrimaryYY" resultMap="BaseResultMap">
     SELECT
@@ -287,6 +264,7 @@ FROM
             AND hospital_id LIKE concat('%',#{hospitalId},'%')
         </if>
     </select>
+
     <!--查询全部采购单信息-->
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
@@ -353,7 +331,7 @@ FROM
         LEFT JOIN  transaction_info ti ON p.pi_id=ti.ti_id
         LEFT JOIN supplier s ON p.supplier_id=s.Supplier_id
     </select>
-    <!--查询供货商列表信息-->
+    <!--按供货商ID搜索-->
     <select id="selectBySupplier" resultMap="BaseResultMap">
         SELECT
         p.pi_id,
@@ -442,20 +420,20 @@ FROM
     <!--交易药品查询-->
     <select id="selectTradingDrugs" resultMap="BaseResultMap">
         SELECT
-        p.`pi_id`,
-        p.`descrip_id`,
-        dis.`drug_serial_number`,
-        dis.`generic_drug`,
-        dis.`trade_name`,
-        dis.`dosage_form`,
-        dis.`specification`,
-        u.`units`,
-        dis.`conversion_factor`,
-        e.`enterprise_name`,
-        ti.`order_quantity`,
-        ti.`order_amount`,
-        r.`receipt`,
-        r.`receipt_money`
+            p.`pi_id`,
+            p.`descrip_id`,
+            dis.`drug_serial_number`,
+            dis.`generic_drug`,
+            dis.`trade_name`,
+            dis.`dosage_form`,
+            dis.`specification`,
+            u.`units`,
+            dis.`conversion_factor`,
+            e.`enterprise_name`,
+            ti.`order_quantity`,
+            ti.`order_amount`,
+            r.`receipt`,
+            r.`receipt_money`
         FROM purchase p
         LEFT JOIN drug_information_sheet dis ON p.drug_id= dis.`drug_id`
         LEFT JOIN units u ON dis.`units` = u.`units_id`
@@ -509,24 +487,24 @@ FROM
     <!--查询所有采购单的采购药品信息-->
     <select id="queryDrugInfo" resultMap="BaseResultMap">
         SELECT
-        p.`pi_id`,
-        h.`hospital_name`,
-        p.`Purchase_number`,
-        p.`Purchase_name`,
-        p.`start_time`,
-        p.`over_time`,
-        p.`descrip_id`,
-        dis.`generic_drug`,
-        dis.`trade_name`,
-        dis.`dosage_form`,
-        dis.`specification`,
-        u.`units`,
-        dis.`conversion_factor`,
-        e.`enterprise_name`,
-        dis.`the_price`,
-        ti.`order_quantity`,
-        ti.`order_amount`,
-        s.`Supplier_name`
+            p.`pi_id`,
+            h.`hospital_name`,
+            p.`Purchase_number`,
+            p.`Purchase_name`,
+            p.`start_time`,
+            p.`over_time`,
+            dis.drug_serial_number,
+            dis.`generic_drug`,
+            dis.`trade_name`,
+            dis.`dosage_form`,
+            dis.`specification`,
+            u.`units`,
+            dis.`conversion_factor`,
+            e.`enterprise_name`,
+            dis.`the_price`,
+            ti.`order_quantity`,
+            ti.`order_amount`,
+            s.`Supplier_name`
         FROM purchase p
         LEFT JOIN drug_information_sheet dis ON p.`drug_id`= dis.`drug_id`
         LEFT JOIN repertory r ON p.`repertory_id`=r.`repertory_id`
@@ -545,7 +523,7 @@ FROM
         p.`Purchase_name`,
         p.`start_time`,
         p.`over_time`,
-        p.`descrip_id`,
+        dis.drug_serial_number,
         dis.`generic_drug`,
         dis.`trade_name`,
         dis.`dosage_form`,
@@ -566,45 +544,35 @@ FROM
         LEFT JOIN enterprise e ON e.`enterprise_id`= dis.`enterprise_id`
         LEFT JOIN supplier s ON s.`drugin_id`= dis.`drug_id`
         where 1=1
-        <if test="purchaseNumber != null">
-            and p.Purchase_number like concat('%',#{purchaseNumber},'%')
+        <if test="purchaseNumber!= null and purchaseNumber!=''">
+            and p.Purchase_number =#{purchaseNumber}
         </if>
-        <if test="purchaseName != null and purchaseName!=''">
+        <if test="purchaseName != null and purchaseName !=''">
             and p.Purchase_name like concat('%',#{purchaseName},'%')
         </if>
         <if test="hospitalName !=null and hospitalName!=''">
             and h.hospital_name like concat('%',#{hospitalName},'%')
         </if>
-        <if test="supplierId !=null">
+        <if test="supplierId !=null and supplierId!='' and supplierId!='-1'">
             and s.supplier_id = #{supplierId}
         </if>
         <if test="drugSerialNumber !=null and drugSerialNumber!=''">
             and dis.drug_serial_number like concat('%',#{drugSerialNumber},'%')
         </if>
-        <if test="genericDrug !=null">
+        <if test="genericDrug !=null and genericDrug!=''">
             and dis.generic_drug like concat('%',#{genericDrug},'%')
         </if>
-        <if test="specification !=null">
+        <if test="specification !=null and specification!=''">
             and dis.specification like concat('%',#{specification},'%')
         </if>
-        <if test="units !=null">
+        <if test="units !=null and units !=''">
             and dis.units like concat('%',#{units},'%')
         </if>
-        <if test="tradeName !=null">
+        <if test="tradeName!=null and tradeName!=''">
             and dis.trade_name like concat('%',#{tradeName},'%')
         </if>
-        <if test="enterpriseName !=null">
+        <if test="enterpriseName != null and enterpriseName!=''">
             and e.enterprise_name like concat('%',#{enterpriseName},'%')
         </if>
     </select>
-    <select id="findAll" resultMap="BaseResultMap">
-        select *
-        from purchase pr,hospital hs
-        where pr.hospital_id = hs.hospital_id
-    </select>
-
-    <!--采购单审核 提交审核结果  审核意见-->
-    <update id="update">
-        update purchase set  result = #{result},opinion = #{opinion} where pi_id = #{piId}
-    </update>
 </mapper>
