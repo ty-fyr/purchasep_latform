@@ -93,96 +93,98 @@
         <result column="isdel" jdbcType="INTEGER" property="isdel"/>
         <result column="proxy_id" jdbcType="INTEGER" property="proxyId"/>
     </association>
-    </resultMap>
-    <resultMap id="DrugInformationSheet" type="com.hospital.purchase.domain.DrugInformationSheet">
-        <id column="drug_id" jdbcType="INTEGER" property="drugId"/>
-        <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber"/>
-        <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo"/>
-        <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug"/>
-        <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm"/>
-        <result column="specification" jdbcType="VARCHAR" property="specification"/>
-        <result column="units" jdbcType="VARCHAR" property="units"/>
-        <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor"/>
-        <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId"/>
-        <result column="trade_name" jdbcType="VARCHAR" property="tradeName"/>
-        <result column="the_price" jdbcType="REAL" property="thePrice"/>
-        <result column="approval_number" jdbcType="INTEGER" property="approvalNumber"/>
-        <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate"/>
-        <result column="whether_import" jdbcType="INTEGER" property="whetherImport"/>
-        <result column="packaging" jdbcType="VARCHAR" property="packaging"/>
-        <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit"/>
-        <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice"/>
-        <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice"/>
-        <result column="level_id" jdbcType="INTEGER" property="levelId"/>
-        <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy"/>
-        <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport"/>
-        <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection"/>
-        <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport"/>
-        <result column="dc_id" jdbcType="INTEGER" property="dcId"/>
-        <result column="descrip_id" jdbcType="INTEGER" property="descripId"/>
-        <result column="description" jdbcType="VARCHAR" property="description"/>
-        <result column="isdel" jdbcType="INTEGER" property="isdel"/>
-        <result column="proxy_id" jdbcType="INTEGER" property="proxyId"/>
-        <!--一对一单位-->
-        <association property="units1" javaType="com.hospital.purchase.domain.Units">
-            <id column="units_id" jdbcType="INTEGER" property="unitsId"/>
-            <result column="units" jdbcType="VARCHAR" property="units"/>
-            <result column="units_fid" jdbcType="INTEGER" property="unitsFid"/>
-        </association>
-        <!--一对一生产企业-->
-        <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
-            <id column="eenterpriseId" property="enterpriseId"/>
-            <result column="enterprise_name" property="enterpriseName"/>
-            <result column="business_license" property="businessLicense"/>
-            <result column="registration_time" property="registrationTime"/>
-        </association>
-        <!--一对一质量层次-->
-        <association property="qualityLevel" javaType="com.hospital.purchase.domain.QualityLevel">
-            <id column="qlevelId" property="levelId"/>
-            <result column="level_type" property="levelType"/>
-        </association>
-        <!--一对一药品类别-->
-        <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
-            <id column="drdcId" property="dcId"/>
-            <result column="drug_type" property="drugType"/>
-            <result column="state" property="state"/>
-        </association>
-        <!--一对一供货商-->
-        <association property="supplier" javaType="com.hospital.purchase.domain.Supplier">
-            <id column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
-            <result column="drugin_id" jdbcType="INTEGER" property="druginId"/>
-            <result column="Supplier_name" jdbcType="VARCHAR" property="supplierName"/>
-            <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress"/>
-            <result column="business_license" jdbcType="VARCHAR" property="businessLicense"/>
-            <result column="Registration_time" jdbcType="DATE" property="registrationTime"/>
-        </association>
-        <!--一对一审核-->
-        <association property="supplierManagement" javaType="com.hospital.purchase.domain.SupplierManagement">
-            <id column="supply_id" jdbcType="INTEGER" property="supplyId"/>
-            <result column="Review_results" jdbcType="VARCHAR" property="reviewResults"/>
-            <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
-            <result column="drug_id" jdbcType="INTEGER" property="drugId"/>
-            <result column="Drug_transaction_status" jdbcType="INTEGER" property="drugTransactionStatus"/>
-            <result column="isdel" jdbcType="INTEGER" property="isdel"/>
-        </association>
-    </resultMap>
-    <sql id="Base_Column_List">
-    supplier_id, Supplier_name, "Registered address", business_license, Registration_time
-  </sql>
-    <select id="findSupplier" resultMap="BaseResultMap">
+  </resultMap>
+
+  <resultMap id="DrugInformationSheet" type="com.hospital.purchase.domain.DrugInformationSheet">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="drug_serial_number" jdbcType="INTEGER" property="drugSerialNumber" />
+    <result column="drug_item_no" jdbcType="INTEGER" property="drugItemNo" />
+    <result column="generic_drug" jdbcType="VARCHAR" property="genericDrug" />
+    <result column="dosage_form" jdbcType="VARCHAR" property="dosageForm" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="units" jdbcType="VARCHAR" property="units" />
+    <result column="conversion_factor" jdbcType="INTEGER" property="conversionFactor" />
+    <result column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="trade_name" jdbcType="VARCHAR" property="tradeName" />
+    <result column="the_price" jdbcType="REAL" property="thePrice" />
+    <result column="approval_number" jdbcType="INTEGER" property="approvalNumber" />
+    <result column="approval_number_date" jdbcType="DATE" property="approvalNumberDate" />
+    <result column="whether_import" jdbcType="INTEGER" property="whetherImport" />
+    <result column="packaging" jdbcType="VARCHAR" property="packaging" />
+    <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit" />
+    <result column="latest_retail_price" jdbcType="REAL" property="latestRetailPrice" />
+    <result column="Source_price" jdbcType="VARCHAR" property="sourcePrice" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="quality_hierarchy" jdbcType="VARCHAR" property="qualityHierarchy" />
+    <result column="inspection_report" jdbcType="INTEGER" property="inspectionReport" />
+    <result column="drug_inspection" jdbcType="INTEGER" property="drugInspection" />
+    <result column="drug_inspection_report" jdbcType="DATE" property="drugInspectionReport" />
+    <result column="dc_id" jdbcType="INTEGER" property="dcId" />
+    <result column="descrip_id" jdbcType="INTEGER" property="descripId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="proxy_id" jdbcType="INTEGER" property="proxyId" />
+    <!--一对一单位-->
+    <association property="units1" javaType="com.hospital.purchase.domain.Units">
+      <id column="units_id" jdbcType="INTEGER" property="unitsId" />
+      <result column="units" jdbcType="VARCHAR" property="units" />
+      <result column="units_fid" jdbcType="INTEGER" property="unitsFid" />
+    </association>
+    <!--一对一生产企业-->
+    <association property="enterprise" javaType="com.hospital.purchase.domain.Enterprise">
+      <id column="eenterpriseId" property="enterpriseId"/>
+      <result column="enterprise_name" property="enterpriseName"/>
+      <result column="business_license" property="businessLicense"/>
+      <result column="registration_time" property="registrationTime"/>
+    </association>
+    <!--一对一质量层次-->
+    <association property="qualityLevel" javaType="com.hospital.purchase.domain.QualityLevel">
+      <id column="qlevelId" property="levelId"/>
+      <result column="level_type" property="levelType"/>
+    </association>
+    <!--一对一药品类别-->
+    <association property="drugCategory" javaType="com.hospital.purchase.domain.DrugCategory">
+      <id column="drdcId" property="dcId"/>
+      <result column="drug_type" property="drugType"/>
+      <result column="state" property="state"/>
+    </association>
+    <!--一对一供货商-->
+    <association property="supplier" javaType="com.hospital.purchase.domain.Supplier">
+      <id column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+      <result column="drugin_id" jdbcType="INTEGER" property="druginId"/>
+      <result column="Supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+      <result column="Registered address" jdbcType="VARCHAR" property="registeredAddress"/>
+      <result column="business_license" jdbcType="VARCHAR" property="businessLicense"/>
+      <result column="Registration_time" jdbcType="DATE" property="registrationTime"/>
+    </association>
+    <!--一对一审核-->
+    <association property="supplierManagement" javaType="com.hospital.purchase.domain.SupplierManagement">
+      <id column="supply_id" jdbcType="INTEGER" property="supplyId"/>
+      <result column="Review_results" jdbcType="VARCHAR" property="reviewResults"/>
+      <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+      <result column="drug_id" jdbcType="INTEGER" property="drugId"/>
+      <result column="Drug_transaction_status" jdbcType="INTEGER" property="drugTransactionStatus"/>
+      <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+    </association>
+  </resultMap>
+  <!--供货审核查询全部-->
+  <select id="findAll" resultMap="DrugInformationSheet">
+    select dr.*,un.units_id,un.units,en.enterprise_id,en.enterprise_name,qu.level_id,qu.level_type,dru.dc_id,dru.drug_type,su.supplier_id,
+            su.drugin_id,su.Supplier_name,sm.supply_id,sm.drug_id,sm.Drug_transaction_status
+    from drug_information_sheet dr
+    LEFT JOIN units un on dr.units = un.units_id
+    left join enterprise en on dr.enterprise_id = en.enterprise_id
+    left join quality_level qu on dr.level_id = qu.level_id
+    left join drug_category dru on dr.dc_id = dru.dc_id
+    left join supplier su on su.drugin_id = dr.drug_id
+    left join supplier_management sm on sm.drug_id = dr.drug_id
+    where 1 = 1
+  </select>
+
+
+  <select id="findSupplier" resultMap="BaseResultMap">
     SELECT * FROM supplier
   </select>
-    <!--供货审核查询全部-->
-    <select id="findAll" resultMap="DrugInformationSheet">
-        select dr.*,un.units_id,un.units,en.enterprise_id,en.enterprise_name,qu.level_id,qu.level_type,dru.dc_id,dru.drug_type,su.supplier_id,
-        su.drugin_id,su.Supplier_name,sm.supply_id,sm.drug_id,sm.Drug_transaction_status
-        from drug_information_sheet dr
-        LEFT JOIN units un on dr.units = un.units_id
-        left join enterprise en on dr.enterprise_id = en.enterprise_id
-        left join quality_level qu on dr.level_id = qu.level_id
-        left join drug_category dru on dr.dc_id = dru.dc_id
-        left join supplier su on su.drugin_id = dr.drug_id
-        left join supplier_management sm on sm.drug_id = dr.drug_id
-        where 1 = 1
-    </select>
+
+
 </mapper>

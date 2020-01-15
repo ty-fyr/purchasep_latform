@@ -80,11 +80,19 @@
         <tr>
             <th colspan="21">
                 <input type="checkbox" onclick="checkall()"/>全选
-                <input type="checkbox" onclick="invertall()"/>反选
-                <button type="button" onclick="updateBatch()" class="btn btn-primary">选择发货</button>
-                <button type="button" onclick="updateBatch()" class="btn btn-primary">导入发货清单</button>
-                <button type="button" onclick="updateBatch()" class="btn btn-primary">无法供货</button>
+                <input type="checkbox" onclick="reverse()"/>反选
+                <button type="button" onclick="SelectDelivery()" class="btn btn-primary">选择发货</button>
+                <button type="button" onclick="upload()" id="upload1" class="btn btn-primary">导入发货清单</button>
+                <button type="button" onclick="UnableSupply()" class="btn btn-primary">无法供货</button>
             </th>
+            <div style="display:none" id="poiInto">
+                <form action="poiinto" method="post">
+                        <a th:href="@{'exportExcel'}">下载模板</a><br/>
+                        <input type="file" accept=".xlsx"/><br/>
+                        <input type="submit" th:value="导入"/>
+                        <button >关闭</button>
+                </form>
+            </div>
         </tr>
         <tr>
             <th>序号</th>
@@ -109,6 +117,7 @@
             <th>供货企业</th>
             <th>采购状态</th>
         </tr>
+
         </thead>
         <tbody>
         <tr th:each="purchases:${purchases}">
@@ -135,12 +144,59 @@
             <td th:if="${purchases.descripId==0}" th:text="已入库"></td>
             <td th:if="${purchases.descripId==1}" th:text="未入库"></td>
         </tr>
+        <tr>
+            <th bgcolor="orange">合计</th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+            <th bgcolor="orange"></th>
+        </tr>
         </tbody>
     </table>
 </center>
 
 </body>
 <script type="text/javascript">
+    //无法供货
+    function UnableSupply() {
+        var arr=document.getElementsByName('one');
+        var ids=[];
+        for (var i= 0;i<arr.length;i++){
+            if(arr[i].checked){
+                ids.push(arr[i].value);
+            }
+        }
+        location.href="/UnableSupply?ids="+ids.join();
+    }
+    //选择发货
+    function SelectDelivery() {
+        var arr=document.getElementsByName('one');
+        var ids=[];
+        for (var i= 0;i<arr.length;i++){
+            if(arr[i].checked){
+                ids.push(arr[i].value);
+            }
+        }
+        location.href="/SelectDelivery?ids="+ids.join();
+    }
     //全选
     function checkall(){
         var checks=document.getElementsByName("one");
@@ -148,18 +204,13 @@
             checks[i].checked=true;
         }
     }
-    //反选
-    function invertall(){
-        var checks1=document.getElementsByName("one");
-        for(var i=0;i<checks1.length;i++){
-            if(check[i].checked==true){
-                check[i].checked=false;
-            }else{
-                check[i].checked=true;
-            }
+    function reverse(){
+        var checks=document.getElementsByName("one");
+        for(var i=0;i<checks.length;i++){
+            checks[i].checked=!checks[i].checked;
         }
-
     }
+
 
     //导出
     function derive1() {
@@ -191,5 +242,10 @@
             "&specification="+specification+"&units="+units+"&conversionFactor="+conversionFactor+
             "&enterpriseName="+enterpriseName+"&tradeName="+tradeName+"&dcId="+dcId;
     }
+    $(document).ready(function(e) {
+        $("#upload1").click(function(e) {
+            $("#poiInto").toggle();
+        });
+    });
 </script>
 </html>

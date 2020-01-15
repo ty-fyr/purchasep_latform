@@ -53,4 +53,19 @@ public interface JizedongService {
 
     //条件查询
     List<Purchase> findSerchBean3(SelectDto selectDto);
+
+    //通过名字查询单位
+    Units selectUnits(String units);
+
+    //根据名字查询生产商
+    Enterprise selectEnterprise(String enterprise);
+
+    //导入采购单信息
+    void addPurchase(Purchase purchase);
+
+    //查询医院
+    Hospital selectHospital(String hospitalName);
+
+    //新增药品
+    void addDrugInformationSheet(DrugInformationSheet drugInformationSheet);
 }

@@ -61,7 +61,6 @@
       <result column="state" property="state"/>
     </association>
   </resultMap>
-
   <resultMap id="Category" type="com.hospital.purchase.domain.DrugCategory">
     <id column="dc_id" jdbcType="INTEGER" property="dcId" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
@@ -303,6 +302,35 @@
     description=#{description}
     WHERE drug_id=#{drugId}
   </update>
+  <insert id="drugInformationSheet" parameterType="com.hospital.purchase.domain.DrugInformationSheet" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO drug_information_sheet
+    (
+    drug_serial_number,
+    generic_drug,
+    trade_name,
+    dosage_form,
+    specification,
+    units,
+    conversion_factor,
+    enterprise_id,
+    isdel,
+    proxy_id
+    )
+    VALUES
+    (
+    #{drugSerialNumber},
+    #{genericDrug},
+    #{tradeName},
+    #{dosageForm},
+    #{specification},
+    #{units},
+    #{conversionFactor},
+    #{enterpriseId},
+    0,
+    1
+    )
+
+  </insert>
   <select id="uptefind" resultMap="DrugInformationSheet">
 		SELECT
 		dsi.drug_id,

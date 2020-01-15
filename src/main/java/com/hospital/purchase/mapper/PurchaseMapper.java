@@ -108,4 +108,8 @@ public interface PurchaseMapper {
      * 采购表提交审核结果
      */
     int update(Purchase purchase);
+
+    //导入采购单信息
+    void addPurchase(Purchase purchase);
+
 }

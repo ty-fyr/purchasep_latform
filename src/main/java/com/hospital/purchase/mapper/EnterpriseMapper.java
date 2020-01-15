@@ -14,4 +14,7 @@ public interface EnterpriseMapper {
     int updateByPrimaryKeySelective(Enterprise record);
 
     int updateByPrimaryKey(Enterprise record);
+
+    //根据名字查询生产商
+    Enterprise selectEnterprise(String enterprise);
 }

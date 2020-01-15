@@ -13,7 +13,6 @@ public interface SupplierMapper {
     List<DrugInformationSheet> findAll();
 
 
-
     //查询全部供货商
     List<Supplier> findSupplier();
 }

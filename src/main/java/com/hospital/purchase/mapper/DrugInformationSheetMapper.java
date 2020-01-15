@@ -104,4 +104,9 @@ public interface DrugInformationSheetMapper {
     //修改药品维护信息
     void updateInfo(SelectDto selectDto);
 
+    //新增药品
+    void addDrugInformationSheet(DrugInformationSheet drugInformationSheet);
+
 }
+
+

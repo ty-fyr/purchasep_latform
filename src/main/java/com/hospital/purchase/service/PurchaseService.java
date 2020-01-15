@@ -55,8 +55,6 @@ public interface PurchaseService {
      */
     List<Purchase> seleLike(Map<String,Object> map);
 
-
-
     /**
      * 采购表查询全部
      *
@@ -67,4 +65,6 @@ public interface PurchaseService {
      * 采购表提交审核结果
      */
     int update(Purchase purchase);
+
+
 }

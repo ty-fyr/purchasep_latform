@@ -43,6 +43,15 @@ public class JizedongServiceImpl implements JizedongService {
     @Autowired
     private PurchaseMapper purchaseMapper;
 
+    @Autowired
+    private UnitsMapper unitsMapper;
+
+    @Autowired
+    private EnterpriseMapper enterpriseMapper;
+
+    @Autowired
+    private HospitalMapper hospitalMapper;
+
     //查询全部
     @Override
     public List<DrugInformationSheet> selecetDrugInformationSheet() {
@@ -127,5 +136,30 @@ public class JizedongServiceImpl implements JizedongService {
             serchBean3.get(i).setOverTimeStr(DateUtils.dateFormat(serchBean3.get(i).getOverTime(),"yyyy-MM-dd"));
         }
         return serchBean3;
+    }
+
+    @Override
+    public Units selectUnits(String units) {
+        return unitsMapper.selectUnits(units);
+    }
+
+    @Override
+    public Enterprise selectEnterprise(String enterprise) {
+        return enterpriseMapper.selectEnterprise(enterprise);
+    }
+
+    @Override
+    public void addPurchase(Purchase purchase) {
+        purchaseMapper.addPurchase(purchase);
+    }
+
+    @Override
+    public Hospital selectHospital(String hospitalName) {
+        return hospitalMapper.selectHospital(hospitalName);
+    }
+
+    @Override
+    public void addDrugInformationSheet(DrugInformationSheet drugInformationSheet) {
+        drugInformationSheetMapper.addDrugInformationSheet(drugInformationSheet);
     }
 }

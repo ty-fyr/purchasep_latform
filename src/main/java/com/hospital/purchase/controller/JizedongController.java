@@ -6,7 +6,9 @@ import com.hospital.purchase.mapper.DrugInformationSheetMapper;
 import com.hospital.purchase.service.JizedongService;
 import com.hospital.purchase.utils.DateUtils;
 import com.hospital.purchase.utils.ExcelUtil;
+import com.hospital.purchase.utils.ExcelUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -38,6 +48,24 @@ public class JizedongController {
     private JizedongService jizedongService;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(JizedongController.class);
+
+
+    // 下载模板
+    @RequestMapping("/exportExcel")
+    @ResponseBody
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        OutputStream os = null;// 输出流
+        InputStream fis = new FileInputStream( "D:/exploit/purchasep_latform/purchasep_latform/src/main/resources/download/下载模板.xlsx");// 手动创建一个elsx文件
+        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        String fileName = "下载模板.xlsx";
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
+        os = response.getOutputStream();
+        wb.write(os);
+        os.flush();
+        os.close();
+    }
+
     //查询选择供货全部药品信息
     @RequestMapping("selectSuppliers")
     public String commodityManagement(ModelMap map){
@@ -360,24 +388,95 @@ public class JizedongController {
         }
     }
 
-  /*  //发送响应流方法
-    public String setResponseHeader(HttpServletResponse response, String fileName) {
+
+
+
+    //选择发货
+    @RequestMapping("/SelectDelivery")
+    public String SelectDelivery(String ids){
         try {
-            try {
-                fileName = new String(fileName.getBytes(),"utf-8");
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            response.setContentType("application/octet-stream;charset=utf-8");
-            response.setHeader("Content-Disposition", "attachment;filename="+ fileName);
-            response.addHeader("Pargam", "no-cache");
-            response.addHeader("Cache-Control", "no-cache");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            jizedongService.updateBatch(ids);
+            LOGGER.info("JizedongController---------SelectDelivery-----成功");
+        }catch (Exception e){
+            LOGGER.error("JizedongController---------SelectDelivery-----失败");
+        }
+        return "redirect:PurchaseOrderManagement";
+    }
+
+
+    //无法供货
+    @RequestMapping("/UnableSupply")
+    public String UnableSupply(String ids){
+        try {
+            jizedongService.updaBatch(ids);
+            LOGGER.info("JizedongController---------UnableSupply-----成功");
+        }catch (Exception e){
+            LOGGER.error("JizedongController---------UnableSupply-----失败");
+        }
+        return "redirect:PurchaseOrderManagement";
+    }
+
+
+    @RequestMapping("poiinto")
+    public String poiinto(@RequestParam("file")MultipartFile file) throws ParseException {
+/*    	MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+*/    	//获取你导入的文件
+		/*MultipartFile multipartFile = multipartHttpServletRequest.getFile("file");*/
+
+        List<List<Object>> list = null;
+        try {
+            list = ExcelUtils.getExcelList(file.getInputStream(),file.getOriginalFilename());
+            System.err.println(file.getOriginalFilename());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return "redirect:/selectSuppliers";
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> li = list.get(i);
+            Purchase purchase=new Purchase();
+            DrugInformationSheet drugInformationSheet=new DrugInformationSheet();
 
-    }*/
+
+            //药品流水号
+            drugInformationSheet.setDrugSerialNumber(Integer.valueOf(li.get(2).toString()));
+
+            //通用名
+            drugInformationSheet.setGenericDrug(li.get(3).toString());
+
+            //商品名称
+            drugInformationSheet.setTradeName(li.get(4).toString());
+
+            //剂型
+            drugInformationSheet.setDosageForm(li.get(5).toString());
+
+            //规格
+            drugInformationSheet.setSpecification(li.get(6).toString());
+
+            //单位
+            String units = li.get(7).toString();
+            Units units1 = jizedongService.selectUnits(units);
+            drugInformationSheet.setUnits(String.valueOf(units1.getUnitsId()));
+
+            //转换系数
+            drugInformationSheet.setConversionFactor(Integer.valueOf(li.get(8).toString()));
+
+            //生产企业名称
+            String enterprise = li.get(9).toString();
+            Enterprise enterprise1 = jizedongService.selectEnterprise(enterprise);
+            drugInformationSheet.setEnterpriseId(enterprise1.getEnterpriseId());
+            jizedongService.addDrugInformationSheet(drugInformationSheet);
+
+            //采购单号
+            purchase.setPurchaseNumber(Integer.valueOf(li.get(0).toString()));
+
+            //采购医院名字
+            String hospitalName = li.get(1).toString();
+            Hospital hospital = jizedongService.selectHospital(hospitalName);
+            purchase.setHospitalId(hospital.getHospitalId());
+
+            purchase.setDrugId(drugInformationSheet.getDrugId());
+            jizedongService.addPurchase(purchase);
+        }
+        return "redirect:PurchaseOrderManagement";
+    }
 }

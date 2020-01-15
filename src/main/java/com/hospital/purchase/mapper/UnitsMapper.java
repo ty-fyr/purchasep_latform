@@ -14,4 +14,7 @@ public interface UnitsMapper {
     int updateByPrimaryKeySelective(Units record);
 
     int updateByPrimaryKey(Units record);
+
+    //通过名字查询单位
+    Units selectUnits(String units);
 }
